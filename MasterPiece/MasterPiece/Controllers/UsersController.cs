@@ -1,13 +1,26 @@
-﻿using DAO.Databases;
+﻿using Business.Logic.Users;
+using DAO.Databases;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Repository.Settings;
 
 namespace MasterPiece.Controllers
 {
-    public class UsersController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UsersController : ControllerBase
     {
-        [HttpPost, Route("Save")]
+
+        private BlUsers _blUsers;
+        public UsersController(IMasterPieceDatabaseSettings settings)
+        {
+            _blUsers = new BlUsers(settings);
+        }
+
+        [HttpPost, Route("Save"), AllowAnonymous]
         public IActionResult Delete([FromBody] User user)
         {
+            _blUsers.Add(user);
             return Ok();
         }
     }
