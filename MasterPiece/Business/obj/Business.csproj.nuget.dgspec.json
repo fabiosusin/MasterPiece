@@ -1,21 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Repository\\Masterpiece\\MasterPiece\\Business\\Business.csproj": {}
+    "C:\\Repositorio\\MasterPiece\\MasterPiece\\Business\\Business.csproj": {}
   },
   "projects": {
-    "C:\\Repository\\Masterpiece\\MasterPiece\\Business\\Business.csproj": {
+    "C:\\Repositorio\\MasterPiece\\MasterPiece\\Business\\Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repository\\Masterpiece\\MasterPiece\\Business\\Business.csproj",
+        "projectUniqueName": "C:\\Repositorio\\MasterPiece\\MasterPiece\\Business\\Business.csproj",
         "projectName": "Business",
-        "projectPath": "C:\\Repository\\Masterpiece\\MasterPiece\\Business\\Business.csproj",
+        "projectPath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\Business\\Business.csproj",
         "packagesPath": "C:\\Users\\Fabio\\.nuget\\packages\\",
-        "outputPath": "C:\\Repository\\Masterpiece\\MasterPiece\\Business\\obj\\",
+        "outputPath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\Business\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\Fabio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -31,8 +28,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Repository\\Masterpiece\\MasterPiece\\Repository\\Repository.csproj": {
-                "projectPath": "C:\\Repository\\Masterpiece\\MasterPiece\\Repository\\Repository.csproj"
+              "C:\\Repositorio\\MasterPiece\\MasterPiece\\Repository\\Repository.csproj": {
+                "projectPath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\Repository\\Repository.csproj"
               }
             }
           }
@@ -61,22 +58,19 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Repository\\Masterpiece\\MasterPiece\\DAO\\DAO.csproj": {
+    "C:\\Repositorio\\MasterPiece\\MasterPiece\\DAO\\DAO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repository\\Masterpiece\\MasterPiece\\DAO\\DAO.csproj",
+        "projectUniqueName": "C:\\Repositorio\\MasterPiece\\MasterPiece\\DAO\\DAO.csproj",
         "projectName": "DAO",
-        "projectPath": "C:\\Repository\\Masterpiece\\MasterPiece\\DAO\\DAO.csproj",
+        "projectPath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\DAO\\DAO.csproj",
         "packagesPath": "C:\\Users\\Fabio\\.nuget\\packages\\",
-        "outputPath": "C:\\Repository\\Masterpiece\\MasterPiece\\DAO\\obj\\",
+        "outputPath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\DAO\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\Fabio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -124,22 +118,19 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Repository\\Masterpiece\\MasterPiece\\Repository\\Repository.csproj": {
+    "C:\\Repositorio\\MasterPiece\\MasterPiece\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repository\\Masterpiece\\MasterPiece\\Repository\\Repository.csproj",
+        "projectUniqueName": "C:\\Repositorio\\MasterPiece\\MasterPiece\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Repository\\Masterpiece\\MasterPiece\\Repository\\Repository.csproj",
+        "projectPath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\Repository\\Repository.csproj",
         "packagesPath": "C:\\Users\\Fabio\\.nuget\\packages\\",
-        "outputPath": "C:\\Repository\\Masterpiece\\MasterPiece\\Repository\\obj\\",
+        "outputPath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\Repository\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\Fabio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -155,8 +146,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Repository\\Masterpiece\\MasterPiece\\DAO\\DAO.csproj": {
-                "projectPath": "C:\\Repository\\Masterpiece\\MasterPiece\\DAO\\DAO.csproj"
+              "C:\\Repositorio\\MasterPiece\\MasterPiece\\DAO\\DAO.csproj": {
+                "projectPath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\DAO\\DAO.csproj"
               }
             }
           }
@@ -195,7 +186,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

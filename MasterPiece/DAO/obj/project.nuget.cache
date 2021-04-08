@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Y+2ghF1eIuioTx3TrW2bNhKBnHFzNTvjR1VU11Q2en7LWrVI6rCle4eW1/rhj3bU2ysCpazNlzDrRSnyv8C9BA==",
+  "dgSpecHash": "5uo5TFqpnMOZ/NfRPRzcMmW8CqXv2W8sMfnkjwjdY2mNQpJCDC7aL1zRTOWNsuCk10C/o9pjDXp+w9r+VrtGsA==",
   "success": true,
-  "projectFilePath": "C:\\Repository\\Masterpiece\\MasterPiece\\DAO\\DAO.csproj",
+  "projectFilePath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\DAO\\DAO.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Fabio\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
     "C:\\Users\\Fabio\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",

@@ -504,21 +504,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Fabio\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Fabio\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Repository\\Masterpiece\\MasterPiece\\Repository\\Repository.csproj",
+      "projectUniqueName": "C:\\Repositorio\\MasterPiece\\MasterPiece\\Repository\\Repository.csproj",
       "projectName": "Repository",
-      "projectPath": "C:\\Repository\\Masterpiece\\MasterPiece\\Repository\\Repository.csproj",
+      "projectPath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\Repository\\Repository.csproj",
       "packagesPath": "C:\\Users\\Fabio\\.nuget\\packages\\",
-      "outputPath": "C:\\Repository\\Masterpiece\\MasterPiece\\Repository\\obj\\",
+      "outputPath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\Repository\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\Fabio\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -534,8 +530,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Repository\\Masterpiece\\MasterPiece\\DAO\\DAO.csproj": {
-              "projectPath": "C:\\Repository\\Masterpiece\\MasterPiece\\DAO\\DAO.csproj"
+            "C:\\Repositorio\\MasterPiece\\MasterPiece\\DAO\\DAO.csproj": {
+              "projectPath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\DAO\\DAO.csproj"
             }
           }
         }
@@ -574,7 +570,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

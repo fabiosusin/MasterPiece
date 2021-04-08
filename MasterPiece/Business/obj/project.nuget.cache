@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zmyoTPVOHEb6Xhe7s3jk8BX4O4YG4GY73hP0giUec/RXB4hhm7V/UxfJArxdR7G3ryrqV+TdTdQ2D6lw4eRlBw==",
+  "dgSpecHash": "xnvDtJ3SybmbTDXp9qyQZT9/5ipod6Jo+hI+hEeeAGyxkKariKzUcMFxmR0hrWBe4RHvb/uWoWNs2UdVWbKYhA==",
   "success": true,
-  "projectFilePath": "C:\\Repository\\Masterpiece\\MasterPiece\\Business\\Business.csproj",
+  "projectFilePath": "C:\\Repositorio\\MasterPiece\\MasterPiece\\Business\\Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Fabio\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
     "C:\\Users\\Fabio\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",
