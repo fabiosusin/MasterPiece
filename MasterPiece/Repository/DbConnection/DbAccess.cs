@@ -11,7 +11,7 @@ namespace Repository.DbConnection
         {
             BsonSerializer.RegisterSerializationProvider(new BsonSerializationProvider());
             var client = new MongoClient(settings.ConnectionString);
-            MongoDatabase = (MongoDatabase)client.GetDatabase(settings.DatabaseName);
+            MongoDatabase = client.GetServer().GetDatabase(settings.DatabaseName);
         }
     }
 }

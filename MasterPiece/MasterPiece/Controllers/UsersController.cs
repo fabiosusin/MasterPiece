@@ -11,7 +11,7 @@ namespace MasterPiece.Controllers
     public class UsersController : ControllerBase
     {
 
-        private BlUsers _blUsers;
+        private readonly BlUsers _blUsers;
         public UsersController(IMasterPieceDatabaseSettings settings)
         {
             _blUsers = new BlUsers(settings);
