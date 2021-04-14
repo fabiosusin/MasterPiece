@@ -53,7 +53,7 @@ namespace Repository.Extensions
             return value.Id;
         }
 
-        public static string Add(this MongoCollection collection, Base value)
+        public static string Add(this MongoCollection collection, IBase value)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
@@ -62,7 +62,6 @@ namespace Repository.Extensions
 
             if (!ObjectId.TryParse(value.Id, out _))
                 value.Id = ObjectId.GenerateNewId().ToString();
-            
             collection.Insert(value);
             return value.Id;
         }
