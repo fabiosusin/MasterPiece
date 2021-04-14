@@ -10,7 +10,7 @@
   background-color: rgb(18, 18, 20);
   .form {
     width: 500px;
-    height: 450px;
+    height: 500px;
     margin-left: 50px;
     background-color: rgb(32, 32, 36);
     margin-left: 7px;
@@ -24,15 +24,29 @@
         margin: 5px 0;
         width: 100%;
       }
-      input {
-        height: 50px;
-        border-radius: 5px;
-        background-color: rgb(18, 18, 20);
-        border: none;
-        font-weight: bold;
-        color: #fff;
-        
-        
+      .input-with-icon {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        i {
+          position: absolute;
+          top: 30%;
+          left: 15px;
+          color: rgb(32, 32, 36);
+        }
+        input {
+          padding: 5px;
+          padding-left: 40px;
+          background: rgb(18, 18, 20);
+          height: 50px;
+          border-radius: 5px;
+          border: none;
+          outline: none;
+          font-weight: bold;
+          color: #fff;
+        }
       }
       button {
         height: 60px;
@@ -43,6 +57,11 @@
         font-weight: bold;
         font-size: 20px;
         margin-top: -17px;
+        transition: 0.3s;
+        &:hover {
+          background: #eb862e;
+          transition: 0.3s;
+        }
       }
       P {
         color: #fff;
@@ -51,40 +70,22 @@
       }
       a {
         margin-top: -5px;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
         font-weight: bold;
         color: #db7318;
         text-decoration: none;
+        transition: 0.3s;
+        &:hover {
+          color: #eb862e;
+          transition: 0.3s;
+        }
       }
     }
   }
 }
 
-.register-page form .input-with-icon { 
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+.register-page form .register-page form .input-with-icon .register-page form .input-with-icon input {
 }
-
-.register-page form .input-with-icon i { 
-  position: absolute;
-  top: 30%;
-  left: 15px;
-  color: #db7318;
- 
-}
-
-.register-page form .input-with-icon input { 
-  height: 30px;
-  padding: 5px;
-  padding-left: 40px;
-  border-radius: 5px;
-  background: rgb(18, 18, 20);
-  
-}
-
 
 @media only screen and (max-width: 1050px) {
   .login-page {
