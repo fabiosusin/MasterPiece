@@ -1,0 +1,80 @@
+@import "../app.component.scss";
+
+.login-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: rgb(18, 18, 20);
+  .logo {
+    background: #fff;
+    height: 400px;
+    width: 500px;
+  }
+  .form {
+    width: 500px;
+    height: 400px;
+    margin-left: 50px;
+    background-color: rgb(32, 32, 36);
+    .login-form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 50px;
+      * {
+        margin: 5px 0;
+        width: 100%;
+      }
+      input {
+        height: 50px;
+        border-radius: 5px;
+        padding: 5px 10px;
+        background-color: rgb(18, 18, 20);
+        border: none;
+        font-weight: bold;
+        color: #fff;
+      }
+      button {
+        height: 60px;
+        border-radius: 5px;
+        border: none;
+        background: #db7318;
+        color: #fff;
+        font-weight: bold;
+        font-size: 20px;
+      }
+      P {
+        color: #fff;
+        font-size: 20px;
+        margin-top: 30px;
+      }
+      a {
+        margin-top: -5px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #db7318;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .login-page {
+    .form {
+      margin-left: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .login-page {
+    .logo,
+    .form {
+      background: red;
+    }
+  }
+}
