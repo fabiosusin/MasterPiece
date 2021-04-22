@@ -1,6 +1,7 @@
 ﻿using DAO.Databases;
 using MongoDB.Driver;
 using Repository.DbConnection;
+using Repository.Extensions;
 using Repository.Settings;
 
 namespace Business.Logic

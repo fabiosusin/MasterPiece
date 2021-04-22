@@ -1,5 +1,7 @@
 ﻿using Business.Logic.Users;
 using DAO.Databases;
+using DAO.Output;
+using MasterPiece.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Settings;
@@ -21,7 +23,11 @@ namespace MasterPiece.Controllers
         public IActionResult Delete([FromBody] User user)
         {
             _blUsers.Add(user);
-            return Ok();
+            return Ok(new SaveUserOutput
+            {
+                User = user,
+                Token = TokenService.GenerateToken(user)
+            });
         }
     }
 }
