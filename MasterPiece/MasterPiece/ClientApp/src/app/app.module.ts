@@ -8,21 +8,19 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {LoginScreenComponent} from './login-screen/login-screen.component'
 import {RegisterScreenComponent} from './register-screen/register-screen.component'
+import { AppRoutingModule } from './modules/app-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LoginScreenComponent,
-    RegisterScreenComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    AppRoutingModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'login-screen', component: LoginScreenComponent },
-      { path: 'register-screen', component: RegisterScreenComponent},
     ])
     
   ],
