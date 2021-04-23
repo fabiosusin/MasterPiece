@@ -10,6 +10,6 @@ export class ApiService extends BaseApiService {
   }
 
   saveUser = async (user: User): Promise<any> =>
-    await this.post('users/create', user);
+    await this.post('users/create', user, await this.getRequestHeaders());
 
 }
