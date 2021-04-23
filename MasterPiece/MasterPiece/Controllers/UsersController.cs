@@ -19,8 +19,8 @@ namespace MasterPiece.Controllers
             _blUsers = new BlUsers(settings);
         }
 
-        [HttpPost, Route("Save"), AllowAnonymous]
-        public IActionResult Delete([FromBody] User user)
+        [HttpPost, Route("Create"), AllowAnonymous]
+        public IActionResult Create([FromBody] User user)
         {
             _blUsers.Add(user);
             return Ok(new SaveUserOutput

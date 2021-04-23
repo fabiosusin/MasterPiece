@@ -1,10 +1,15 @@
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { User } from "src/models/register-login/user";
+import { BaseApiService } from "../base/base-api.service";
 
-export class ApiService {
-    constructor(protected httpClient: HttpClient) { }
+@Injectable({ providedIn: 'root' })
+export class ApiService extends BaseApiService {
+  constructor(protected httpClient: HttpClient) {
+    super(httpClient);
+  }
 
-    saveUser = async (user: User): Promise<any> =>
-        this.httpClient.request('GET', this.heroesUrl + '?' + 'name=term', { responseType: 'json' });
+  saveUser = async (user: User): Promise<any> =>
+    await this.post('users/create', user);
 
 }

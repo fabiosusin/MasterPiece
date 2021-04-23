@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {LoginScreenComponent} from './login-screen/login-screen.component'
 import {RegisterScreenComponent} from './register-screen/register-screen.component'
+import { ApiService } from 'src/shared/services/api.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,9 @@ import {RegisterScreenComponent} from './register-screen/register-screen.compone
     ])
     
   ],
-  providers: [],
+  providers: [
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
