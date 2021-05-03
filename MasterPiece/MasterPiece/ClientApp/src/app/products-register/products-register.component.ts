@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./products-register.component.scss']
 })
 export class ProductsRegisterComponent {
-
+  
 }
