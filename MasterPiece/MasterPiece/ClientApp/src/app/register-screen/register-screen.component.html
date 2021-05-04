@@ -1,30 +1,30 @@
 
 <div class="register-page">
-  <div class="form" >
+  <div class="form" [formGroup] = "formulario" >
     <form class="register-form">
       
       <div class="input-with-icon">
         <i class="fas fa-envelope"></i>
-      <input type="email" placeholder="Email"/>
+      <input type="email" placeholder="Email" formControlName = "email"/>
       </div>
 
       <div class="input-with-icon">
         <i class="fas fa-user"></i>
-      <input type="text" placeholder="Nome"/>
+      <input type="text" placeholder="Nome" formControlName="nome"/>
       </div>
 
       <div class="input-with-icon">
         <i class="fas fa-lock"></i>
-      <input type="password" placeholder="Senha"/>
+      <input type="password" placeholder="Senha" formControlName="senha"/>
       </div>
       
       <div class="input-with-icon">
         <i class="fas fa-lock"></i>
-      <input type="password" placeholder="Confirme sua Senha"/>
+      <input type="password" placeholder="Confirme sua Senha" formControlName="confirmaSenha"/>
       </div>
 
       <a>Esqueci minha senha</a>
-      <button>CADASTRAR</button>
+      <button type="submit">CADASTRAR</button>
       <label for="Input_RememberMe"></label>
       
       <a class="fa fa-arrow-left" aria-hidden="true" href="http://localhost:4200/login-screen">Voltar para Login</a>

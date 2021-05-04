@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background-color: var(--background-color);
+  background-color:  rgb(18, 18, 20);
   .form {
     width: 500px;
     height: 450px;
@@ -28,7 +28,7 @@
       input {
         height: 50px;
         border-radius: 5px;
-        background-color: var(--background-color);
+        background-color:  rgb(18, 18, 20);
         border: none;
         font-weight: bold;
         color: #fff;
@@ -37,7 +37,7 @@
         height: 60px;
         border-radius: 5px;
         border: none;
-        background: var(--theme-main-color);
+        background:#db7318;
         color: #fff;
         font-weight: bold;
         font-size: 20px;
@@ -52,14 +52,14 @@
         margin-top: -5px;
         margin-bottom: 20px;
         font-weight: bold;
-        color: var(--theme-main-color);
+        color: #db7318;;
         text-decoration: none;
       }
       i { 
         position: absolute;
         top: 30%;
         left: 15px;
-        color: var(--theme-main-color);
+        color: #db7318;;
         width: 10px;
       }
     }
