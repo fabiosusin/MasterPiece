@@ -20,7 +20,6 @@ import { VMessageComponent } from 'src/shared/directives/vmessage/vmessage.compo
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    VMessageComponent,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
     ])

@@ -1,16 +1,40 @@
 
 <div class="register-page">
-  <div class="form" [formGroup] = "formulario" >
+  <div class="form" [formGroup] = "signupForm" >
     <form class="register-form">
       
       <div class="input-with-icon">
         <i class="fas fa-envelope"></i>
       <input type="email" placeholder="Email" formControlName = "email"/>
+            <app-vmessage
+            *ngIf="signupForm.get('email').errors?.required"
+            text="Email is required!">
+            </app-vmessage>
+            <app-vmessage
+            *ngIf="signupForm.get('email').errors?.email"
+            text="Invalid e-mail">
+            </app-vmessage>
       </div>
 
       <div class="input-with-icon">
         <i class="fas fa-user"></i>
-      <input type="text" placeholder="Nome" formControlName="nome"/>
+      <input type="text" placeholder="Nome do Usuário" formControlName="userName"/>
+      <app-vmessage
+      *ngIf="signupForm.get('userName').errors?.required"
+      text="Username is required!">
+      </app-vmessage>
+      <app-vmessage
+      *ngIf="signupForm.get('userName').errors?.minlength"
+      text="Minimum length is 2">
+      </app-vmessage>
+      <app-vmessage
+      *ngIf="signupForm.get('userName').errors?.maxlength"
+      text="Maximum length is 30">
+      </app-vmessage>
+      <app-vmessage
+      *ngIf="signupForm.get('userName').errors?.pattern"
+      text="Must be lowercase">
+      </app-vmessage>
       </div>
 
       <div class="input-with-icon">
@@ -27,7 +51,7 @@
       <button type="submit">CADASTRAR</button>
       <label for="Input_RememberMe"></label>
       
-      <a class="fa fa-arrow-left" aria-hidden="true" href="http://localhost:4200/login-screen">Voltar para Login</a>
+      <a class="fa fa-arrow-left" aria-hidden="true"  [routerLink]="['login-screen']">Voltar para Login</a>
       
     </form>
   </div>

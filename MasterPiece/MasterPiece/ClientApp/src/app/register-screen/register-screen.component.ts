@@ -20,7 +20,7 @@ export class RegisterScreenComponent {
                   Validators.email
               ]
           ],
-          fullName: ['',
+          userName: ['',
               [
                   Validators.required,
                   Validators.minLength(2),
