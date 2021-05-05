@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import {LoginScreenComponent} from './login-screen/login-screen.component'
-import {RegisterScreenComponent} from './register-screen/register-screen.component'
+import { HomeComponent } from './pages/home/home.component';
+import {LoginScreenComponent} from './pages/login-screen/login-screen.component'
+import {RegisterScreenComponent} from './pages/register-screen/register-screen.component'
 import { ApiService } from 'src/shared/services/api.service';
+import { LoggedUser } from './cache/loggedUser.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { ApiService } from 'src/shared/services/api.service';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'login-screen', component: LoginScreenComponent },

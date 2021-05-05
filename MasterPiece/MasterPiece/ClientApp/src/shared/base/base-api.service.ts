@@ -25,6 +25,26 @@ export class BaseApiService {
   //     Authorization: `Bearer ${await this.getAuthenticationToken()}`
   //   });
 
+  // async renewAutenticationToken(): Promise<string> {
+  //   try {
+  //     return await this.get(`${this.getBaseURL()}/masterajax/bearertoken`, null).then((token: any) => {
+  //       if (token && token.indexOf('DOCTYPE') < 0) {
+  //         this.cookieService.set('erpusertoken', token, null, '/');
+  //         return token;
+  //       }
+
+  //       return undefined;
+
+  //     }).catch(() => {
+  //       window.location = `${this.getBaseURL()}/logout`;
+  //       return undefined;
+  //     });
+  //   } catch {
+  //     window.location = `${this.getBaseURL()}/logout`;
+  //     return undefined;
+  //   }
+  // }
+
   protected getRequestHeaders = async (): Promise<HttpHeaders> =>
     new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
@@ -46,26 +66,6 @@ export class BaseApiService {
       }).catch(async () => { });
     });
   }
-
-  // async renewAutenticationToken(): Promise<string> {
-  //   try {
-  //     return await this.get(`${this.getBaseURL()}/masterajax/bearertoken`, null).then((token: any) => {
-  //       if (token && token.indexOf('DOCTYPE') < 0) {
-  //         this.cookieService.set('erpusertoken', token, null, '/');
-  //         return token;
-  //       }
-
-  //       return undefined;
-
-  //     }).catch(() => {
-  //       window.location = `${this.getBaseURL()}/logout`;
-  //       return undefined;
-  //     });
-  //   } catch {
-  //     window.location = `${this.getBaseURL()}/logout`;
-  //     return undefined;
-  //   }
-  // }
 
   protected get = async (url: string, headers: HttpHeaders = undefined): Promise<any> =>
     await this.request('get', [environment.baseUrlApi + url, { headers }]);

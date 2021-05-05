@@ -1,0 +1,45 @@
+<div class="page">
+    <div class="tab">
+        <button type="button" class="tablinks" [ngClass]="{ 'active': tab == 0 }" (click)="onClickChangeTab(0)">Dados
+      Pessoais</button>
+        <button type="button" class="tablinks" [ngClass]="{ 'active': tab == 1 }" (click)="onClickChangeTab(1)">Endereço</button>
+    </div>
+    <div class="form">
+        <form *ngIf="form" class="register-form" [formGroup]="form">
+
+            <ng-container *ngIf="tab == 0">
+                <div class="input-with-icon">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Nome" formControlName="name" />
+                </div>
+
+                <div class="input-with-icon">
+                    <i class="fas fa-sort-numeric-up"></i>
+                    <input type="text" placeholder="CPF" formControlName="cpf" />
+                </div>
+
+                <div class="input-with-icon">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email" formControlName="email" />
+                </div>
+
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Senha" formControlName="password" />
+                </div>
+
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Confirme sua Senha" formControlName="confirmPassword" />
+                </div>
+            </ng-container>
+
+            <a>Esqueci minha senha</a>
+            <button (click)="onSubmit(form.value)" type="submit">CADASTRAR</button>
+            <label for="Input_RememberMe"></label>
+
+            <a class="fa fa-arrow-left" aria-hidden="true" href="http://localhost:4200/login-screen"> Voltar para Login</a>
+
+        </form>
+    </div>
+</div>
