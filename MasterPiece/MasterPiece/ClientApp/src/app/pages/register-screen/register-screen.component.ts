@@ -20,20 +20,17 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
   ngOnInit(): void {
     this.assignForm();
   }
-
-  validateForm = async () => this.form.valid;
-
   assignForm = async () => {
     const user = new User();
     user.address = new Address();
 
     this.form = this.formBuilder.group({
-      name: [user.name, [Validators.required]],
-      password: [user.password, Validators.required],
-      confirmPassword: [user.confirmPassword, Validators.required],
-      cpf: [user.cpf, Validators.required],
-      email: [user.email, Validators.required],
-      address: this.formBuilder.group({
+        name: [user.name, [Validators.required]],
+        password: [user.password, Validators.required],
+        confirmPassword: [user.confirmPassword, Validators.required],
+        cpf: [user.cpf, Validators.required],
+        email: [user.email, Validators.required],
+        address: this.formBuilder.group({
         street: [user.address.street],
         city: [user.address.city],
         state: [user.address.state],
@@ -56,5 +53,4 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
       console.log(e);
     }
   }
-
 }

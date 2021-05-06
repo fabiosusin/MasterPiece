@@ -5,14 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { LoginScreenComponent } from './pages/login-screen/login-screen.component'
-import { RegisterScreenComponent } from './pages/register-screen/register-screen.component'
 import { ApiService } from 'src/shared/services/api.service';
-import { NgxCurrencyModule } from 'ngx-currency';
 import { customCurrencyMaskConfig } from './modules-config';
 import { NgxMaskModule } from 'ngx-mask';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { MoneyDirective } from 'src/shared/directives/money.directive';
+import { NgxCurrencyModule } from 'ngx-currency';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,8 +28,6 @@ import { MoneyDirective } from 'src/shared/directives/money.directive';
 
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'login-screen', component: LoginScreenComponent },
-      { path: 'register-screen', component: RegisterScreenComponent },
     ])
 
   ],

@@ -39,5 +39,13 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
   onSubmit = async (product: Product) => {
     if (this.form.invalid)
       return;
+
+      try {
+        const result = await this.apiService.saveProduct(product);
+        this.loggedUser.setLoggedUser(result);
+      }
+      catch (e) {
+        console.log(e);
+      }
  }
 }
