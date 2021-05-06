@@ -21,6 +21,8 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
     this.assignForm();
   }
 
+  validateForm = async () => this.form.valid;
+
   assignForm = async () => {
     const user = new User();
     user.address = new Address();
@@ -43,11 +45,16 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
   };
 
   onSubmit = async (user: User) => {
-    if (this.form.invalid)
+    if (!this.validateForm())
       return;
 
-    // const result = await this.apiService.saveUser(user);
-    // this.loggedUser.setLoggedUser(result);
+    try {
+      const result = await this.apiService.saveUser(user);
+      this.loggedUser.setLoggedUser(result);
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 
 }

@@ -9,7 +9,7 @@ export class User {
 
 export class Address {
     state?: string;
-    zipCode?: string;
+    zipCode?: number;
     city?: string;
     neighborhood?: string;
     number?: string;
