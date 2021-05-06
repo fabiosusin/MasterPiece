@@ -7,6 +7,7 @@ export class BaseEdit<T> {
 
     onClickChangeTab = (newTab: number) => this.tab = newTab;
 
+    validateForm = async () => this.form.valid;
     assignForm = async (_item: T) => { };
     onSubmit = async (_item: T) => { };
 }

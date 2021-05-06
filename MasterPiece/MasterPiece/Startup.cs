@@ -100,6 +100,10 @@ namespace MasterPiece
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:4200").AllowAnyMethod()
+            );
+
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
