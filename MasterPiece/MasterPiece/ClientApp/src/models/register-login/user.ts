@@ -3,7 +3,7 @@ export class User {
     password?: string;
     confirmPassword?: string;
     email?: string;
-    cpf?: string;
+    cpf?: number;
     address?: Address;
 }
 
