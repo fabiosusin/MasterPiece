@@ -1,4 +1,6 @@
 ﻿using DAO.Databases;
+using DAO.Input;
+using MongoDB.Driver.Builders;
 using Repository.Extensions;
 using Repository.Settings;
 using System;
@@ -23,6 +25,15 @@ namespace Business.Logic.Users
 
             if (!Validation.IsValidEmail(user.Email))
                 throw new Exception("Email inválido!");
+        }
+
+        public bool Login(LoginInput login)
+        {
+            var user = MongoDatabase.GetCollection<User>().FindOne(Query.And(
+                Query<User>.EQ(x => x.Email, login.Email),
+                Query<User>.EQ(x => x.Password, login.Password)));
+
+            return user != null;
         }
     }
 }

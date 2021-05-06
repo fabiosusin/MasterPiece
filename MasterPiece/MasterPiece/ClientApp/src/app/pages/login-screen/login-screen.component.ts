@@ -20,20 +20,28 @@ export class LoginScreenComponent extends BaseEdit<Login> implements OnInit {
   ngOnInit(): void {
     this.assignForm();
   }
- 
+
   assignForm = async () => {
     const login = new Login();
 
-        this.form = this.formBuilder.group({
-        email: [login.email, [Validators.required]],
-        password: [login.password, Validators.required],
-      })
+    this.form = this.formBuilder.group({
+      email: [login.email, [Validators.required]],
+      password: [login.password, Validators.required],
+    })
   };
 
-  onSubmit = async (product: Login) => {
+  onSubmit = async (user: Login) => {
     if (this.form.invalid)
       return;
- }
+
+    try {
+      const result = await this.apiService.login(user);
+      console.log('result', result);
+    }
+    catch (e) {
+      console.log(e)
+    }
+  }
 
 
 }
