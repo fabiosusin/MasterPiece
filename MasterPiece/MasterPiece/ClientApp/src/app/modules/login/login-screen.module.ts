@@ -2,7 +2,8 @@ import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppCommonModule } from '../../../app/modules/app-common.module';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginScreenComponent } from '../../login-screen/login-screen.component';
+import { LoginScreenComponent } from 'src/app/pages/login-screen/login-screen.component';
+
 
 export const CURRENT_ROUTES: Routes = [
   { path: 'login-screen', component: LoginScreenComponent},  

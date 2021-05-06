@@ -5,14 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import {LoginScreenComponent} from './pages/login-screen/login-screen.component'
-import {RegisterScreenComponent} from './pages/register-screen/register-screen.component'
 import { ApiService } from 'src/shared/services/api.service';
-import { LoggedUser } from './cache/loggedUser.component';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { MoneyDirective } from 'src/shared/directives/money.directive';
-import { VMessageModule } from 'src/shared/directives/vmessage/vmessage.module';
-import { VMessageComponent } from 'src/shared/directives/vmessage/vmessage.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +20,7 @@ import { VMessageComponent } from 'src/shared/directives/vmessage/vmessage.compo
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
     ])
