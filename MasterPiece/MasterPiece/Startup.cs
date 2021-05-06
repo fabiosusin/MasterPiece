@@ -13,6 +13,7 @@ using System.Text;
 
 namespace MasterPiece
 {
+    
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -20,14 +21,14 @@ namespace MasterPiece
             Configuration = configuration;
         }
 
+        readonly string allowDeveloperOrigins = "_myAllowSpecificOrigins";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-            services.AddControllers();
-
             services.Configure<MasterPieceDatabaseSettings>(
                 Configuration.GetSection(nameof(MasterPieceDatabaseSettings)));
 
@@ -39,6 +40,15 @@ namespace MasterPiece
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
+            });
+
+            services.AddCors(policy =>
+            {
+                policy.AddPolicy(allowDeveloperOrigins, builders =>
+                {
+                    builders.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod().AllowAnyHeader();
+                });
             });
 
             services.AddAuthentication(x =>
@@ -81,6 +91,13 @@ namespace MasterPiece
                 app.UseHsts();
             }
 
+            app.UseCors();
+
+            if (env.IsDevelopment())
+            {
+                app.UseCors(allowDeveloperOrigins);
+                //	app.UseDeveloperExceptionPage();
+            }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -99,16 +116,11 @@ namespace MasterPiece
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseCors(
-                options => options.WithOrigins("http://localhost:4200").AllowAnyMethod()
-            );
-
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
-                spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())

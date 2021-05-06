@@ -9,8 +9,8 @@ import { LoginScreenComponent } from './pages/login-screen/login-screen.componen
 import { RegisterScreenComponent } from './pages/register-screen/register-screen.component'
 import { ApiService } from 'src/shared/services/api.service';
 import { NgxCurrencyModule } from 'ngx-currency';
-import { customCurrencyMaskConfig } from './modules-config';
 import { NgxMaskModule } from 'ngx-mask';
+import { customCurrencyMaskConfig } from './modules-config';
 @NgModule({
   declarations: [
     AppComponent,
