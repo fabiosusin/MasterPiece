@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasterPiece", "MasterPiece\MasterPiece.csproj", "{6EA05ACD-7D7B-4506-845B-101E2B807FD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{34ACF602-EBDE-4F5F-9A90-A32DD783EBF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{34ACF602-EBDE-4F5F-9A90-A32DD783EBF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{465EFB21-59EE-4FEA-8E11-347F03B174CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAO", "DAO\DAO.csproj", "{465EFB21-59EE-4FEA-8E11-347F03B174CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{D0022E81-F172-4B1A-84A8-20557DC37A44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{D0022E81-F172-4B1A-84A8-20557DC37A44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{812C42D3-6F97-4B38-BD61-010F54EA4206}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D0022E81-F172-4B1A-84A8-20557DC37A44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0022E81-F172-4B1A-84A8-20557DC37A44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0022E81-F172-4B1A-84A8-20557DC37A44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{812C42D3-6F97-4B38-BD61-010F54EA4206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{812C42D3-6F97-4B38-BD61-010F54EA4206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{812C42D3-6F97-4B38-BD61-010F54EA4206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{812C42D3-6F97-4B38-BD61-010F54EA4206}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
