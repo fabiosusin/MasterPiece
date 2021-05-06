@@ -21,7 +21,7 @@ namespace Business.Logic.Users
             if (user.Address?.ZipCode > 0 && Validation.IsValidZipCode(user.Address.ZipCode))
                 throw new Exception("CEP inválido!");
 
-            if (Validation.IsValidEmail(user.Email))
+            if (!Validation.IsValidEmail(user.Email))
                 throw new Exception("Email inválido!");
         }
     }

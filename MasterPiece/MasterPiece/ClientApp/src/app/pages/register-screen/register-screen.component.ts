@@ -20,6 +20,8 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
   ngOnInit(): void {
     this.assignForm();
   }
+  validateForm = async () => this.form.valid;
+
   assignForm = async () => {
     const user = new User();
     user.address = new Address();
@@ -42,10 +44,17 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
   };
 
   onSubmit = async (user: User) => {
-    if (!this.validateForm())
+    if (!(await this.validateForm()))
       return;
 
     try {
+      if (!user.cpf)
+        user.cpf = 0;
+      if (!user.address.zipCode)
+        user.address.zipCode = 0;
+
+      +user.cpf;
+      +user.address.zipCode;
       const result = await this.apiService.saveUser(user);
       this.loggedUser.setLoggedUser(result);
     }
