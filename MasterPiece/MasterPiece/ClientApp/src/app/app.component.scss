@@ -109,6 +109,17 @@
                     transition: 0.3s;
                 }
             }
+            .back-to-login {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                i {
+                    width: 20px;
+                }
+                span {
+                    margin-bottom: 10px;
+                }
+            }
         }
     }
 }
