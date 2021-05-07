@@ -26,10 +26,9 @@ namespace MasterPiece.Controllers
         public IActionResult Create([FromBody] Product product)
         {
             _blProducts.Add(product);
-            return Ok(new Product
-            {
-                ProductName = product
-            });
+            
+            return Ok(product);
+            
         }
     }
 }

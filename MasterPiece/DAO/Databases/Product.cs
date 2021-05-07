@@ -8,13 +8,18 @@ namespace DAO.Databases
 {
     public class Product : Base
     {
-        public Product ProductName { get; set; }
         public string Name { get; set; }
+        public string NameWithoutAccents { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
-        public double TotalValue { get; set; }
-        public double UnityValue { get; set; }
-        public double Balance { get; set; }
+        public decimal TotalValue { get; set; }
+        public decimal UnityValue { get; set; }
+        public decimal Balance { get; set; }
+        public ProductType Type { get; set; }
+    }
+    public enum ProductType
+    {
+        Default, Donation, ForSale
     }
 }
 

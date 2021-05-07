@@ -21,7 +21,11 @@ namespace Business.Logic.Products
             
             if (product.Description.Trim().Length == 0)
                 throw new Exception("Descrição é requerida!");
+        }
 
+        public override void EntitySanitize(Product entity)
+        {
+            entity.NameWithoutAccents = entity.Name.RemoveCharactersWithAccent();
         }
     }
 

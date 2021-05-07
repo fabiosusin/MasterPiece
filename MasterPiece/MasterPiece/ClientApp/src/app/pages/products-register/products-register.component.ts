@@ -40,5 +40,8 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
     if (this.form.invalid)
       return;
 
+    try { 
+      const result = await this.apiService.saveProduct(product);
+    } catch { }
  }
 }
