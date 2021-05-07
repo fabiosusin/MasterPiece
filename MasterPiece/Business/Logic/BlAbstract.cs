@@ -26,5 +26,10 @@ namespace Business.Logic
             EntityValidation(entity);
             MongoDatabase.GetCollection<TEntity>().Add(entity);
         }
+
+        public virtual void Get(string id)
+        {
+            MongoDatabase.GetCollection<TEntity>().FindById(id);
+        }
     }
 }

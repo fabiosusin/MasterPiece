@@ -1,0 +1,23 @@
+@import "../../../assets/scss/forms.scss";
+
+.register-page {
+  .form {
+    width: 500px;
+    height: 600px;
+    margin-left: 50px;
+    background-color: rgb(32, 32, 36);
+    margin-left: 7px;
+    .input-with-icon {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    i { position: absolute;
+    top: 30%;
+    left: 15px;
+    color: rgb(32, 32, 36);
+    }
+    }
+  }
+}

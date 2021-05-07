@@ -1,0 +1,44 @@
+<div class="register-page">
+    <div class="form">
+        <form class="register-form" *ngIf="form" class="register-form" [formGroup]="form">
+
+            <div class="input-with-icon">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Nome" formControlName="name" />
+            </div>
+
+            <div class="input-with-icon">
+                <i class="fas fa-pencil-alt"></i>
+                <input type="text" placeholder="Descrição" formControlName="description" />
+            </div>
+
+            <div class="input-with-icon">
+                <i class="fas fa-money-check-alt"></i>
+                <input placeholder="Valor Total" currencyMask formControlName="totalValue" />
+            </div>
+
+            <div class="input-with-icon">
+                <i class="fas fa-money-bill-alt"></i>
+                <input placeholder="Valor Unitário" currencyMask formControlName="unityValue" />
+            </div>
+
+            <div class="input-with-icon">
+                <i class="fas fa-wallet"></i>
+                <input placeholder="Saldo" currencyMask formControlName="balance" />
+            </div>
+
+            <div class="input-with-icon">
+                <i class="fas fa-bars"></i>
+                <input type="text" placeholder="Categoria" formControlName="category" />
+            </div>
+
+            <a>Esqueci minha senha</a>
+            <button (click)="onSubmit(form.value)" type="submit">CADASTRAR</button>
+            <label for="Input_RememberMe"></label>
+
+            <a class="back-to-login" [routerLink]="['/login-screen']"><i class="fa fa-arrow-left"></i> <span>Voltar para
+                    Login</span></a>
+
+        </form>
+    </div>
+</div>

@@ -70,8 +70,8 @@
             <button (click)="onSubmit(form.value)" type="submit">CADASTRAR</button>
             <label for="Input_RememberMe"></label>
 
-            <a class="fa fa-arrow-left" aria-hidden="true" href="http://localhost:4200/login-screen"> Voltar para
-                Login</a>
+            <a class="back-to-login" [routerLink]="['/login-screen']"><i class="fa fa-arrow-left"></i> <span>Voltar para
+                    Login</span></a>
 
         </form>
     </div>

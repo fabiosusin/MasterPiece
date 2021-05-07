@@ -55,6 +55,7 @@ export class BaseApiService {
   private async request(method: string, args: any[]): Promise<any> {
     return await new Promise(async (resolve, reject) => {
       this.httpClient[method](...args).toPromise().then((retorno: any) => {
+        console.log('retorno API', retorno)
         if (!retorno)
           resolve(null);
         if (typeof retorno == 'string')
