@@ -2,9 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
 import { ApiService } from 'src/shared/services/api.service';
 import { customCurrencyMaskConfig } from './modules-config';
 import { NgxMaskModule } from 'ngx-mask';
@@ -14,7 +12,6 @@ import { NgxCurrencyModule } from 'ngx-currency';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     MoneyDirective
   ],
   imports: [
@@ -24,15 +21,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     FormsModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     NgxMaskModule.forRoot(),
-    ReactiveFormsModule,
-
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
-      { path: 'login-screen', component: LoginScreenComponent },
-      { path: 'register-screen', component: RegisterScreenComponent },
-    ])
-
+    ReactiveFormsModule
   ],
   providers: [
     ApiService
