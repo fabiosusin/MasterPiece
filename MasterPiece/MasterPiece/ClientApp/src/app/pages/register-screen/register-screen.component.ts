@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { LoggedUser } from 'src/app/cache/loggedUser.component';
 import { Address, User } from 'src/models/register-login/user';
 import { ApiService } from 'src/shared/services/api.service';
-import { BaseEdit } from '../../base/edit/base-edit.component';
+import { BaseEdit } from '../base-page/base-edit.component';
 
 @Component({
   selector: 'app-register-login-component',

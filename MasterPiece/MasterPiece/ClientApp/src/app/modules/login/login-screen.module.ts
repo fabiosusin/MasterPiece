@@ -6,8 +6,7 @@ import { LoginScreenComponent } from 'src/app/pages/login-screen/login-screen.co
 
 
 export const CURRENT_ROUTES: Routes = [
-  { path: 'login-screen', component: LoginScreenComponent},  
-  { path: '', redirectTo: 'login-screen', pathMatch: 'full' },
+  { path: '', component: LoginScreenComponent}
 ];
 
 @NgModule({

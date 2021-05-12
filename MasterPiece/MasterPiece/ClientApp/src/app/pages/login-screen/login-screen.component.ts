@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { BaseEdit } from 'src/app/base/edit/base-edit.component';
+import { BaseEdit } from 'src/app/pages/base-page/base-edit.component';
 import { LoggedUser } from 'src/app/cache/loggedUser.component';
 import { Login } from 'src/models/login-register/login';
 import { ApiService } from 'src/shared/services/api.service';

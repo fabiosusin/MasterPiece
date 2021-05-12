@@ -5,8 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegisterScreenComponent } from 'src/app/pages/register-screen/register-screen.component';
 
 export const CURRENT_ROUTES: Routes = [
-  { path: 'register-screen', component: RegisterScreenComponent},  
-  { path: '', redirectTo: 'register-screen', pathMatch: 'full' },
+  { path: '', component: RegisterScreenComponent}
 ];
 
 @NgModule({
