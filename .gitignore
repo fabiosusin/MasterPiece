@@ -3,7 +3,6 @@
 
 # User-specific files
 *.suo
-*.vs
 *.user
 *.sln.docstates
 
@@ -158,3 +157,39 @@ $RECYCLE.BIN/
 
 # The packages folder can be ignored because of Package Restore
 packages/
+
+/BorlanV2/TempBoleto
+/BorlanV2/Modelos
+/.vs/config
+/PDVwin/downloads.sigecloud.com.br/file/pdv
+/API_V2/Tools/pdf/pdf
+/API_V2/Modelos
+/SIGE Android/AppAndroid/
+*.DotSettings
+/.vs
+/CheckoutV2/Front
+/API.Etiquetas/Modelo
+/BorlanV2/Tools/pdf/pdf
+/Teste.Manual.Console
+/APIV2/TempDownloads
+/API.Excel/Modelo
+/SIGE.API.Office/.vs
+/SIGE.API.Office/Modelo
+/BorlanV3/ClientApp/dist/BorlanV3
+/BorlanV3/ClientApp/node_modules
+/BorlanV2/BorlanV3/assets
+/BorlanV2/BorlanV3/BorlanV3-legacy.js
+/BorlanV2/BorlanV3/BorlanV3.js
+/BorlanV3/ClientApp/BorlanV3-legacy.js
+/BorlanV3/ClientApp/BorlanV3.js
+/API_V2/OP/
+/API_V2/CQ
+/SIGEUtils/DateTimeExtensions.cs
+/SIGE.MobiIntegrator.API/web.config
+*/node_modules
+.*/
+*/.*/
+/BorlanV2/V3
+/SIGE.ECommerceIntegrator.API/app
+/SIGE.OAuth2/WebClient/node_modules
+/SIGE.OAuth2/WebClient/dist/sige-auth
