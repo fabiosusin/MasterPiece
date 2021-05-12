@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasterPiece", "MasterPiece\MasterPiece.csproj", "{6EA05ACD-7D7B-4506-845B-101E2B807FD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Front", "MasterPiece\Front.csproj", "{6EA05ACD-7D7B-4506-845B-101E2B807FD0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{34ACF602-EBDE-4F5F-9A90-A32DD783EBF4}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAO", "DAO\DAO.csproj", "{4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{D0022E81-F172-4B1A-84A8-20557DC37A44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{812C42D3-6F97-4B38-BD61-010F54EA4206}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "Utils\Utils.csproj", "{812C42D3-6F97-4B38-BD61-010F54EA4206}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
