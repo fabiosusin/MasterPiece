@@ -21,4 +21,7 @@ export class ApiService extends BaseApiService {
   saveProduct = async (product: Product): Promise<any> =>
     await this.post('products/create', product, await this.getRequestHeaders());
 
+  showProduct = async (showProduct: Product): Promise<any> =>
+    await this.post('products/list', showProduct, await this.getRequestHeaders());
+
 }

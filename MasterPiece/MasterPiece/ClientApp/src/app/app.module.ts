@@ -29,8 +29,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'login-screen', component: LoginScreenComponent },
-      { path: 'register-screen', component: RegisterScreenComponent },
+      
     ])
 
   ],
