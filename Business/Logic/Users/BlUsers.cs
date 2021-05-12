@@ -17,13 +17,13 @@ namespace Business.Logic.Users
             if (user.Password != user.ConfirmPassword)
                 throw new Exception("Senhas não coincidem!");
 
-            if (Validation.IsCpf(user.Cpf))
+            if (StringExtension.IsCpf(user.Cpf))
                 throw new Exception("CPF inválido!");
 
-            if (user.Address?.ZipCode > 0 && Validation.IsValidZipCode(user.Address.ZipCode))
+            if (user.Address?.ZipCode > 0 && StringExtension.IsValidZipCode(user.Address.ZipCode))
                 throw new Exception("CEP inválido!");
 
-            if (!Validation.IsValidEmail(user.Email))
+            if (!StringExtension.IsValidEmail(user.Email))
                 throw new Exception("Email inválido!");
         }
 
