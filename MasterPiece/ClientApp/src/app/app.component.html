@@ -1,0 +1,36 @@
+<div class="bg-top">
+    <div class="bg-top-upper">
+        <div class="logo">
+            <img src="../../../assets/images/logo-masterpiece-laranja.png" alt="Logo Topo Tag">
+        </div>
+        <div class="find-product">
+            <input type="text" placeholder="Buscar Produto" />
+            <button>
+        <i class="fas fa-search"></i>
+      </button>
+        </div>
+        <div class="buttons">
+            <a><i class="fas fa-bars"></i></a>
+            <a [routerLink]="'/login-screen'"><i class="far fa-user"></i></a>
+            <a><i class="fas fa-shopping-bag"></i></a>
+        </div>
+    </div>
+    <div class="bg-top-lower">
+        <div class="sub-category">Categoria 1</div>
+        <div class="sub-category">Categoria 2</div>
+        <div class="sub-category">Categoria 3</div>
+        <div class="sub-category">Categoria 4</div>
+        <div class="sub-category">Categoria 5</div>
+    </div>
+</div>
+<div>
+    <router-outlet></router-outlet>
+</div>
+<div class="footer">
+    <div class="logo-rodape">
+        <a href="#">
+            <img src="../../../assets/images/logo-masterpiece-laranja.png" alt="Logo TAG Rodapé">
+        </a>
+        <p>v1.0.0 | Loja criada por MasterPiece</p>
+    </div>
+</div>

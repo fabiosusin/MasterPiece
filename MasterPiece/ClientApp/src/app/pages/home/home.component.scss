@@ -1,0 +1,119 @@
+.layout {
+    position: relative;
+    margin-top: -65px;
+    .header-info {
+        height: 400px;
+        background: var(--background-color);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-end;
+        h1,
+        p {
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        h1 {
+            font-weight: 300;
+            border: 3px solid #fff;
+            padding: 20px;
+            display: table;
+        }
+        p {
+            width: 100%;
+        }
+    }
+    .main-color-line {
+        height: 40px;
+        background: var(--theme-main-color-darker);
+    }
+    .texts {
+        text-align: center;
+        margin-top: 20px;
+        p {
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .botao {
+            display: table;
+            margin: 30px auto;
+        }
+    }
+    .title {
+        position: relative;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 3px;
+        margin: 50px;
+        span {
+            border: 2px solid #333;
+            padding: 10px 15px;
+            font-size: 17px;
+            flex-flow: row wrap;
+            text-transform: uppercase;
+            color: #000;
+        }
+        b {
+            display: block;
+            flex: 1;
+            height: 2px;
+            opacity: 0.1;
+            background-color: var(--theme-main-color);
+        }
+    }
+    .bg-products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+        .card {
+            height: 300px;
+            width: 300px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 10px 0 #99999963;
+            border: 1px solid #99999963;
+            margin: 10px 5px;
+            .image {
+                height: 100%;
+                background: #000;
+                width: 100%;
+            }
+            .description {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                height: 70px;
+                min-height: 70px;
+                h5 {
+                    margin: 0;
+                }
+                p,
+                .show-on-hover {
+                    width: 100%;
+                    transition: 0.6s;
+                    visibility: hidden;
+                }
+            }
+            &:hover {
+                .description {
+                    .show-on-hover {
+                        font-size: 14px;
+                        transition: 0.6s;
+                        display: block;
+                        visibility: visible !important;
+                        color: var(--theme-main-font-color-brighter-1);
+                    }
+                }
+            }
+        }
+    }
+}
