@@ -3,7 +3,6 @@ using MongoDB.Driver;
 using Repository.DbConnection;
 using Repository.Extensions;
 using Repository.Settings;
-using Utils.Extensions.Validations;
 
 namespace Business.Logic
 {
@@ -21,15 +20,13 @@ namespace Business.Logic
 
         public virtual void EntityValidation(TEntity entity) { }
 
+        public virtual void EntitySanitize(TEntity entity) { }
+
         public virtual void Add(TEntity entity)
         {
             EntityValidation(entity);
+            EntitySanitize(entity);
             MongoDatabase.GetCollection<TEntity>().Add(entity);
-        }
-
-        public virtual void Get(string id)
-        {
-            MongoDatabase.GetCollection<TEntity>().FindById(id);
         }
     }
 }

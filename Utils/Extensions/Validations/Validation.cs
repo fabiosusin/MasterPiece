@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Utils.Extensions.Validations
 {
-    public static class Validation
+    public static class StringExtension
     {
 
         public static bool IsCpf(long cpf) => IsCpf(cpf.ToString());
