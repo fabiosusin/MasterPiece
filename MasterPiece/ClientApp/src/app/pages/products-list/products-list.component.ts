@@ -17,14 +17,11 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
     super();
   }
   ngOnInit(): void {
-
+    const t: Filters = { }
+    this.getProduct(t);
   }
 
-
   getProduct = async (filters: Filters) => {
-    if (this.form.invalid)
-      return;
-
     try {
       const result = await this.apiService.showProduct(filters);
       console.log('result', result);
