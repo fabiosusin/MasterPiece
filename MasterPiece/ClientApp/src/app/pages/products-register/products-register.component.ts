@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'oidc-client';
 import { BaseEdit } from 'src/app/pages/base-page/base-edit.component';
 import { LoggedUser } from 'src/app/cache/loggedUser.component';
-import { Product} from 'src/models/product-register/product';
+import { Product} from 'src/models/product/product';
 import { ApiService } from 'src/shared/services/api.service';
 
 @Component({

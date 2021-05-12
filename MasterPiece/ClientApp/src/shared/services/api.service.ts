@@ -2,7 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { LoggedUserModel } from "src/models/logged-user/logged-user";
 import { Login } from "src/models/login-register/login";
-import { Product } from "src/models/product-register/product";
+import { Filters } from "src/models/product/filters";
+import { Product } from "src/models/product/product";
 import { User } from "src/models/register-login/user";
 import { BaseApiService } from "../base/base-api.service";
 
@@ -21,7 +22,7 @@ export class ApiService extends BaseApiService {
   saveProduct = async (product: Product): Promise<any> =>
     await this.post('products/create', product, await this.getRequestHeaders());
 
-  showProduct = async (showProduct: Product): Promise<any> =>
-    await this.post('products/list', showProduct, await this.getRequestHeaders());
+  showProduct = async (filters: Filters): Promise<Product[]> =>
+    await this.post('products/list', filters, await this.getRequestHeaders());
 
 }
