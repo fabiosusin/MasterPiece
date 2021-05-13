@@ -12,6 +12,8 @@ import { BaseEdit } from "../base-page/base-edit.component";
 
 export class ProductListComponent extends BaseEdit<Product> implements OnInit {
   itemArray: Array<Product>;
+  
+
   constructor(
     protected apiService: ApiService,) {
     super();
@@ -23,8 +25,8 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
 
   getProduct = async (filters: Filters) => {
     try {
-      const result = await this.apiService.showProduct(filters);
-      console.log('result', result);
+      this.itemArray = await this.apiService.showProduct(filters);
+      console.log(this.itemArray);
     }
     catch (e) {
       console.log(e)

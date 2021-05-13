@@ -58,12 +58,8 @@ export class BaseApiService {
         console.log('retorno API', retorno)
         if (!retorno)
           resolve(null);
-        if (typeof retorno == 'string')
-          resolve(retorno);
-        else if (!retorno.success)
-          reject(retorno.message ? retorno.message : 'Erro ao buscar os dados');
-        else
-          resolve(retorno.data);
+
+        resolve(retorno);
       }).catch(async () => { });
     });
   }
