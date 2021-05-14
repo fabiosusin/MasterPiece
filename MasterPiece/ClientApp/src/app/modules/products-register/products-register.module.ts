@@ -5,8 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductsRegisterComponent } from 'src/app/pages/products-register/products-register.component';
 
 export const CURRENT_ROUTES: Routes = [
-  { path: 'products-register', component: ProductsRegisterComponent},  
-  { path: '', redirectTo: 'products-register', pathMatch: 'full' },
+  { path: '', component: ProductsRegisterComponent},
 ];
 
 @NgModule({

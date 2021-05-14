@@ -1,5 +1,6 @@
+import { User } from "../register-login/user";
+
 export class LoggedUserModel {
     token?: string;
-    userName?: string;
-    password?: string;
+    user?: User;
 }

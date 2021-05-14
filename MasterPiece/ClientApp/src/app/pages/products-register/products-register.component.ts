@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from 'oidc-client';
-import { BaseEdit } from 'src/app/pages/base-page/base-edit.component';
-import { LoggedUser } from 'src/app/cache/loggedUser.component';
-import { Product} from 'src/models/product-register/product';
+import { BaseEdit } from 'src/app/pages/base/base-edit.component';
+import { LoggedUserService } from 'src/app/cache/loggedUser.component';
+import { Product, ProductType } from 'src/models/product-register/product';
 import { ApiService } from 'src/shared/services/api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-register',
@@ -15,37 +15,58 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
   constructor(
     protected apiService: ApiService,
     protected formBuilder: FormBuilder,
-    protected loggedUser: LoggedUser) {
-    super();
+    protected loggedUser: LoggedUserService,
+    protected activatedRoute: ActivatedRoute,
+    protected router: Router) {
+    super(router);
   }
+
+  getFreeProduct = () => this.form.get('type').value == ProductType.Donation;
+
+  productTypes: {}[] = [
+    { value: ProductType.Donation, label: 'Doação' },
+    { value: ProductType.ForSale, label: 'Venda' }
+  ];
+
   ngOnInit(): void {
     this.assignForm();
   }
- 
+
+  ngAfterViewInit() {
+    const isLogged = this.loggedUser.getLoggedUser() != null;
+    if (!isLogged)
+      this.router.navigate(['/login']);
+  }
+
   assignForm = async () => {
-    const product = new Product();
-
-
     this.form = this.formBuilder.group({
-        name: [product.name, [Validators.required]],
-        description: [product.description, Validators.required],
-        category: [product.category, Validators.required],
-        totalValue: [product.totalValue],
-        unityValue: [product.unityValue],
-        balance: [product.balance],
-      })
+      name: ['', [Validators.required]],
+      description: ['', Validators.required],
+      category: ['', Validators.required],
+      type: [this.dataReceived ? this.dataReceived.type : ProductType.Donation, Validators.required],
+      price: [''],
+      balance: [''],
+    })
   };
 
   onSubmit = async (product: Product) => {
-    if (this.form.invalid)
+    if (await this.inValidateForm())
       return;
 
-      try {
-        const result = await this.apiService.saveProduct(product);
-        this.loggedUser.setLoggedUser(result);
-      }
-      catch (e) {
-        console.log(e);
-      }
- }
+    try {
+      if (!product.price)
+        product.price = 0;
+      if (!product.balance)
+        product.balance = 0;
+
+      +product.price;
+      +product.balance;
+      await this.apiService.saveProduct(product);
+      this.router.navigate(['/home']);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
 }

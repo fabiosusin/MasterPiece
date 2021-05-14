@@ -1,5 +1,7 @@
-﻿using DAO.Databases;
+﻿using Business.Services;
+using DAO.Databases;
 using DAO.Input;
+using DAO.Output;
 using MongoDB.Driver.Builders;
 using Repository.Extensions;
 using Repository.Settings;
@@ -27,13 +29,23 @@ namespace Business.Logic.Users
                 throw new Exception("Email inválido!");
         }
 
-        public bool Login(LoginInput login)
+        public SaveUserOutput Login(LoginInput login)
         {
+            if (string.IsNullOrEmpty(login?.Email) || string.IsNullOrEmpty(login?.Password))
+                return null;
+
             var user = MongoDatabase.GetCollection<User>().FindOne(Query.And(
                 Query<User>.EQ(x => x.Email, login.Email),
                 Query<User>.EQ(x => x.Password, login.Password)));
+            if (user == null)
+                return null;
 
-            return user != null;
+
+            return new SaveUserOutput
+            {
+                User = user,
+                Token = TokenService.GenerateToken(user)
+            };
         }
     }
 }

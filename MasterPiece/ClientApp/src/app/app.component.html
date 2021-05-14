@@ -1,17 +1,28 @@
 <div class="bg-top">
     <div class="bg-top-upper">
-        <div class="logo">
+        <div class="logo" [routerLink]="'/home'">
             <img src="../../../assets/images/logo-masterpiece-laranja.png" alt="Logo Topo Tag">
         </div>
         <div class="find-product">
             <input type="text" placeholder="Buscar Produto" />
             <button>
-        <i class="fas fa-search"></i>
-      </button>
+                <i class="fas fa-search"></i>
+            </button>
         </div>
         <div class="buttons">
-            <a><i class="fas fa-bars"></i></a>
-            <a [routerLink]="'/login-screen'"><i class="far fa-user"></i></a>
+            <!-- <div class="bgDropdown" *ngIf="isLogged"> -->
+            <div class="bgDropdown">
+                <a (click)="openDropdown = !openDropdown"><i class="fas fa-bars"></i></a>
+                <div class="dropdown-items" *ngIf="openDropdown">
+                    <a (click)="onClickGoToRegisterProduct(1)">Doar Produto</a>
+                    <a (click)="onClickGoToRegisterProduct(2)">Vender Produto</a>
+                    <a>Meus Produtos</a>
+                    <a>Minhas Vendas</a>
+                    <a (click)="onClickLogout()">Sair</a>
+                </div>
+            </div>
+            <!-- <a *ngIf="!isLogged" [routerLink]="'/login'"><i class="far fa-user"></i></a> -->
+            <a [routerLink]="'/login'"><i class="far fa-user"></i></a>
             <a><i class="fas fa-shopping-bag"></i></a>
         </div>
     </div>

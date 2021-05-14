@@ -7,7 +7,7 @@
             <a>Esqueci minha senha</a>
             <button type="submit" (click)="onSubmit(form.value)">ENTRAR</button>
             <label for="Input_RememberMe"></label>
-            <p>Não Registrado? <a href="http://localhost:4200/register-screen">Crie uma conta</a></p>
+            <p>Não Registrado? <a [routerLink]="'/register'">Crie uma conta</a></p>
         </form>
     </div>
 </div>
