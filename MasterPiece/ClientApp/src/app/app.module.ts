@@ -9,6 +9,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { MoneyDirective } from 'src/shared/directives/money.directive';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { CartService } from 'src/shared/services/cart-service/cart.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { NgxCurrencyModule } from 'ngx-currency';
     ReactiveFormsModule
   ],
   providers: [
-    ApiService
+    ApiService,
+    CartService
   ],
   exports: [
     MoneyDirective

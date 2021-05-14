@@ -2,7 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { Filters } from "src/models/product/filters";
 import { Product } from "src/models/product/product";
 import { ApiService } from "src/shared/services/api.service";
+import { CartService } from "src/shared/services/cart-service/cart.service";
 import { BaseEdit } from "../base-page/base-edit.component";
+
 
 @Component({
   selector: 'app-products-list-component',
@@ -12,15 +14,21 @@ import { BaseEdit } from "../base-page/base-edit.component";
 
 export class ProductListComponent extends BaseEdit<Product> implements OnInit {
   itemArray: Array<Product>;
-  
 
   constructor(
+    private cartService: CartService,
     protected apiService: ApiService,) {
     super();
   }
   ngOnInit(): void {
     const t: Filters = { }
     this.getProduct(t);
+  }
+
+    addToCart(product: Filters){  
+    this.cartService.addToCart(product);
+    window.alert('Seu produto foi adicionado ao carrinho')
+    console.log(product);
   }
 
   getProduct = async (filters: Filters) => {
