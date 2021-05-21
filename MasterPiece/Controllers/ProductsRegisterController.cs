@@ -14,14 +14,14 @@ namespace MasterPiece.Controllers
         {
             _blProducts = new BlProducts(settings);
         }
-       
+
         [HttpPost, Route("Create")]
         public IActionResult Create([FromBody] Product product)
         {
             _blProducts.Add(product);
-            
+
             return Ok(product);
-            
+
         }
     }
 }

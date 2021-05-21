@@ -58,4 +58,16 @@ export class Utils {
         });
     }
 
+    static getErrorMessageFromHttpResponse(response: any) {
+        debugger;
+        console.debug('Mensagem Erro API =>', response);
+        if (typeof response == 'object' && typeof response.error == 'object' && response.error) {
+            if (typeof response.error.exceptionMessage == 'string')
+                return response.error.exceptionMessage;
+            if (typeof response.error.message == 'string')
+                return response.error.message;
+        }
+        return 'Ops! Algo deu errado';
+    }
+
 }

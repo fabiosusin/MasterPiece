@@ -1,4 +1,4 @@
-@import '~ngx-toastr/toastr';
+@import "~ngx-toastr/toastr";
 @import "./variables.scss";
 .bg-top {
     display: flex;
@@ -321,4 +321,8 @@ h6,
 
 *:focus {
     outline: none;
+}
+
+::ng-deep .toast-container {
+    white-space: pre-line;
 }

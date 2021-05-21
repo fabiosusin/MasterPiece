@@ -16,13 +16,16 @@ namespace Business.Logic.Users
 
         public override void EntityValidation(User user)
         {
+            if (string.IsNullOrEmpty(user.Password))
+                throw new Exception("Informe uma Senha!");
+
             if (user.Password != user.ConfirmPassword)
                 throw new Exception("Senhas não coincidem!");
 
-            if (StringExtension.IsCpf(user.Cpf))
+            if (!StringExtension.IsCpf(user.Cpf))
                 throw new Exception("CPF inválido!");
 
-            if (user.Address?.ZipCode > 0 && StringExtension.IsValidZipCode(user.Address.ZipCode))
+            if (!string.IsNullOrEmpty(user.Address.ZipCode) && user.Address.ZipCode.Length != 8)
                 throw new Exception("CEP inválido!");
 
             if (!StringExtension.IsValidEmail(user.Email))

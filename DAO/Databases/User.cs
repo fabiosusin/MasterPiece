@@ -7,7 +7,7 @@ namespace DAO.Databases
         public string Name { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public long Cpf { get; set; }
+        public string Cpf { get; set; }
         public Address Address { get; set; }
 
         [BsonIgnore]
@@ -16,7 +16,7 @@ namespace DAO.Databases
 
     public class Address
     {
-        public long ZipCode { get; set; }
+        public string ZipCode { get; set; }
         public string State { get; set; }
         public string City { get; set; }
         public string Neighborhood { get; set; }

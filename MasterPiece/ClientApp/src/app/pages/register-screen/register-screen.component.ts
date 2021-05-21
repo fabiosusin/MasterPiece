@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoggedUserService } from 'src/app/cache/loggedUser.component';
 import { Address, User } from 'src/models/register-login/user';
 import { ApiService } from 'src/shared/services/api.service';
+import { Utils } from 'src/shared/utils';
 import { BaseEdit } from '../base/base-edit.component';
 
 @Component({
@@ -16,9 +17,12 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
     protected apiService: ApiService,
     protected formBuilder: FormBuilder,
     protected loggedUser: LoggedUserService,
+    protected utils: Utils,
     protected router: Router) {
-    super(router);
+    super(router, utils);
   }
+  user: User = new User();
+
   ngOnInit(): void {
     this.assignForm();
   }
@@ -30,44 +34,56 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
   }
 
   assignForm = async () => {
-    const user = new User();
-    user.address = new Address();
-
     this.form = this.formBuilder.group({
-      name: [user.name, [Validators.required]],
-      password: [user.password, Validators.required],
-      confirmPassword: [user.confirmPassword, Validators.required],
-      cpf: [user.cpf, Validators.required],
-      email: [user.email, Validators.required],
+      name: [this.user.name, [Validators.required]],
+      password: [this.user.password, Validators.required],
+      confirmPassword: [this.user.confirmPassword, Validators.required],
+      cpf: [this.user.cpf, Validators.required],
+      email: [this.user.email, Validators.required],
       address: this.formBuilder.group({
-        street: [user.address.street],
-        city: [user.address.city],
-        state: [user.address.state],
-        zipCode: [user.address.zipCode],
-        number: [user.address.number],
-        neighborhood: [user.address.neighborhood]
+        street: [this.user.address.street],
+        city: [this.user.address.city],
+        state: [this.user.address.state],
+        zipCode: [this.user.address.zipCode],
+        number: [this.user.address.number],
+        neighborhood: [this.user.address.neighborhood]
       })
     });
   };
 
+  errors = () => {
+    const invalidFields: string[] = [];
+    if (!this.user.name)
+      invalidFields.push('Nome')
+    if (!this.user.cpf)
+      invalidFields.push('CPF')
+    if (!this.user.email)
+      invalidFields.push('Email')
+    if (!this.user.password)
+      invalidFields.push('Senha')
+    if (!this.user.confirmPassword)
+      invalidFields.push('Confirmação de Senha')
+
+    super.showValidationsError(invalidFields, 'Os campos devem ser informados');
+  }
+
   onSubmit = async (user: User) => {
-    if (await this.inValidateForm())
+    if (await this.inValidateForm()) {
+      this.errors();
       return;
+    }
 
     try {
-      if (!user.cpf)
-        user.cpf = 0;
-      if (!user.address.zipCode)
-        user.address.zipCode = 0;
-
-      +user.cpf;
-      +user.address.zipCode;
+      this.isLoading = true;
       const result = await this.apiService.saveUser(user);
       this.loggedUser.setLoggedUser(result);
       this.router.navigate(['/home'])
     }
     catch (e) {
-      console.log(e);
+      this.utils.errorMessage(e);
+    }
+    finally {
+      this.isLoading = false;
     }
   }
 }

@@ -1,12 +1,12 @@
-import { Directive, ElementRef, OnChanges, Attribute, HostListener } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import { Directive, Attribute, HostListener, OnChanges, OnInit } from '@angular/core';
+import { DefaultValueAccessor, NgControl } from '@angular/forms';
 import { KeysNames } from 'src/models/directives/key-names';
 
 @Directive({
-  selector: '[cpfcnpj], [cpf], [cnpj]'
+  selector: '[zipCode]',
+  providers: [DefaultValueAccessor]
 })
-
-export class CpfCnpjDirective implements OnChanges {
+export class ZipCodeDirective implements OnChanges, OnInit {
   private allowedKeys: string[] = [
     ...KeysNames.controls,
     ...KeysNames.numbers
@@ -16,20 +16,8 @@ export class CpfCnpjDirective implements OnChanges {
     ...KeysNames.clipboard,
     KeysNames.a
   ];
-
-  onlyCpf: boolean;
-  onlyCnpj: boolean;
-
-  constructor(
-    public control: NgControl,
-    public ele: ElementRef,
-    @Attribute('cpfcnpj') public cpfcnpj: string,
-    @Attribute('cpf') public cpf: string,
-    @Attribute('cnpj') public cnpj: string
-  ) {
-    this.onlyCpf = !this.cpfcnpj && this.cpf != null;
-    this.onlyCnpj = !this.cpfcnpj && this.cnpj != null;
-  }
+  
+  constructor(public control: NgControl, @Attribute('zipCode') public zipCode: string) {}
 
   ngOnChanges() {
     this.onInputChange();
@@ -57,13 +45,12 @@ export class CpfCnpjDirective implements OnChanges {
 
     value = (model === value ? model : value).match(/\d+/g).join('');
 
-    const pattern = this.onlyCpf || (!this.onlyCnpj && value.length <= 11) ? '###.###.###-##' : '##.###.###/####-##';
+    const pattern = '#####-###';
     let i = 0;
     let formatted = pattern.replace(/#/g, _ => (value[i] ? value[i++] : ''));
-
-    // Remove os caracteres especiais ainda não usados na máscara
     formatted = formatted.match(/(.*)\d/)[0].toString();
 
+    this.control.viewToModelUpdate(value);
     this.control.valueAccessor.writeValue(formatted);
     this.control.control.setValue(value, { emitEvent: false, emitModelToViewChange: false });
   }

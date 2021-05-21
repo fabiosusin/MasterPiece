@@ -20,22 +20,15 @@ export class AppComponent implements OnInit {
   isLogged: boolean;
 
   ngOnInit(): void {
-    this.getIsLogged();
   }
 
   ngAfterViewInit() {
-    console.log('oi')
-    this.getIsLogged();
-  }
-
-  getIsLogged() {
     this.isLogged = this.loggedUser.getLoggedUser() != null;
   }
 
   onClickLogout = () => {
     this.loggedUser.removeLoggedUser();
     this.router.navigate(['/login']);
-    this.getIsLogged();
   }
 
   onClickGoToRegisterProduct(type: ProductType) {

@@ -9,27 +9,21 @@ import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
 import { Utils } from 'src/shared/utils';
 import { CpfCnpjDirective } from 'src/shared/directives/cpf-cnpj.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
-  declarations: [
-    AppComponent,
-    MoneyDirective,
-    CpfCnpjDirective
-  ],
+  declarations: [ AppComponent ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot() // ToastrModule added
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule // ToastrModule added
   ],
   providers: [
     Utils,
     ApiService
-  ],
-  exports: [
-    MoneyDirective,
-    CpfCnpjDirective
   ],
  
   bootstrap: [AppComponent]

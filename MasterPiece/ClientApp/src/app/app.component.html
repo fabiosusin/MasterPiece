@@ -10,8 +10,7 @@
             </button>
         </div>
         <div class="buttons">
-            <!-- <div class="bgDropdown" *ngIf="isLogged"> -->
-            <div class="bgDropdown">
+            <div class="bgDropdown" *ngIf="isLogged">
                 <a (click)="openDropdown = !openDropdown"><i class="fas fa-bars"></i></a>
                 <div class="dropdown-items" *ngIf="openDropdown">
                     <a (click)="onClickGoToRegisterProduct(1)">Doar Produto</a>
@@ -21,8 +20,7 @@
                     <a (click)="onClickLogout()">Sair</a>
                 </div>
             </div>
-            <!-- <a *ngIf="!isLogged" [routerLink]="'/login'"><i class="far fa-user"></i></a> -->
-            <a [routerLink]="'/login'"><i class="far fa-user"></i></a>
+            <a *ngIf="!isLogged" [routerLink]="'/login'"><i class="far fa-user"></i></a>
             <a><i class="fas fa-shopping-bag"></i></a>
         </div>
     </div>

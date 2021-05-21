@@ -44,10 +44,6 @@ namespace Utils.Extensions.Validations
             return cpf.EndsWith(digito);
         }
 
-        public static bool IsValidZipCode(long cep) => IsValidZipCode(cep.ToString());
-
-        public static bool IsValidZipCode(string cep) => new Regex("^\\d{5}-\\d{3}$").IsMatch(cep);
-
         public static bool IsValidEmail(string email)
         {
             try
