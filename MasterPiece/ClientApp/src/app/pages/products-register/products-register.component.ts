@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BaseEdit } from 'src/app/pages/base/base-edit.component';
+import { User } from 'oidc-client';
+import { BaseEdit } from 'src/app/pages/base-page/base-edit.component';
+import { LoggedUser } from 'src/app/cache/loggedUser.component';
+import { Product} from 'src/models/product/product';
 import { LoggedUserService } from 'src/app/cache/loggedUser.component';
 import { Product, ProductType } from 'src/models/product-register/product';
 import { ApiService } from 'src/shared/services/api.service';
@@ -25,7 +28,7 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
 
   product: Product = new Product();
   productTypes: {}[] = [
-    { value: ProductType.Donation, label: 'Doação' },
+    { value: ProductType.Donation, label: 'Doa��o' },
     { value: ProductType.ForSale, label: 'Venda' }
   ];
 
@@ -56,7 +59,7 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
     if (!this.product.name)
       invalidFields.push('Nome')
     if (!this.product.description)
-      invalidFields.push('Descrição')
+      invalidFields.push('Descri��o')
     if (!this.product.category)
       invalidFields.push('Categoria')
 
