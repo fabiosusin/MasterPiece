@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ProductType } from 'src/models/product-register/product';
+import { ProductType } from 'src/models/product/product';
 import { Utils } from 'src/shared/utils';
 import { LoggedUserService } from './cache/loggedUser.component';
 
