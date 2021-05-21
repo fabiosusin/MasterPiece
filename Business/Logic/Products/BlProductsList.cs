@@ -22,7 +22,7 @@ namespace Business.Logic.Products
                 query.Add(Query<Product>.EQ(x => x.Category, filters.Category));
 
             if (!string.IsNullOrEmpty(filters.Price.ToString()))
-                query.Add(Query<Product>.EQ(x => x.TotalValue, filters.Price));
+                query.Add(Query<Product>.EQ(x => x.Price, filters.Price));
 
             if (!string.IsNullOrEmpty(filters.ProductName))
                 query.Add(Query<Product>.EQ(x => x.Name, filters.ProductName));
