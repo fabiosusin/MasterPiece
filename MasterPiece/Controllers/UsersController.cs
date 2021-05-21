@@ -1,8 +1,8 @@
 ﻿using Business.Logic.Users;
+using Business.Services;
 using DAO.Databases;
 using DAO.Input;
 using DAO.Output;
-using MasterPiece.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Settings;
@@ -32,13 +32,6 @@ namespace MasterPiece.Controllers
         }
 
         [HttpPost, Route("Login"), AllowAnonymous]
-        public IActionResult Login([FromBody] LoginInput user)
-        {
-            return Ok(new
-            {
-                Logged = _blUsers.Login(user),
-                Success = true
-            });
-        }
+        public IActionResult Login([FromBody] LoginInput user) => Ok(_blUsers.Login(user));
     }
 }

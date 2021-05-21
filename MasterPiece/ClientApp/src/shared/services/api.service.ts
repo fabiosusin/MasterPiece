@@ -16,11 +16,11 @@ export class ApiService extends BaseApiService {
   saveUser = async (user: User): Promise<LoggedUserModel> =>
     await this.post('users/create', user, await this.getRequestHeaders());
 
-  login = async (user: Login): Promise<any> =>
+  login = async (user: Login): Promise<LoggedUserModel> =>
     await this.post('users/login', user, await this.getRequestHeaders());
 
   saveProduct = async (product: Product): Promise<any> =>
-    await this.post('products/create', product, await this.getRequestHeaders());
+    await this.post('productsregister/create', product, await this.getRequestHeaders());
 
   showProduct = async (filters: Filters): Promise<Product[]> =>
     await this.post('products/list', filters, await this.getRequestHeaders());

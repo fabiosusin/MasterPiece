@@ -1,3 +1,5 @@
+<app-loading *ngIf="isLoading"></app-loading>
+
 <div class="page">
     <div class="tab">
         <button type="button" class="tablinks" [ngClass]="{ 'active': tab == 0 }" (click)="onClickChangeTab(0)">Dados
@@ -15,7 +17,7 @@
 
                 <div class="input-with-icon">
                     <i class="fas fa-sort-numeric-up"></i>
-                    <input type="text" placeholder="CPF" mask="000.000.000-00" formControlName="cpf" />
+                    <input type="text" placeholder="CPF" formControlName="cpf" cpfcnpj />
                 </div>
 
                 <div class="input-with-icon">
@@ -52,7 +54,7 @@
 
                 <div class="input-with-icon">
                     <i class="fas fa-list-ol"></i>
-                    <input type="text" placeholder="CEP" mask="00000-000" formControlName="zipCode" />
+                    <input type="text" placeholder="CEP" formControlName="zipCode" zipCode />
                 </div>
 
                 <div class="input-with-icon">
@@ -66,11 +68,9 @@
                 </div>
             </ng-container>
 
-            <a>Esqueci minha senha</a>
             <button (click)="onSubmit(form.value)" type="submit">CADASTRAR</button>
-            <label for="Input_RememberMe"></label>
 
-            <a class="back-to-login" [routerLink]="['/login-screen']"><i class="fa fa-arrow-left"></i> <span>Voltar para
+            <a class="back-to-login" [routerLink]="['/login']"><i class="fa fa-arrow-left"></i> <span>Voltar para
                     Login</span></a>
 
         </form>

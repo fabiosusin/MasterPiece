@@ -1,3 +1,4 @@
+@import "~ngx-toastr/toastr";
 @import "./variables.scss";
 .bg-top {
     display: flex;
@@ -57,6 +58,33 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            .bgDropdown {
+                .dropdown-items {
+                    z-index: 1;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                    align-items: center;
+                    background: var(--theme-main-color-darker);
+                    position: absolute;
+                    height: auto;
+                    border-radius: 5px;
+                    overflow: hidden;
+                    width: 150px;
+                    a {
+                        width: 100%;
+                        transition: 0.3s;
+                        font-weight: bold;
+                        font-size: 15px;
+                        padding: 5px 10px;
+                        &:hover {
+                            transition: 0.3s;
+                            background: var(--theme-main-color);
+                            color: #fff;
+                        }
+                    }
+                }
+            }
             a {
                 font-size: 24px;
                 transition: 0.3s;
@@ -146,6 +174,7 @@
                     width: 10px;
                     color: rgb(32, 32, 36);
                 }
+                select,
                 input {
                     padding: 5px;
                     padding-left: 40px;
@@ -292,4 +321,8 @@ h6,
 
 *:focus {
     outline: none;
+}
+
+::ng-deep .toast-container {
+    white-space: pre-line;
 }

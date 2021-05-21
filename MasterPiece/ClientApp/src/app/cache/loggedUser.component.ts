@@ -2,20 +2,36 @@ import { Injectable } from "@angular/core";
 import { LoggedUserModel } from "src/models/logged-user/logged-user";
 
 @Injectable({ providedIn: 'root' })
-export class LoggedUser {
+export class LoggedUserService {
 
     setLoggedUser(loggedUser: LoggedUserModel) {
-        localStorage.setItem('password', loggedUser.password);
+        if (!loggedUser || !loggedUser.user || !loggedUser.token) {
+            console.error('Não foi possível setar o usuário Logado', loggedUser)
+            return;
+        }
+
+        localStorage.setItem('password', loggedUser.user.password);
         localStorage.setItem('token', loggedUser.token);
-        localStorage.setItem('userName', loggedUser.userName);
+        localStorage.setItem('userName', loggedUser.user.name);
+    }
+
+    removeLoggedUser() {
+        localStorage.removeItem('password');
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
     }
 
     getLoggedUser() {
         const user: LoggedUserModel = {
-            password: localStorage.getItem('password'),
+            user: {
+                password: localStorage.getItem('password'),
+                name: localStorage.getItem('userName')
+            },
             token: localStorage.getItem('token'),
-            userName: localStorage.getItem('userName')
         };
+
+        if (!user.token)
+            return null;
 
         return user;
     }

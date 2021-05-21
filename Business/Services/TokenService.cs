@@ -2,14 +2,11 @@
 using DAO.Databases.Token;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace MasterPiece.Services
+namespace Business.Services
 {
     public static class TokenService
     {

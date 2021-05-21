@@ -3,13 +3,13 @@ export class User {
     password?: string;
     confirmPassword?: string;
     email?: string;
-    cpf?: number;
-    address?: Address;
+    cpf?: string;
+    address?: Address = new Address();
 }
 
 export class Address {
     state?: string;
-    zipCode?: number;
+    zipCode?: string;
     city?: string;
     neighborhood?: string;
     number?: string;

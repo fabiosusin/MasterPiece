@@ -12,14 +12,15 @@ namespace DAO.Databases
         public string NameWithoutAccents { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
-        public decimal TotalValue { get; set; }
-        public decimal UnityValue { get; set; }
+        public decimal Price { get; set; }
         public decimal Balance { get; set; }
         public ProductType Type { get; set; }
     }
     public enum ProductType
     {
-        Default, Donation, ForSale
+        Default,
+        Donation,
+        ForSale
     }
 }
 

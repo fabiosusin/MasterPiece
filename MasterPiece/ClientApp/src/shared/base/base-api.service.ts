@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from '../../environments/environment';
+import { Utils } from "../utils";
 
 @Injectable({ providedIn: 'root' })
 export class BaseApiService {
@@ -55,12 +56,14 @@ export class BaseApiService {
   private async request(method: string, args: any[]): Promise<any> {
     return await new Promise(async (resolve, reject) => {
       this.httpClient[method](...args).toPromise().then((retorno: any) => {
-        console.log('retorno API', retorno)
+        console.debug('retorno API =>', retorno)
         if (!retorno)
           resolve(null);
 
         resolve(retorno);
-      }).catch(async () => { });
+      }).catch(async (error: HttpErrorResponse) => {
+        reject(Utils.getErrorMessageFromHttpResponse(error));
+      });
     });
   }
 

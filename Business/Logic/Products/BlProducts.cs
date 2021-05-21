@@ -11,11 +11,17 @@ namespace Business.Logic.Products
 
         public override void EntityValidation(Product product)
         {
-            if (product.Name.Trim().Length == 0)
-                 throw new Exception ("Nome requerido!");
-            
-            if (product.Description.Trim().Length == 0)
-                throw new Exception("Descrição é requerida!");
+            if (string.IsNullOrEmpty(product.Name))
+                 throw new Exception ("Informe o Nome do Produto!");
+
+            if(product.Type == ProductType.Default)
+                throw new Exception("Informe o Tipo do Produto!");
+
+            if (product.Type == ProductType.Donation)
+                return;
+
+            if(product.Price == 0)
+                throw new Exception("Informe o Preço do Produto!");
         }
 
         public override void EntitySanitize(Product entity)

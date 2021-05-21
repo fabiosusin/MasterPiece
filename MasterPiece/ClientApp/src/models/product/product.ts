@@ -1,8 +1,14 @@
-export class Product { 
-    public name: string;
-    public description: string;
-    public category: string;
-    public totalValue:  number;
-    public unityValue : number;
-    public balance : number;
+export class Product {
+    name: string;
+    description: string;
+    category: string;
+    price: number;
+    balance: number;
+    type: ProductType;
+}
+
+export enum ProductType {
+    Default,
+    Donation,
+    ForSale
 }
