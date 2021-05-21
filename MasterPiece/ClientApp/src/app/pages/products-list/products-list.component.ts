@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Filters } from "src/models/product/filters";
 import { Product } from "src/models/product/product";
 import { ApiService } from "src/shared/services/api.service";
 import { CartService } from "src/shared/services/cart-service/cart.service";
-import { BaseEdit } from "../base-page/base-edit.component";
+import { Utils } from "src/shared/utils";
+import { BaseEdit } from "../../pages/base/base-edit.component";
 
 
 @Component({
@@ -16,9 +18,11 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
   itemArray: Array<Product>;
 
   constructor(
+    protected router: Router,
+    protected utils: Utils,
     private cartService: CartService,
     protected apiService: ApiService,) {
-    super();
+    super(router, utils);
   }
   ngOnInit(): void {
     const t: Filters = { }

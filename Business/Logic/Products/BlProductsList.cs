@@ -21,9 +21,6 @@ namespace Business.Logic.Products
             if (!string.IsNullOrEmpty(filters.Category))
                 query.Add(Query<Product>.EQ(x => x.Category, filters.Category));
 
-            if (filters.Price > 0)
-                query.Add(Query<Product>.EQ(x => x.TotalValue, filters.Price));
-
             if (!string.IsNullOrEmpty(filters.ProductName))
                 query.Add(Query<Product>.Matches(x => x.NameWithoutAccents, string.Format("(?i).*{0}.*", filters.ProductName)));
 
