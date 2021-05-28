@@ -21,7 +21,7 @@ namespace MasterPiece.Controllers
 
         [HttpPost, Route("List")]
         public IActionResult List([FromBody] FiltersProducts filtersproduct)
-       {
+        {
             var products = _blProductsList.GetProducts(filtersproduct);
             return Ok(products);
         }

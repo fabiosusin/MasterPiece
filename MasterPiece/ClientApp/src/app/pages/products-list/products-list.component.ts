@@ -4,7 +4,6 @@ import { Filters } from "src/models/product/filters";
 import { Product } from "src/models/product/product";
 import { ApiService } from "src/shared/services/api.service";
 import { Utils } from "src/shared/utils";
-import { BaseEdit } from "../base/base-edit.component";
 import { CartService } from "src/shared/services/cart-service/cart.service";
 import { BaseEdit } from "../../pages/base/base-edit.component";
 
@@ -17,9 +16,11 @@ import { BaseEdit } from "../../pages/base/base-edit.component";
 
 export class ProductListComponent extends BaseEdit<Product> implements OnInit {
   itemArray: Array<Product>;
+ 
 
   constructor(
     protected apiService: ApiService,
+    private cartService: CartService,
     protected router: Router,
     protected utils: Utils) {
     super(router, utils);

@@ -25,7 +25,6 @@ import { CartService } from 'src/shared/services/cart-service/cart.service';
   ],
   providers: [
     Utils,
-    ApiService
     ApiService,
     CartService
   ],
