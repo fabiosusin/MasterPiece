@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { Utils } from 'src/shared/utils';
 import { CpfCnpjDirective } from 'src/shared/directives/cpf-cnpj.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedService } from 'src/shared/services/shared.service';
 @NgModule({
   declarations: [ AppComponent ],
   imports: [
@@ -23,7 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     Utils,
-    ApiService
+    ApiService,
+    SharedService
   ],
  
   bootstrap: [AppComponent]

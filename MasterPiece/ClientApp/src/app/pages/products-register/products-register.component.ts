@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Utils } from 'src/shared/utils';
 import { BaseEdit } from '../base/base-edit.component';
 import { Product, ProductType } from 'src/models/product/product';
+import { SharedService } from 'src/shared/services/shared.service';
 
 @Component({
   selector: 'app-products-register',
@@ -17,11 +18,11 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
   constructor(
     protected apiService: ApiService,
     protected formBuilder: FormBuilder,
-    protected loggedUser: LoggedUserService,
     protected activatedRoute: ActivatedRoute,
     protected utils: Utils,
-    protected router: Router) {
-    super(router, utils);
+    protected router: Router,
+    protected sharedService: SharedService) {
+    super(router, utils, sharedService);
   }
 
   product: Product = new Product();
@@ -32,12 +33,6 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
 
   ngOnInit(): void {
     this.assignForm();
-  }
-
-  ngAfterViewInit() {
-    const isLogged = this.loggedUser.getLoggedUser() != null;
-    if (!isLogged)
-      this.router.navigate(['/login']);
   }
 
   getFreeProduct = () => this.form.get('type').value == ProductType.Donation;
