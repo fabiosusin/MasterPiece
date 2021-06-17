@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { Router } from "@angular/router";
 import { Filters } from "src/models/product/filters";
 import { Product } from "src/models/product/product";
@@ -16,7 +16,8 @@ import { BaseEdit } from "../../pages/base/base-edit.component";
 
 export class ProductListComponent extends BaseEdit<Product> implements OnInit {
   itemArray: Array<Product>;
- 
+  @Output() productRemoved = new EventEmitter();
+
 
   constructor(
     protected apiService: ApiService,
@@ -26,14 +27,21 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
     super(router, utils);
   }
   ngOnInit(): void {
-    const t: Filters = { }
+    const t: Filters = {}
     this.getProduct(t);
   }
 
-    addToCart(product: Filters){  
+  addToCart(product: Product) {
     this.cartService.addToCart(product);
     window.alert('Seu produto foi adicionado ao carrinho')
     console.log(product);
+  }
+
+
+  remove(product: Product) {
+    debugger;
+    this.cartService.clearCart(product);
+    window.alert('seu produto foi removido com sucesso!')
   }
 
   getProduct = async (filters: Filters) => {

@@ -11,7 +11,7 @@
             <!-- List group-->
                 <!-- list group item-->
                 <li class="list-group-item">
-                    <table class="table table-dark" style="width:100%">
+                    <table class="table table-dark center" style="width:100%">
                         <tr>
                           <th>Nome</th>
                           <th>Descrição</th>
@@ -26,7 +26,10 @@
                           <td>{{results.price | currency: "BRL" }}</td>
                           <td>{{results.balance}}</td>
                           <td> <input type="button" (click) = "addToCart(results)" class="btn btn-primary btn-lg" value="Adicionar ao Carrinho"></td>
+                          <td style="width: 50px;"> <input type="button" (click) = "remove(itemArray)" class="btn btn-primary btn-lg" value="Remover do Carrinho"></td> 
                         </tr>
+                        
+                        
                       </table>
                 </div>
             </div>
