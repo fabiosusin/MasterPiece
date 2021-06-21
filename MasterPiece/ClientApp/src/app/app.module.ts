@@ -4,15 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from 'src/shared/services/api.service';
 import { AppRoutingModule } from './modules/app-routing.module';
-import { MoneyDirective } from 'src/shared/directives/money.directive';
 import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
 import { Utils } from 'src/shared/utils';
-import { CpfCnpjDirective } from 'src/shared/directives/cpf-cnpj.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedService } from 'src/shared/services/shared.service';
+import { ClickOutsideDirective } from 'src/shared/directives/click-outside.directive';
 @NgModule({
-  declarations: [ AppComponent ],
+  declarations: [
+    AppComponent,
+    ClickOutsideDirective
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -27,7 +29,9 @@ import { SharedService } from 'src/shared/services/shared.service';
     ApiService,
     SharedService
   ],
- 
+  exports: [
+    ClickOutsideDirective
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,17 @@
 <div class="page">
     <div class="form">
-        <form class="register-form" *ngIf="form" class="register-form" [formGroup]="form">
+        <form class="register-form" *ngIf="form" [formGroup]="form">
+
+            <div class="image">
+                <a class="image-icon" *ngIf="!getImage()">
+                    <i class="fas fa-camera"></i>
+                </a>
+                <a class="image-icon bgImg" *ngIf="getImage()">
+                    <img [src]="getImage()" />
+                    <i class="remove-img fas fa-times" (click)="onClickRemoveImage()"></i>
+                </a>
+                <input type="file" (change)="attachFile($event)" *ngIf="!getImage()">
+            </div>
 
             <div class="input-with-icon">
                 <i class="fas fa-user"></i>
@@ -12,7 +23,7 @@
                 <input type="text" placeholder="Descrição" formControlName="description" />
             </div>
 
-            <div class="input-with-icon" *ngIf="productTypes">
+            <div class="input-with-icon" *ngIf="productTypes" tooltip="Tipo do Produto">
                 <i class="fas fa-money-check-alt"></i>
                 <select formControlName="type">
                     <option *ngFor="let productType of productTypes" [ngValue]="productType.value">
@@ -21,19 +32,22 @@
                 </select>
             </div>
 
-            <div class="input-with-icon" *ngIf="!getFreeProduct()">
-                <i class="fas fa-money-check-alt"></i>
+            <div class="input-with-icon" *ngIf="!getFreeProduct()" tooltip="Valor do Produto">
+                <i class="far fa-money-bill-alt"></i>
                 <input placeholder="Valor do Produto" formControlName="price" money />
             </div>
 
-            <div class="input-with-icon">
+            <div class="input-with-icon" tooltip="Saldo">
                 <i class="fas fa-wallet"></i>
                 <input placeholder="Saldo" formControlName="balance" money />
             </div>
 
-            <div class="input-with-icon">
+            <div class="input-with-icon" *ngIf="categories">
                 <i class="fas fa-bars"></i>
-                <input type="text" placeholder="Categoria" formControlName="category" />
+                <input list="categories" id="category" placeholder="Categoria" formControlName="category" />
+                <datalist id="categories">
+                    <option *ngFor="let lbCategory of categories">{{ lbCategory.name }}</option>
+                </datalist>
             </div>
 
             <a>Esqueci minha senha</a>

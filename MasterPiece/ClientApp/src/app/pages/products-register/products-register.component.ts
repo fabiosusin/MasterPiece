@@ -1,13 +1,13 @@
+import { Category } from './../../../models/category/category]';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from 'oidc-client';
-import { LoggedUserService } from 'src/app/cache/loggedUser.component';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/shared/services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Utils } from 'src/shared/utils';
 import { BaseEdit } from '../base/base-edit.component';
 import { Product, ProductType } from 'src/models/product/product';
 import { SharedService } from 'src/shared/services/shared.service';
+import { Filters } from 'src/models/product/filters';
 
 @Component({
   selector: 'app-products-register',
@@ -25,17 +25,21 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
     super(router, utils, sharedService);
   }
 
+  categories: Array<Category>;
   product: Product = new Product();
   productTypes: {}[] = [
     { value: ProductType.Donation, label: 'Doação' },
     { value: ProductType.ForSale, label: 'Venda' }
   ];
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.getCategories();
     this.assignForm();
   }
 
+  getImage = () => this.form.get('pictureBase64').value;
   getFreeProduct = () => this.form.get('type').value == ProductType.Donation;
+  onClickRemoveImage = () => this.form.controls['pictureBase64'].setValue(null)
   assignForm = async () => {
     this.form = this.formBuilder.group({
       name: [this.product.name, [Validators.required]],
@@ -44,6 +48,7 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
       type: [this.dataReceived ? this.dataReceived.type : ProductType.Donation, Validators.required],
       price: [this.product.price],
       balance: [this.product.balance],
+      pictureBase64: [this.product.pictureBase64],
     })
   };
 
@@ -76,7 +81,34 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
     finally {
       this.isLoading = false;
     }
+  }
 
+  async getCategories() {
+    this.categories = await this.apiService.listCategories(new Filters())
+  }
+
+
+  async attachFile(event: any) {
+    if (event.target.files.length <= 0) {
+      this.utils.errorMessage('Ocorreu um erro ao importar a imagem!');
+      return;
+    }
+
+    const file = <File>event.target.files[0];
+    if (file.size / 1024 / 1024 > 5) { //5MB
+      this.utils.warningMessage('O tamanho máximo para os arquivos é de 5MB.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = async () => {
+      try {
+        this.form.controls['pictureBase64'].setValue(reader.result.toString());
+      } catch (e) {
+        this.utils.errorMessage(e);
+      }
+    };
   }
 
 }

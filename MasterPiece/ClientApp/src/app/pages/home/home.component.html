@@ -13,115 +13,39 @@
         </div>
         <h2 class="title"><b></b><span>Pesquisar</span><b></b></h2>
         <div class="bg-products">
-            <div class="card">
-                <div class="image"></div>
+            <div class="card category" *ngFor="let category of categories">
+                <div class="image"><img *ngIf="category.imageUrl" [src]="category.imageUrl" /></div>
                 <div class="description">
-                    <h5>Material Básico</h5>
-                    <p class="show-on-hover">10 produtos</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Acabamentos</h5>
-                    <p class="show-on-hover">10 produtos</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Elétrica</h5>
-                    <p class="show-on-hover">10 produtos</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Móveis</h5>
-                    <p class="show-on-hover">10 produtos</p>
-                </div>
-            </div>
-            <div class="card" [routerLink]="['/products-list']">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Todos</h5>
-                    <p class="show-on-hover">10 produtos</p>
+                    <h5>{{ category.name }}</h5>
+                    <p class="show-on-hover">{{ category.products }} produtos</p>
                 </div>
             </div>
         </div>
         <h2 class="title"><b></b><span>Produtos em Destaque</span><b></b></h2>
         <div class="bg-products">
-            <div class="card">
-                <div class="image"></div>
+            <div class="card" *ngFor="let product of products">
+                <div class="image"><img *ngIf="product.imageUrl" [src]="product.imageUrl" /></div>
                 <div class="description">
-                    <h5>Material Básico</h5>
-                    <p>10 produtos</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Acabamentos</h5>
-                    <p>10 produtos</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Elétrica</h5>
-                    <p>10 produtos</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Móveis</h5>
-                    <p>10 produtos</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Todos</h5>
-                    <p>10 produtos</p>
+                    <h5>{{ product.name }}</h5>
+                    <div class="infos">
+                        <p><b>{{ product.balance | quantity }} unidades</b> por <b>R$ {{ product.price | currency:'R$' }}</b></p>
+                        <button class="info-btn left" type="button">Comprar</button>
+                        <button class="info-btn right" type="button"><i class="fas fa-shopping-bag"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
         <h2 class="title"><b></b><span>Produtos Mais Vendidos</span><b></b></h2>
         <div class="bg-products">
-            <div class="card">
-                <div class="image"></div>
+            <div class="card" *ngFor="let product of products">
+                <div class="image"><img *ngIf="product.imageUrl" [src]="product.imageUrl" /></div>
                 <div class="description">
-                    <h5>Material Básico</h5>
-                    <p>10 produtos</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Acabamentos</h5>
-                    <p>10 produtos</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Elétrica</h5>
-                    <p>10 produtos</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Móveis</h5>
-                    <p>10 produtos</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image"></div>
-                <div class="description">
-                    <h5>Todos</h5>
-                    <p>10 produtos</p>
+                    <h5>{{ product.name }}</h5>
+                    <div class="infos">
+                        <p><b>{{ product.balance | quantity }} unidades</b> por <b>R$ {{ product.price | currency:'R$' }}</b></p>
+                        <button class="info-btn left" type="button">Comprar</button>
+                        <button class="info-btn right" type="button"><i class="fas fa-shopping-bag"></i></button>
+                    </div>
                 </div>
             </div>
         </div>

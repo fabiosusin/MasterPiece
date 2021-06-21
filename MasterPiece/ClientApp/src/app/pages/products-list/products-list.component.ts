@@ -30,11 +30,10 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
       return;
 
     try {
-      const result = await this.apiService.showProduct(filters);
-      console.log('result', result);
+      const result = await this.apiService.listProduct(filters);
     }
     catch (e) {
-      console.log(e)
+      this.utils.errorMessage(e);
     }
   }
 }

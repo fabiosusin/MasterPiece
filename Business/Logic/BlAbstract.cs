@@ -22,11 +22,13 @@ namespace Business.Logic
 
         public virtual void EntitySanitize(TEntity entity) { }
 
-        public virtual void Add(TEntity entity)
+        public virtual TEntity Add(TEntity entity)
         {
             EntityValidation(entity);
             EntitySanitize(entity);
             MongoDatabase.GetCollection<TEntity>().Add(entity);
+
+            return entity;
         }
     }
 }
