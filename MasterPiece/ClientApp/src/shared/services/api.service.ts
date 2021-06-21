@@ -1,3 +1,4 @@
+import { Category } from './../../models/category/category]';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { LoggedUserModel } from "src/models/logged-user/logged-user";
@@ -22,7 +23,10 @@ export class ApiService extends BaseApiService {
   saveProduct = async (product: Product): Promise<any> =>
     await this.post('productsregister/create', product, await this.getRequestHeaders());
 
-  showProduct = async (filters: Filters): Promise<Product[]> =>
-    await this.post('products/list', filters, await this.getRequestHeaders());
+    listProduct = async (filters: Filters): Promise<Product[]> =>
+    await this.post('productsList/list', filters, await this.getRequestHeaders());
+
+    listCategories = async (filters: Filters): Promise<Category[]> =>
+    await this.post('productsList/categories', filters, await this.getRequestHeaders());
 
 }

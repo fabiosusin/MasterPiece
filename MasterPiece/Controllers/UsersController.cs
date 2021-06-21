@@ -23,7 +23,7 @@ namespace MasterPiece.Controllers
         [HttpPost, Route("Create"), AllowAnonymous]
         public IActionResult Create([FromBody] User user)
         {
-            _blUsers.Add(user);
+            _ = _blUsers.Add(user);
             return Ok(new SaveUserOutput
             {
                 User = user,

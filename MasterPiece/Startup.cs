@@ -1,3 +1,4 @@
+using Business.Services.Exceptions;
 using DAO.Databases.Token;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -13,7 +14,7 @@ using System.Text;
 
 namespace MasterPiece
 {
-    
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -31,6 +32,9 @@ namespace MasterPiece
         {
             services.Configure<MasterPieceDatabaseSettings>(
                 Configuration.GetSection(nameof(MasterPieceDatabaseSettings)));
+
+            services.AddControllers(options =>
+                options.Filters.Add(new HttpResponseExceptionFilter()));
 
             services.AddSingleton<IMasterPieceDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<MasterPieceDatabaseSettings>>().Value);
