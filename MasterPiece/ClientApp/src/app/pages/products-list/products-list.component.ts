@@ -16,6 +16,7 @@ import { BaseEdit } from "../../pages/base/base-edit.component";
 
 export class ProductListComponent extends BaseEdit<Product> implements OnInit {
   itemArray: Array<Product>;
+  items = [];
   @Output() productRemoved = new EventEmitter();
 
 
@@ -31,11 +32,24 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
     this.getProduct(t);
   }
 
+  removeProduct(product) { 
+    debugger;
+    this.items.splice(product, 1)
+    return;
+  }
+
+  removing(product: Product) { 
+    debugger;
+    this.removeProduct(product);
+    console.log("Produto Removido com sucesso")
+  }
+
   addToCart(product: Product) {
     this.cartService.addToCart(product);
     window.alert('Seu produto foi adicionado ao carrinho')
     console.log(product);
   }
+
 
 
   remove(product: Product) {
