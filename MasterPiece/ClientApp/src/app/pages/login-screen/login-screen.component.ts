@@ -6,6 +6,7 @@ import { Login } from 'src/models/login-register/login';
 import { ApiService } from 'src/shared/services/api.service';
 import { Router } from '@angular/router';
 import { Utils } from 'src/shared/utils';
+import { SharedService } from 'src/shared/services/shared.service';
 
 @Component({
   selector: 'app-tela-login-component',
@@ -14,22 +15,20 @@ import { Utils } from 'src/shared/utils';
 })
 export class LoginScreenComponent extends BaseEdit<Login> implements OnInit {
   constructor(
+    protected sharedService: SharedService,
     protected apiService: ApiService,
     protected formBuilder: FormBuilder,
     protected loggedUser: LoggedUserService,
     protected utils: Utils,
     protected router: Router) {
-    super(router, utils);
+    super(router, utils, sharedService);
   }
   ngOnInit(): void {
     this.assignForm();
   }
 
-  ngAfterViewInit() {
-    const isLogged = this.loggedUser.getLoggedUser() != null;
-    if (isLogged)
-      this.router.navigate(['/home']);
-  }
+  ngAfterViewInit() { }
+
 
   assignForm = async () => {
     const login = new Login();
@@ -54,9 +53,11 @@ export class LoginScreenComponent extends BaseEdit<Login> implements OnInit {
         return;
       }
       this.loggedUser.setLoggedUser(result);
+      this.sharedService.changeLoggedUser();
       this.router.navigate(['/home'])
     }
     catch (e) {
+      this.utils.errorMessage(e);
       console.error(e)
     }
     finally {

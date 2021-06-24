@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { Filters } from "src/models/product/filters";
 import { Product } from "src/models/product/product";
 import { ApiService } from "src/shared/services/api.service";
+import { SharedService } from "src/shared/services/shared.service";
 import { Utils } from "src/shared/utils";
 import { CartService } from "src/shared/services/cart-service/cart.service";
 import { BaseEdit } from "../../pages/base/base-edit.component";
@@ -24,8 +25,9 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
     protected apiService: ApiService,
     private cartService: CartService,
     protected router: Router,
-    protected utils: Utils) {
-    super(router, utils);
+    protected utils: Utils,
+    protected sharedService: SharedService) {
+    super(router, utils, sharedService);
   }
   ngOnInit(): void {
     const t: Filters = {}
@@ -60,11 +62,10 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
 
   getProduct = async (filters: Filters) => {
     try {
-      this.itemArray = await this.apiService.showProduct(filters);
-      console.log(this.itemArray);
+      const result = await this.apiService.listProduct(filters);
     }
     catch (e) {
-      console.log(e)
+      this.utils.errorMessage(e);
     }
   }
 }

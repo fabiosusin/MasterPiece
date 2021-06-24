@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoggedUserService } from 'src/app/cache/loggedUser.component';
 import { Address, User } from 'src/models/register-login/user';
 import { ApiService } from 'src/shared/services/api.service';
+import { SharedService } from 'src/shared/services/shared.service';
 import { Utils } from 'src/shared/utils';
 import { BaseEdit } from '../base/base-edit.component';
 
@@ -17,20 +18,15 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
     protected apiService: ApiService,
     protected formBuilder: FormBuilder,
     protected loggedUser: LoggedUserService,
+    protected sharedService: SharedService,
     protected utils: Utils,
     protected router: Router) {
-    super(router, utils);
+    super(router, utils, sharedService);
   }
   user: User = new User();
 
   ngOnInit(): void {
     this.assignForm();
-  }
-
-  ngAfterViewInit() {
-    const isLogged = this.loggedUser.getLoggedUser() != null;
-    if (isLogged)
-      this.router.navigate(['/home']);
   }
 
   assignForm = async () => {
@@ -77,6 +73,7 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
       this.isLoading = true;
       const result = await this.apiService.saveUser(user);
       this.loggedUser.setLoggedUser(result);
+      this.sharedService.changeLoggedUser();
       this.router.navigate(['/home'])
     }
     catch (e) {

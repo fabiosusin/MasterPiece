@@ -10,9 +10,9 @@
             </button>
         </div>
         <div class="buttons">
-            <div class="bgDropdown" *ngIf="isLogged">
-                <a (click)="openDropdown = !openDropdown"><i class="fas fa-bars"></i></a>
-                <div class="dropdown-items" *ngIf="openDropdown">
+            <div class="bgDropdown" *ngIf="logged">
+                <a (click)="onClickOutsideChangeDropdown()"><i class="fas fa-bars"></i></a>
+                <div class="dropdown-items" (clickOutside)="openDropdown ? onClickOutsideChangeDropdown(false) : null" *ngIf="openDropdown">
                     <a (click)="onClickGoToRegisterProduct(1)">Doar Produto</a>
                     <a (click)="onClickGoToRegisterProduct(2)">Vender Produto</a>
                     <a>Meus Produtos</a>
@@ -20,16 +20,12 @@
                     <a (click)="onClickLogout()">Sair</a>
                 </div>
             </div>
-            <a *ngIf="!isLogged" [routerLink]="'/login'"><i class="far fa-user"></i></a>
+            <a *ngIf="!logged" [routerLink]="'/login'"><i class="far fa-user"></i></a>
             <a><i class="fas fa-shopping-bag"></i></a>
         </div>
     </div>
     <div class="bg-top-lower">
-        <div class="sub-category">Material Básico</div>
-        <div class="sub-category">Acabamentos</div>
-        <div class="sub-category">Elétrica</div>
-        <div class="sub-category">Móveis</div>
-        <div class="sub-category " [routerLink]="['/products-list']">Todos</div>
+        <div class="sub-category" *ngFor="let category of categories">{{category.name}}</div>
     </div>
 </div>
 <div>
@@ -37,7 +33,7 @@
 </div>
 <div class="footer">
     <div class="logo-rodape">
-        <a href="#">
+        <a>
             <img src="../../../assets/images/logo-masterpiece-laranja.png" alt="Logo TAG Rodapé">
         </a>
         <p>v1.0.0 | Loja criada por MasterPiece</p>

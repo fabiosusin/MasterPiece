@@ -107,7 +107,7 @@ export class MoneyDirective implements OnChanges {
 
   @HostListener('keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
     !this.allowedKeys.includes(event.key) &&
-    !(this.allowedKeysWithControl.includes(event.key) && (event.ctrlKey || event.metaKey)) &&
-    event.preventDefault();
+      !(this.allowedKeysWithControl.includes(event.key) && (event.ctrlKey || event.metaKey)) &&
+      event.preventDefault();
   }
 }
