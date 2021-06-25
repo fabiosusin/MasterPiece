@@ -4,8 +4,9 @@ import { Router } from "@angular/router";
 import { Product } from "src/models/product/product";
 import { ApiService } from "src/shared/services/api.service";
 import { Utils } from "src/shared/utils";
-import { CartService } from "src/shared/services/cart-service/cart.service";
 import { BaseEdit } from "../../pages/base/base-edit.component";
+import { CartComponent } from "src/app/cache/cart.component";
+import { UserService } from "src/shared/services/user.service";
 
 
 @Component({
@@ -22,30 +23,31 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
 
   constructor(
     protected apiService: ApiService,
-    private cartService: CartService,
+    protected cartService: CartComponent,
+    protected userService: UserService,
     protected router: Router,
     protected utils: Utils) {
     super(router, utils);
   }
   ngOnInit(): void {
-    const t: Filters = {}
-    this.getProduct(t);
+    this.getProduct(new FiltersProduct());
   }
 
-  removeProduct(product) { 
+  removeProduct(product) {
     debugger;
     this.items.splice(product, 1)
     return;
   }
 
-  removing(product: Product) { 
+  removing(product: Product) {
     debugger;
     this.removeProduct(product);
     console.log("Produto Removido com sucesso")
   }
 
   addToCart(product: Product) {
-    this.cartService.addToCart(product);
+    this.cartService.setShoppingCartNewItem(product);
+    this.userService.changeShoppingCartAmount();
     window.alert('Seu produto foi adicionado ao carrinho')
     console.log(product);
   }
@@ -54,13 +56,15 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
 
   remove(product: Product) {
     debugger;
-    this.cartService.clearCart(product);
+    this.cartService.removeProduct(product);
+    this.userService.changeShoppingCartAmount();
     window.alert('seu produto foi removido com sucesso!')
   }
 
-  getProduct = async (filters: Filters) => {
+  getProduct = async (filters: FiltersProduct) => {
+    debugger;
     try {
-      const result = await this.apiService.listProduct(filters);
+      this.itemArray = await this.apiService.listProduct(filters);
     }
     catch (e) {
       this.utils.errorMessage(e);

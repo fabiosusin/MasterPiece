@@ -25,6 +25,7 @@ export class AppComponent extends BasePage implements OnInit {
     super(router, utils);
   }
 
+  amount: number;
   openDropdown: boolean;
   loggedModel: LoggedUserModel;
   categories = Array<ProductCategoryOutput>();
@@ -34,7 +35,7 @@ export class AppComponent extends BasePage implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.LoggedUser();
+    this.subscribeEvents();
   }
 
   async getCategories() {
@@ -44,15 +45,20 @@ export class AppComponent extends BasePage implements OnInit {
   onClickLogout = () => {
     this.loggedUserService.removeLoggedUser();
     this.router.navigate(['/login']);
-    this.LoggedUser();
+    this.subscribeEvents();
   }
 
-  LoggedUser() {
+  subscribeEvents() {
     this.loggedModel = this.loggedUserService.getLoggedUser();
 
     this.userService.getLoggedUser()
       .subscribe((item: LoggedUserModel) => {
         this.loggedModel = item
+      });
+
+    this.userService.getShoppingCartAmount()
+      .subscribe((amount: number) => {
+        this.amount = amount
       });
   }
 

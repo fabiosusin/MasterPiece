@@ -1,5 +1,6 @@
 import { ImageFormat } from './../shared/imageFormat';
 export class Product {
+    id?: string;
     userId?: string;
     name?: string;
     description?: string;
