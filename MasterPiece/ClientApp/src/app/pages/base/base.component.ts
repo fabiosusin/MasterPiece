@@ -1,12 +1,10 @@
 import { Router } from '@angular/router';
-import { SharedService } from 'src/shared/services/shared.service';
 import { Utils } from 'src/shared/utils';
 
 export class BasePage {
     constructor(
         protected router: Router,
-        protected utils: Utils,
-        protected sharedService: SharedService) {
+        protected utils: Utils) {
         this.dataReceived = this.router.getCurrentNavigation() && this.router.getCurrentNavigation().extras ?
             this.router.getCurrentNavigation().extras.state : null;
     }

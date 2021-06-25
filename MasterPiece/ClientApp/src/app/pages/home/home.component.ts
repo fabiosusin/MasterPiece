@@ -1,13 +1,11 @@
-import { Category } from './../../../models/category/category]';
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/models/product/product';
 import { ApiService } from 'src/shared/services/api.service';
-import { SharedService } from 'src/shared/services/shared.service';
 import { Utils } from 'src/shared/utils';
 import { BaseEdit } from '../base/base-edit.component';
-import { Filters } from 'src/models/product/filters';
+import { ProductCategoryOutput } from 'src/models/category/product-category-output';
 
 @Component({
   selector: 'app-home',
@@ -19,13 +17,12 @@ export class HomeComponent extends BaseEdit<Product> implements OnInit {
   constructor(
     protected apiService: ApiService,
     protected router: Router,
-    protected utils: Utils,
-    protected sharedService: SharedService) {
-    super(router, utils, sharedService);
+    protected utils: Utils) {
+    super(router, utils);
   }
 
   products = Array<Product>();
-  categories = Array<Category>();
+  categories = Array<ProductCategoryOutput>();
 
   async ngOnInit(): Promise<void> {
     await this.getProducts();
@@ -39,9 +36,7 @@ export class HomeComponent extends BaseEdit<Product> implements OnInit {
   }
 
   async getCategories() {
-    this.categories = await this.apiService.listCategories({
-      limit: 8
-    })
+    this.categories = await this.apiService.listCategories()
   }
 
 }

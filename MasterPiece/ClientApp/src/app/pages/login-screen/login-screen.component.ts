@@ -6,7 +6,7 @@ import { Login } from 'src/models/login-register/login';
 import { ApiService } from 'src/shared/services/api.service';
 import { Router } from '@angular/router';
 import { Utils } from 'src/shared/utils';
-import { SharedService } from 'src/shared/services/shared.service';
+import { UserService } from 'src/shared/services/user.service';
 
 @Component({
   selector: 'app-tela-login-component',
@@ -15,13 +15,13 @@ import { SharedService } from 'src/shared/services/shared.service';
 })
 export class LoginScreenComponent extends BaseEdit<Login> implements OnInit {
   constructor(
-    protected sharedService: SharedService,
+    protected userService: UserService,
     protected apiService: ApiService,
     protected formBuilder: FormBuilder,
     protected loggedUser: LoggedUserService,
     protected utils: Utils,
     protected router: Router) {
-    super(router, utils, sharedService);
+    super(router, utils);
   }
   ngOnInit(): void {
     this.assignForm();
@@ -48,12 +48,19 @@ export class LoginScreenComponent extends BaseEdit<Login> implements OnInit {
     try {
       this.isLoading = true;
       const result = await this.apiService.login(user);
-      if (!result) {
+
+      if (!result || !result.user) {
         this.utils.errorMessage('Usuário ou Senha incorretos. Verifique os dados e tente novamente!')
         return;
       }
+
+      if (result.user.blocked) {
+        this.utils.errorMessage('O seu Usuário atualmente está bloqueado!')
+        return;
+      }
+
       this.loggedUser.setLoggedUser(result);
-      this.sharedService.changeLoggedUser();
+      this.userService.changeLoggedUser();
       this.router.navigate(['/home'])
     }
     catch (e) {

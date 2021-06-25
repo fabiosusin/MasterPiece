@@ -2,6 +2,7 @@
 using Business.Services;
 using DAO.Databases;
 using DAO.Input;
+using DAO.Input.Filters;
 using DAO.Output;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace MasterPiece.Controllers
         [HttpPost, Route("Create"), AllowAnonymous]
         public IActionResult Create([FromBody] User user)
         {
-            _ = _blUsers.Add(user);
+            _ = _blUsers.Save(user);
             return Ok(new SaveUserOutput
             {
                 User = user,
@@ -33,5 +34,11 @@ namespace MasterPiece.Controllers
 
         [HttpPost, Route("Login"), AllowAnonymous]
         public IActionResult Login([FromBody] LoginInput user) => Ok(_blUsers.Login(user));
+
+        [HttpPost, Route("All-Users")]
+        public IActionResult Users([FromBody] UsersFilter filter) => Ok(_blUsers.List(filter));
+
+        [HttpGet, Route("Get")]
+        public IActionResult Get(string id) => Ok(_blUsers.Get(id));
     }
 }

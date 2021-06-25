@@ -9,10 +9,12 @@ export class LoggedUserService {
             console.error('Não foi possível setar o usuário Logado', loggedUser)
             return;
         }
-
+        
+        localStorage.setItem('id', loggedUser.user.id);
         localStorage.setItem('password', loggedUser.user.password);
         localStorage.setItem('token', loggedUser.token);
         localStorage.setItem('userName', loggedUser.user.name);
+        localStorage.setItem('admin', loggedUser.user.admin.toString());
     }
 
     removeLoggedUser() {
@@ -24,12 +26,14 @@ export class LoggedUserService {
     getLoggedUser() {
         const user: LoggedUserModel = {
             user: {
+                id: localStorage.getItem('id'),
                 password: localStorage.getItem('password'),
-                name: localStorage.getItem('userName')
+                name: localStorage.getItem('userName'),
+                admin: localStorage.getItem('admin').toLocaleLowerCase() == 'true'
             },
             token: localStorage.getItem('token'),
         };
-
+        
         if (!user.token)
             return null;
 

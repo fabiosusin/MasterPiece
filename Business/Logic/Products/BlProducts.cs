@@ -5,6 +5,8 @@ using Utils.Extensions.StringExtensions;
 using Microsoft.AspNetCore.Hosting;
 using Utils.Extensions.Files.Images;
 using Business.Services.Exceptions;
+using Repository.Extensions;
+using MongoDB.Driver.Builders;
 
 namespace Business.Logic.Products
 {
@@ -17,6 +19,9 @@ namespace Business.Logic.Products
         {
             if (product == null)
                 throw new ValidationResponseException("Ocorreu um erro ao enviar os dados para o servidor!");
+
+            if (string.IsNullOrEmpty(product.UserId))
+                throw new ValidationResponseException("Você deve estar logado para cadastrar um produto!");
 
             if (string.IsNullOrEmpty(product.Name))
                 throw new ValidationResponseException("Informe o Nome do Produto!");
@@ -33,7 +38,15 @@ namespace Business.Logic.Products
 
         public override void EntitySanitize(Product entity)
         {
-            entity.Image = SaveImage.SaveListResolutions(entity.PictureBase64);
+            var category = MongoDatabase.GetCollection<Category>().FindOne(Query<Category>.EQ(x => x.Name, entity.AuxiliaryProperties?.CategoryName));
+            if (category == null)
+            {
+                category = new Category(entity.AuxiliaryProperties.CategoryName);
+                category.Id = MongoDatabase.GetCollection<Category>().Add(category);
+            }
+
+            entity.CategoryId = category.Id;
+            entity.Image = SaveImage.SaveListResolutions(entity.AuxiliaryProperties?.PictureBase64);
             entity.NameWithoutAccents = entity.Name.RemoveCharactersWithAccent();
         }
 

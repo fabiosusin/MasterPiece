@@ -1,3 +1,4 @@
+import { UserService } from 'src/shared/services/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,7 +9,6 @@ import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
 import { Utils } from 'src/shared/utils';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedService } from 'src/shared/services/shared.service';
 import { ClickOutsideDirective } from 'src/shared/directives/click-outside.directive';
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { ClickOutsideDirective } from 'src/shared/directives/click-outside.direc
   providers: [
     Utils,
     ApiService,
-    SharedService
+    UserService
   ],
   exports: [
     ClickOutsideDirective

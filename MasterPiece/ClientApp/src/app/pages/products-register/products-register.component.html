@@ -2,7 +2,7 @@
     <div class="form">
         <form class="register-form" *ngIf="form" [formGroup]="form">
 
-            <div class="image">
+            <div class="image" formGroupName="auxiliaryProperties">
                 <a class="image-icon" *ngIf="!getImage()">
                     <i class="fas fa-camera"></i>
                 </a>
@@ -42,15 +42,14 @@
                 <input placeholder="Saldo" formControlName="balance" money />
             </div>
 
-            <div class="input-with-icon" *ngIf="categories">
+            <div class="input-with-icon" *ngIf="categories" formGroupName="auxiliaryProperties">
                 <i class="fas fa-bars"></i>
-                <input list="categories" id="category" placeholder="Categoria" formControlName="category" />
+                <input list="categories" id="category" placeholder="Categoria" formControlName="categoryName" />
                 <datalist id="categories">
                     <option *ngFor="let lbCategory of categories">{{ lbCategory.name }}</option>
                 </datalist>
             </div>
 
-            <a>Esqueci minha senha</a>
             <button (click)="onSubmit(form.value)" type="submit">CADASTRAR</button>
             <label for="Input_RememberMe"></label>
 

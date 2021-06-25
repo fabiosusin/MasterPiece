@@ -9,6 +9,10 @@
     <div class="form">
         <form *ngIf="form" class="register-form" [formGroup]="form">
 
+            <div class="input-with-icon" *ngIf="loggedUser && loggedUser.admin">
+                <mat-slide-toggle  formControlName="blocked">Bloquear</mat-slide-toggle>
+            </div>
+
             <ng-container *ngIf="tab == 0">
                 <div class="input-with-icon">
                     <i class="fas fa-user"></i>
@@ -17,7 +21,7 @@
 
                 <div class="input-with-icon">
                     <i class="fas fa-sort-numeric-up"></i>
-                    <input type="text" placeholder="CPF" formControlName="cpf" cpfcnpj />
+                    <input type="text" placeholder="CPF/CNPJ" formControlName="cpf" cpfcnpj />
                 </div>
 
                 <div class="input-with-icon">

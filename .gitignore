@@ -159,7 +159,7 @@ $RECYCLE.BIN/
 # The packages folder can be ignored because of Package Restore
 packages/
 
-/ProductsImages
+*/ProductsImages
 /BorlanV2/TempBoleto
 /BorlanV2/Modelos
 /.vs/config
@@ -195,3 +195,4 @@ packages/
 /SIGE.ECommerceIntegrator.API/app
 /SIGE.OAuth2/WebClient/node_modules
 /SIGE.OAuth2/WebClient/dist/sige-auth
+/MasterPiece/ClientApp/src/assets/ProductsImages

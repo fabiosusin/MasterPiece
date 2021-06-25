@@ -1,13 +1,19 @@
 import { ImageFormat } from './../shared/imageFormat';
 export class Product {
-    name: string;
-    description: string;
-    category: string;
-    pictureBase64: string;
-    price?: number;
-    balance?: number;
-    type: ProductType;
-    image: ImageFormat = new ImageFormat();
+    userId?: string;
+    name?: string;
+    description?: string;
+    categoryId?: string;
+    price?: number = 0;
+    balance?: number = 0;
+    type?: ProductType;
+    image?: ImageFormat = new ImageFormat();
+    auxiliaryProperties?: AuxiliaryProperties = new AuxiliaryProperties();
+}
+
+export class AuxiliaryProperties {
+    categoryName?: string;
+    pictureBase64?: string;
     imageUrl?: string;
 }
 

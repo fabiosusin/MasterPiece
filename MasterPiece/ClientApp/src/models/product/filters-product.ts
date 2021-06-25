@@ -1,5 +1,5 @@
 
-export class Filters {
+export class FiltersProduct {
     productName?: string;
     price?: number;
     category?: string;
