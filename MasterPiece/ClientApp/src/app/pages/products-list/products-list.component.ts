@@ -1,9 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { FiltersProduct } from 'src/models/product/filters-product';
 import { Router } from "@angular/router";
-import { Filters } from "src/models/product/filters";
 import { Product } from "src/models/product/product";
 import { ApiService } from "src/shared/services/api.service";
-import { SharedService } from "src/shared/services/shared.service";
 import { Utils } from "src/shared/utils";
 import { CartService } from "src/shared/services/cart-service/cart.service";
 import { BaseEdit } from "../../pages/base/base-edit.component";
@@ -25,9 +24,8 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
     protected apiService: ApiService,
     private cartService: CartService,
     protected router: Router,
-    protected utils: Utils,
-    protected sharedService: SharedService) {
-    super(router, utils, sharedService);
+    protected utils: Utils) {
+    super(router, utils);
   }
   ngOnInit(): void {
     const t: Filters = {}

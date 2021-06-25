@@ -16,8 +16,5 @@ namespace MasterPiece.Controllers
 
         [HttpPost, Route("List")]
         public IActionResult List([FromBody] FiltersProducts filtersproduct) => Ok(_blProductsList.List(filtersproduct));
-
-        [HttpPost, Route("Categories")]
-        public IActionResult Categories([FromBody] FiltersProducts filtersproduct) => Ok(_blProductsList.GetProductCategories(filtersproduct));
     }
 }

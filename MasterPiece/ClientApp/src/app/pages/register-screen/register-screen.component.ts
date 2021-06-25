@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoggedUserService } from 'src/app/cache/loggedUser.component';
+import { LoggedUserModel } from 'src/models/logged-user/logged-user';
 import { Address, User } from 'src/models/register-login/user';
 import { ApiService } from 'src/shared/services/api.service';
-import { SharedService } from 'src/shared/services/shared.service';
+import { UserService } from 'src/shared/services/user.service';
 import { Utils } from 'src/shared/utils';
 import { BaseEdit } from '../base/base-edit.component';
 
@@ -15,22 +16,39 @@ import { BaseEdit } from '../base/base-edit.component';
 })
 export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
   constructor(
+    protected userService: UserService,
     protected apiService: ApiService,
     protected formBuilder: FormBuilder,
-    protected loggedUser: LoggedUserService,
-    protected sharedService: SharedService,
+    protected loggedUserService: LoggedUserService,
+    protected activatedRoute: ActivatedRoute,
     protected utils: Utils,
     protected router: Router) {
-    super(router, utils, sharedService);
+    super(router, utils);
   }
-  user: User = new User();
 
-  ngOnInit(): void {
+  id: string;
+  user: User = new User();
+  loggedUser: LoggedUserModel = new LoggedUserModel();
+
+  async ngOnInit(): Promise<void> {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (this.id)
+      this.user = await this.apiService.getUser(this.id);
+
+    this.LoggedUser();
     this.assignForm();
   }
 
+  LoggedUser() {
+    this.loggedUser = this.loggedUserService.getLoggedUser();
+  }
+
   assignForm = async () => {
+    this.user.confirmPassword = this.id ? this.user.password : '';
+
     this.form = this.formBuilder.group({
+      id: [this.user.id],
+      blocked: [this.user.blocked],
       name: [this.user.name, [Validators.required]],
       password: [this.user.password, Validators.required],
       confirmPassword: [this.user.confirmPassword, Validators.required],
@@ -72,8 +90,8 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
     try {
       this.isLoading = true;
       const result = await this.apiService.saveUser(user);
-      this.loggedUser.setLoggedUser(result);
-      this.sharedService.changeLoggedUser();
+      this.loggedUserService.setLoggedUser(result);
+      this.userService.changeLoggedUser();
       this.router.navigate(['/home'])
     }
     catch (e) {

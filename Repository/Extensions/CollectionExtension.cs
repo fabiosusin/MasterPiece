@@ -8,14 +8,14 @@ namespace Repository.Extensions
 {
     public static class CollectionExtension
     {
-        public static void UpdateById(this MongoCollection collection, Base value)
+        public static void UpdateById(this MongoCollection collection, IBase value)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
-            collection.Update(Query<Base>.EQ(x => x.Id, value.Id), Update<Base>.Replace(value));
+            collection.Update(Query<Base>.EQ(x => x.Id, value.Id), Update<IBase>.Replace(value));
         }
 
         public static void UpdateById<T>(this MongoCollection<T> collection, string id, UpdateBuilder<T> updateBuilder)

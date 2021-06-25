@@ -6,6 +6,7 @@ import { ProductsRegisterComponent } from 'src/app/pages/products-register/produ
 
 export const CURRENT_ROUTES: Routes = [
   { path: '', component: ProductsRegisterComponent},
+  { path: '/:id', component: ProductsRegisterComponent},
 ];
 
 @NgModule({
