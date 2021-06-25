@@ -1,14 +1,11 @@
 ﻿using DAO.Databases;
 using DAO.Input;
-using DAO.Output;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using Repository.Settings;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Business.Logic.Products
 {
@@ -23,14 +20,17 @@ namespace Business.Logic.Products
         private IMongoQuery QueryFilters(FiltersProducts filters)
         {
             var query = new List<IMongoQuery>();
-            if (!string.IsNullOrEmpty(filters.Category))
-                query.Add(Query<Product>.EQ(x => x.Category, filters.Category));
+            if (!string.IsNullOrEmpty(filters.CategoryId))
+                query.Add(Query<Product>.EQ(x => x.CategoryId, filters.CategoryId));
+
+            if (filters.HasPicture)
+                query.Add(Query<Product>.NE(x => x.Image, null));
 
             if (filters.Price > 0)
                 query.Add(Query<Product>.EQ(x => x.Price, filters.Price));
 
             if (!string.IsNullOrEmpty(filters.ProductName))
-                query.Add(Query<Product>.EQ(x => x.Name, filters.ProductName));
+                query.Add(Query<Product>.Matches(x => x.Name, $"(?i).*{string.Join(".*", Regex.Split(filters.ProductName, @"\s+").Select(x => Regex.Escape(x)))}.*"));
 
             if (!query.Any())
                 return Query.And(Query.Empty);
@@ -44,22 +44,12 @@ namespace Business.Logic.Products
             if (!(products?.Any() ?? false))
                 return null;
 
-            products.ForEach(x => x.ImageUrl = x.Image?.GetImage(ListResolutionsSize.Url512, FileType.Jpeg));
+            products.ForEach(x => x.AuxiliaryProperties.ImageUrl = x.Image?.GetImage(ListResolutionsSize.Url512, FileType.Jpeg));
             return products;
         }
+
+        public IEnumerable<Product> GetProducts(FiltersProducts filters) => filters.Limit > 0 ?  Collection.Find(QueryFilters(filters)).SetLimit(filters.Limit) : Collection.Find(QueryFilters(filters));
+
         
-        public IEnumerable<ProductCategoryOutput> GetProductCategories(FiltersProducts filters) => GetProducts(filters).GroupBy(x => x.Category).Select(x => new ProductCategoryOutput { Name = x.Key, ImageUrl = GetCategoryimage(x.ToList()), Products = x.Count(), QuantityProductSold = x.Sum(y => GetQuantitySoldItem(y.Id)) });
-
-        private IEnumerable<Product> GetProducts(FiltersProducts filters) => filters.Limit > 0 ?  Collection.Find(QueryFilters(filters)).SetLimit(filters.Limit) : Collection.Find(QueryFilters(filters));
-
-        private long GetQuantitySoldItem(string id) => BlSaleProducts.GetProducts(new FiltersSaleProducts { Id = id })?.Count ?? 0;
-
-        private string GetCategoryimage(List<Product> products)
-        {
-            if (!(products?.Any() ?? false))
-                return null;
-
-            return products.FirstOrDefault(x => x.Image != null)?.Image.GetImage(ListResolutionsSize.Url512, FileType.Jpeg);
-        }
     }
 }

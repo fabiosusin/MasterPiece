@@ -1,0 +1,48 @@
+@import "../../app.component.scss";
+
+.page {
+    height: 100vh;
+    background: var(--background-color);
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 100px;
+    .form {
+        margin-left: 0;
+        width: 70%;
+        .register-form {
+            .input-with-icon {
+                width: 20%;
+            }
+            .fw {
+                width: 100%;
+                button {
+                    margin-top: 0;
+                }
+            }
+        }
+        .not-found {
+            color: #fff;
+            font-weight: bold;
+            font-size: 24px;
+            margin: 50px;
+        }
+        table {
+            background: transparent;
+            width: calc(100% - 100px);
+            margin: 50px;
+            box-shadow: none;
+            .edit {
+                color: var(--theme-main-color-darker);
+            }
+        }
+    }
+}
+mat-footer-row,
+mat-header-row,
+mat-row,
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+    color: #fff;
+    font-size: 20px;
+}

@@ -22,11 +22,17 @@ namespace Business.Logic
 
         public virtual void EntitySanitize(TEntity entity) { }
 
-        public virtual TEntity Add(TEntity entity)
+        public virtual TEntity GetById(string id) => MongoDatabase.GetCollection<TEntity>().FindById(id);
+
+        public virtual TEntity Save(TEntity entity)
         {
             EntityValidation(entity);
             EntitySanitize(entity);
-            MongoDatabase.GetCollection<TEntity>().Add(entity);
+
+            if (!string.IsNullOrEmpty(entity.Id))
+                MongoDatabase.GetCollection<TEntity>().UpdateById(entity);
+            else
+                MongoDatabase.GetCollection<TEntity>().Add(entity);
 
             return entity;
         }

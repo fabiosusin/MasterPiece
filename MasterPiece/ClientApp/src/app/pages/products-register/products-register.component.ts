@@ -1,4 +1,4 @@
-import { Category } from './../../../models/category/category]';
+import { LoggedUserModel } from './../../../models/logged-user/logged-user';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/shared/services/api.service';
@@ -6,8 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Utils } from 'src/shared/utils';
 import { BaseEdit } from '../base/base-edit.component';
 import { Product, ProductType } from 'src/models/product/product';
-import { SharedService } from 'src/shared/services/shared.service';
-import { Filters } from 'src/models/product/filters';
+import { Category } from 'src/models/category/category';
+import { LoggedUserService } from 'src/app/cache/loggedUser.component';
+import { FiltersCategory } from 'src/models/category/filters-category';
 
 @Component({
   selector: 'app-products-register',
@@ -18,11 +19,11 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
   constructor(
     protected apiService: ApiService,
     protected formBuilder: FormBuilder,
+    protected loggedUserService: LoggedUserService,
     protected activatedRoute: ActivatedRoute,
     protected utils: Utils,
-    protected router: Router,
-    protected sharedService: SharedService) {
-    super(router, utils, sharedService);
+    protected router: Router) {
+    super(router, utils);
   }
 
   categories: Array<Category>;
@@ -34,31 +35,45 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
 
   async ngOnInit(): Promise<void> {
     await this.getCategories();
+  }
+
+  ngAfterViewInit(): void {
+    const loggedUser = this.loggedUserService.getLoggedUser();
+    this.product.userId = loggedUser ? loggedUser.user.id : '';
     this.assignForm();
   }
 
-  getImage = () => this.form.get('pictureBase64').value;
+  getImage = () => this.form.get('auxiliaryProperties.pictureBase64').value;
   getFreeProduct = () => this.form.get('type').value == ProductType.Donation;
   onClickRemoveImage = () => this.form.controls['pictureBase64'].setValue(null)
   assignForm = async () => {
     this.form = this.formBuilder.group({
+      userId: [this.product.userId, [Validators.required]],
       name: [this.product.name, [Validators.required]],
       description: [this.product.description, Validators.required],
-      category: [this.product.category, Validators.required],
       type: [this.dataReceived ? this.dataReceived.type : ProductType.Donation, Validators.required],
       price: [this.product.price],
       balance: [this.product.balance],
-      pictureBase64: [this.product.pictureBase64],
+      auxiliaryProperties: this.formBuilder.group({
+        pictureBase64: [this.product.auxiliaryProperties.pictureBase64],
+        categoryName: [this.product.auxiliaryProperties.categoryName, Validators.required],
+      })
     })
   };
 
   errors = () => {
     const invalidFields: string[] = [];
+    if (!this.product.userId) {
+      super.showValidationsError(['Você deve estar logado']);
+      this.router.navigate(['/login']);
+      return;
+    }
+
     if (!this.product.name)
       invalidFields.push('Nome')
     if (!this.product.description)
       invalidFields.push('Descrição')
-    if (!this.product.category)
+    if (!this.product.auxiliaryProperties.categoryName)
       invalidFields.push('Categoria')
 
     super.showValidationsError(invalidFields, 'Os campos devem ser informados');
@@ -84,7 +99,7 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
   }
 
   async getCategories() {
-    this.categories = await this.apiService.listCategories(new Filters())
+    this.categories = await this.apiService.categories();
   }
 
 
@@ -104,7 +119,7 @@ export class ProductsRegisterComponent extends BaseEdit<Product> implements OnIn
     reader.readAsDataURL(file);
     reader.onload = async () => {
       try {
-        this.form.controls['pictureBase64'].setValue(reader.result.toString());
+        this.form.controls['auxiliaryProperties']['controls']['pictureBase64'].setValue(reader.result.toString());
       } catch (e) {
         this.utils.errorMessage(e);
       }

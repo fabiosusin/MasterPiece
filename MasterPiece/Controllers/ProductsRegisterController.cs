@@ -16,7 +16,7 @@ namespace MasterPiece.Controllers
         }
 
         [HttpPost, Route("Create")]
-        public IActionResult Create([FromBody] Product product) => Ok(_blProducts.Add(product));
+        public IActionResult Create([FromBody] Product product) => Ok(_blProducts.Save(product));
     }
 }
 

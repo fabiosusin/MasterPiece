@@ -69,8 +69,10 @@
     .bg-products {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
+        // justify-content: space-between;
+        // align-items: center;
+        margin-left: -18px;
+        width: calc(100% + 18px);
         padding: 0 50px;
         .card {
             height: 350px;
@@ -79,7 +81,8 @@
             align-items: center;
             box-shadow: 0 0 10px 0 #99999963;
             border: 1px solid #99999963;
-            margin: 10px 5px;
+            margin: 10px 40px;
+            overflow: hidden;
             &:hover {
                 .description {
                     margin-top: 0;

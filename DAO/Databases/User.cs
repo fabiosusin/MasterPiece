@@ -8,10 +8,23 @@ namespace DAO.Databases
         public string Password { get; set; }
         public string Email { get; set; }
         public string Cpf { get; set; }
+        public bool Blocked { get; set; }
         public Address Address { get; set; }
 
         [BsonIgnore]
+        public bool Admin { get; set; }
+        [BsonIgnore]
         public string ConfirmPassword { get; set; }
+
+        public User() { }
+
+        public User(string name, string pass, bool admin)
+        {
+            Name = name;
+            Password = pass;
+            Admin = admin;
+        }
+
     }
 
     public class Address

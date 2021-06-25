@@ -1,14 +1,13 @@
+import { UserService } from 'src/shared/services/user.service';
+import { ProductCategoryOutput } from 'src/models/category/product-category-output';
 import { ApiService } from './../shared/services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Category } from 'src/models/category/category]';
-import { Filters } from 'src/models/product/filters';
 import { ProductType } from 'src/models/product/product';
-import { SharedService } from 'src/shared/services/shared.service';
 import { Utils } from 'src/shared/utils';
 import { LoggedUserService } from './cache/loggedUser.component';
 import { BasePage } from './pages/base/base.component';
+import { LoggedUserModel } from 'src/models/logged-user/logged-user';
 
 @Component({
   selector: 'app-root',
@@ -17,39 +16,43 @@ import { BasePage } from './pages/base/base.component';
 })
 export class AppComponent extends BasePage implements OnInit {
   constructor(
-    protected sharedService: SharedService,
-    protected loggedUser: LoggedUserService,
+    protected userService: UserService,
+    protected loggedUserService: LoggedUserService,
     protected apiService: ApiService,
     protected router: Router,
     protected utils: Utils
   ) {
-    super(router, utils, sharedService)
+    super(router, utils);
   }
 
   openDropdown: boolean;
-  logged: boolean;
-  categories = Array<Category>();
+  loggedModel: LoggedUserModel;
+  categories = Array<ProductCategoryOutput>();
 
   ngOnInit(): void {
-    this.isLoggedUser();
     this.getCategories();
   }
 
+  ngAfterViewInit(): void {
+    this.LoggedUser();
+  }
 
   async getCategories() {
-    this.categories = await this.apiService.listCategories(new Filters())
+    this.categories = await this.apiService.listCategories();
   }
 
   onClickLogout = () => {
-    this.loggedUser.removeLoggedUser();
+    this.loggedUserService.removeLoggedUser();
     this.router.navigate(['/login']);
-    this.isLoggedUser();
+    this.LoggedUser();
   }
 
-  isLoggedUser() {
-    this.sharedService.getIsLoggedUser()
-      .subscribe((item: boolean) => {
-        this.logged = item
+  LoggedUser() {
+    this.loggedModel = this.loggedUserService.getLoggedUser();
+
+    this.userService.getLoggedUser()
+      .subscribe((item: LoggedUserModel) => {
+        this.loggedModel = item
       });
   }
 

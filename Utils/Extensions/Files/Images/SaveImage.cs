@@ -11,7 +11,8 @@ namespace Utils.Extensions.Files.Images
 {
     public class SaveImage
     {
-        private const string FilesPath = "../../../assets";
+        private const string FilesPath = "/ClientApp/src/assets";
+        private const string DbFilesPath = "/../../assets";
         private const string PicturesPath = "/ProductsImages";
         private const string PicturesPathWebp = "/Webp";
         private const string PicturesPathJpeg = "/Jpeg";
@@ -106,12 +107,15 @@ namespace Utils.Extensions.Files.Images
 
             var dir = Directory.GetCurrentDirectory();
             var path = FilesPath + PicturesPath;
-            
+            var dbpath = DbFilesPath+ PicturesPath;
+
             var folder = input.Type == FileType.Jpeg ? PicturesPathJpeg : PicturesPathWebp;
             var extension = input.Type == FileType.Jpeg ? ".jpeg" : ".webp";
             
-            var result = path + folder + "/" + input.ImageId + extension;
-            var imagePath = dir + result;
+            var samePath = folder + "/" + input.ImageId + extension;
+            var result = dbpath + samePath;
+            
+            var imagePath = dir + path + samePath;
 
 
             if (!Directory.Exists(dir +path))

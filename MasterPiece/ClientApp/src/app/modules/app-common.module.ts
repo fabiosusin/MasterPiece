@@ -2,7 +2,7 @@ import { QuantityPipe } from './../../shared/pipe/quantity.pipe';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatProgressSpinnerModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatSliderModule, MatSlideToggleModule, MatTableModule } from '@angular/material';
 import { LoaderComponent } from 'src/shared/components/loader/loader.component';
 import { MoneyDirective } from 'src/shared/directives/money.directive';
 import { CpfCnpjDirective } from 'src/shared/directives/cpf-cnpj.directive';
@@ -23,7 +23,10 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    TooltipModule
+    TooltipModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    MatSliderModule
   ],
   exports: [
     MoneyDirective,
@@ -32,6 +35,9 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatTableModule,
     LoaderComponent,
     TooltipModule,
     QuantityPipe
