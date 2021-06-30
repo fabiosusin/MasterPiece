@@ -24,12 +24,13 @@ export class LoggedUserService {
     }
 
     getLoggedUser() {
+        const admin = localStorage.getItem('admin');
         const user: LoggedUserModel = {
             user: {
                 id: localStorage.getItem('id'),
                 password: localStorage.getItem('password'),
                 name: localStorage.getItem('userName'),
-                admin: localStorage.getItem('admin').toLocaleLowerCase() == 'true'
+                admin: admin ? admin.toLocaleLowerCase() == 'true' : false
             },
             token: localStorage.getItem('token'),
         };

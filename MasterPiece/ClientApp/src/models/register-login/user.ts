@@ -5,8 +5,8 @@ export class User {
     confirmPassword?: string;
     email?: string;
     cpf?: string;
-    admin?: boolean;
-    blocked?: boolean;
+    admin?: boolean = false;
+    blocked?: boolean = false;
     address?: Address = new Address();
 }
 

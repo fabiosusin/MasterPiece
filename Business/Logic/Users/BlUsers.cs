@@ -41,7 +41,7 @@ namespace Business.Logic.Users
             if (!StringExtension.IsValidEmail(user.Email))
                 throw new ValidationResponseException("Email inválido!");
 
-            if (Collection.Find(Query.And(Query<User>.NE(x => x.Id, user.Id), Query<User>.EQ(x => x.Email, user.Email))) != null)
+            if (Collection.FindOne(Query.And(Query<User>.NE(x => x.Id, user.Id), Query<User>.EQ(x => x.Email, user.Email))) != null)
                 throw new ValidationResponseException("Email já cadastrado!");
         }
 

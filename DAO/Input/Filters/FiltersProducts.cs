@@ -10,6 +10,7 @@
 
         // Ajuste de pesquisa, como limite de resultado e ordenações
         public int Limit { get; set; }
+        public int Page { get; set; }
         public OrderBy OrderBy { get; set; }
     }
 

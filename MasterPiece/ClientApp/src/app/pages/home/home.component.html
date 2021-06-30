@@ -30,8 +30,8 @@
                     <div class="infos">
                         <p *ngIf="product.type == 1"><b>{{ product.balance | quantity }} unidades</b> para <b>Adoção</b></p>
                         <p *ngIf="product.type == 2"><b>{{ product.balance | quantity }} unidades</b> por <b>R$ {{ product.price | currency:'R$' }}</b></p>
-                        <button class="info-btn left" type="button">{{ product.type == 1 ? 'Adquirir' : 'Comprar' }}</button>
-                        <button class="info-btn right" type="button"><i class="fas fa-shopping-bag"></i></button>
+                        <button class="info-btn bt-left" type="button">{{ product.type == 1 ? 'Adquirir' : 'Comprar' }}</button>
+                        <button class="info-btn bt-right" type="button" (click)="addToCart(product)"><i class="fas fa-shopping-bag"></i></button>
                     </div>
                 </div>
             </div>
@@ -44,8 +44,8 @@
                     <h5>{{ product.name }}</h5>
                     <div class="infos">
                         <p><b>{{ product.balance | quantity }} unidades</b> por <b>R$ {{ product.price | currency:'R$' }}</b></p>
-                        <button class="info-btn left" type="button">Comprar</button>
-                        <button class="info-btn right" type="button"><i class="fas fa-shopping-bag"></i></button>
+                        <button class="info-btn bt-left" type="button">Comprar</button>
+                        <button class="info-btn bt-right" type="button"><i class="fas fa-shopping-bag"></i></button>
                     </div>
                 </div>
             </div>

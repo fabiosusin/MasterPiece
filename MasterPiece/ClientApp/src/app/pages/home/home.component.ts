@@ -6,6 +6,8 @@ import { ApiService } from 'src/shared/services/api.service';
 import { Utils } from 'src/shared/utils';
 import { BaseEdit } from '../base/base-edit.component';
 import { ProductCategoryOutput } from 'src/models/category/product-category-output';
+import { CartComponent } from 'src/app/cache/cart.component';
+import { UserService } from 'src/shared/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +17,8 @@ import { ProductCategoryOutput } from 'src/models/category/product-category-outp
 
 export class HomeComponent extends BaseEdit<Product> implements OnInit {
   constructor(
+    protected cartService: CartComponent,
+    protected userService: UserService,
     protected apiService: ApiService,
     protected router: Router,
     protected utils: Utils) {
@@ -37,6 +41,11 @@ export class HomeComponent extends BaseEdit<Product> implements OnInit {
 
   async getCategories() {
     this.categories = await this.apiService.listCategories()
+  }
+
+  addToCart(product: Product) {
+    this.cartService.setShoppingCartNewItem(product);
+    this.userService.changeShoppingCartAmount();
   }
 
 }

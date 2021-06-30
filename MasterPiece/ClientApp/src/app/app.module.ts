@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { Utils } from 'src/shared/utils';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClickOutsideDirective } from 'src/shared/directives/click-outside.directive';
+import { NgxCurrencyModule } from 'ngx-currency';
 @NgModule({
   declarations: [
     AppComponent,

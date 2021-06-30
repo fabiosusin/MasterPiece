@@ -4,28 +4,33 @@
             <img src="../../../assets/images/logo-masterpiece-laranja.png" alt="Logo Topo Tag">
         </div>
         <div class="find-product">
-            <input type="text" placeholder="Buscar Produto" />
-            <button>
+            <input type="text" [(ngModel)]="productName" placeholder="Buscar Produto" (keyup.enter)="onClickFindProducts()" />
+            <button type="button" (click)="onClickFindProducts()">
                 <i class="fas fa-search"></i>
             </button>
-        </div>        <div class="buttons">
+        </div>
+        <div class="buttons">
             <div class="bgDropdown" *ngIf="loggedModel && loggedModel.user">
                 <a (click)="onClickOutsideChangeDropdown()"><i class="fas fa-bars"></i></a>
-                <div class="dropdown-items" (clickOutside)="openDropdown ? onClickOutsideChangeDropdown(false) : null" *ngIf="openDropdown && !loggedModel.user.admin">
+                <div class="dropdown-items" (clickOutside)="openDropdown ? onClickOutsideChangeDropdown(false) : null"
+                    *ngIf="openDropdown && !loggedModel.user.admin">
                     <a (click)="onClickGoToRegisterProduct(1)">Doar Produto</a>
                     <a (click)="onClickGoToRegisterProduct(2)">Vender Produto</a>
                     <a>Meus Produtos</a>
                     <a>Minhas Vendas</a>
                     <a (click)="onClickLogout()">Sair</a>
                 </div>
-                <div class="dropdown-items" (clickOutside)="openDropdown ? onClickOutsideChangeDropdown(false) : null" *ngIf="openDropdown && loggedModel.user.admin">
+                <div class="dropdown-items" (clickOutside)="openDropdown ? onClickOutsideChangeDropdown(false) : null"
+                    *ngIf="openDropdown && loggedModel.user.admin">
                     <a [routerLink]="'/admin/users'">Gerenciar Usuários</a>
                     <a [routerLink]="'/admin/categories'">Gerenciar Categorias</a>
                     <a (click)="onClickLogout()">Sair</a>
                 </div>
             </div>
             <a *ngIf="!(loggedModel && loggedModel.user)" [routerLink]="'/login'"><i class="far fa-user"></i></a>
-            <a><i class="fas fa-shopping-bag"></i></a>
+            <a [routerLink]="'/shopping-cart'">
+                <p class="amount">{{amount}}</p> <i class="fas fa-shopping-bag"></i>
+            </a>
         </div>
     </div>
     <div class="bg-top-lower">

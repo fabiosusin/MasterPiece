@@ -4,4 +4,5 @@ export class FiltersProduct {
     price?: number;
     category?: string;
     limit?: number;
+    page?: number;
 }
