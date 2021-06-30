@@ -8,6 +8,7 @@ import { Utils } from 'src/shared/utils';
 import { LoggedUserService } from './cache/loggedUser.component';
 import { BasePage } from './pages/base/base.component';
 import { LoggedUserModel } from 'src/models/logged-user/logged-user';
+import { CartComponent } from './cache/cart.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { LoggedUserModel } from 'src/models/logged-user/logged-user';
 })
 export class AppComponent extends BasePage implements OnInit {
   constructor(
+    protected cartService: CartComponent,
     protected userService: UserService,
     protected loggedUserService: LoggedUserService,
     protected apiService: ApiService,
@@ -25,6 +27,7 @@ export class AppComponent extends BasePage implements OnInit {
     super(router, utils);
   }
 
+  productName: string;
   amount: number;
   openDropdown: boolean;
   loggedModel: LoggedUserModel;
@@ -50,6 +53,7 @@ export class AppComponent extends BasePage implements OnInit {
 
   subscribeEvents() {
     this.loggedModel = this.loggedUserService.getLoggedUser();
+    this.amount = this.cartService.getShoppingCartAmount();
 
     this.userService.getLoggedUser()
       .subscribe((item: LoggedUserModel) => {
@@ -70,5 +74,9 @@ export class AppComponent extends BasePage implements OnInit {
 
   onClickGoToRegisterProduct(type: ProductType) {
     this.router.navigateByUrl('/products', { state: { type: type } });
+  }
+
+  onClickFindProducts() {
+    this.router.navigateByUrl('/products-list', { state: { productName: this.productName } });
   }
 }

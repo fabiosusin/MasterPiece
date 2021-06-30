@@ -29,19 +29,23 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            border: 2px solid var(--theme-main-color);
+            border-radius: 5px;
             input {
                 width: 400px;
                 height: 40px;
                 padding: 10px;
                 border: none;
+                background: transparent;
+                color: #fff;
             }
             button {
                 height: 40px;
                 width: 50px;
+                background: transparent;
                 border: none;
-                background: #fff;
                 i {
-                    color: var(--background-color);
+                    color: #fff;
                     transition: 0.3s;
                 }
                 &:hover {
@@ -202,7 +206,6 @@
                 color: #fff;
                 font-weight: bold;
                 font-size: 20px;
-                margin-top: -17px;
                 transition: 0.3s;
                 &:hover {
                     background: #eb862e;
@@ -284,7 +287,6 @@
     padding: 20px;
     color: #fff;
     padding-top: 40px;
-    margin-top: 40px;
     .logo-rodape {
         img {
             width: 50px;

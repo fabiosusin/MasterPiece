@@ -1,4 +1,57 @@
-<div class="container py-5">
+<div class="page">
+    <div class="left">
+        <div class="categories">
+            <h4>Pesquisar</h4>
+            <span class="divider"></span>
+            <a *ngFor="let category of categories">{{category.name}}</a>
+        </div>
+        <div class="bg-products">
+            <div class="card" *ngFor="let product of products">
+                <div class="image"><img *ngIf="product.auxiliaryProperties && product.auxiliaryProperties.imageUrl"
+                        [src]="product.auxiliaryProperties.imageUrl" /></div>
+                <div class="description">
+                    <h5>{{ product.name }}</h5>
+                    <div class="infos">
+                        <p><b>{{ product.balance | quantity }} unidades</b> por <b>R$ {{ product.price | currency:'R$'
+                                }}</b></p>
+                        <button class="info-btn bt-left" type="button">Comprar</button>
+                        <button class="info-btn bt-right" type="button"><i class="fas fa-shopping-bag"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="bg-products">
+            <div class="card" *ngFor="let product of products">
+                <div class="image"><img *ngIf="product.auxiliaryProperties && product.auxiliaryProperties.imageUrl"
+                        [src]="product.auxiliaryProperties.imageUrl" /></div>
+                <div class="description">
+                    <h5>{{ product.name }}</h5>
+                    <div class="infos">
+                        <p><b>{{ product.balance | quantity }} unidades</b> por <b>R$ {{ product.price | currency:'R$'
+                                }}</b></p>
+                        <button class="info-btn bt-left" type="button">Comprar</button>
+                        <button class="info-btn bt-right" type="button" (click)="addToCart(product)"><i
+                                class="fas fa-shopping-bag"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="empty-products" *ngIf="!products">
+            <i class="far fa-times-circle"></i>
+            <p>Nenhum Produto encontrado</p>
+        </div>
+        <div class="paginator">
+            <a (click)="decrementPage()"><i class="fas fa-angle-left"></i></a>
+            <input [(ngModel)]="filters.page" type="number" (change)="changePage()" />
+            <a (click)="incrementPage()"><i class="fas fa-angle-right"></i></a>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="container py-5">
     <div class="row text-center text-white mb-5">
         <div class="col-lg-7 mx-auto">
             <h1 class="display-4">Listagem de Produtos</h1>
@@ -8,29 +61,31 @@
 
     <div class="row">
         <div class="col-lg-8 mx-auto">
-            <!-- List group-->
-                <!-- list group item-->
-                <li class="list-group-item">
-                    <table class="table table-dark center" style="width:100%">
-                        <tr>
-                          <th>Nome</th>
-                          <th>Descrição</th>
-                          <th>Categoria</th>
-                          <th>Valor</th>
-                          <th>Saldo</th>
-                        </tr>
-                        <tr *ngFor = "let results of itemArray">
-                          <td>{{results.name}}</td>
-                          <td>{{results.description}}</td>
-                          <td>{{results.category}}</td>
-                          <td>{{results.price | currency: "BRL" }}</td>
-                          <td>{{results.balance}}</td>
-                          <td> <input type="button" (click) = "removing(results)" class="btn btn-primary btn-lg" value="Remover Produto"></td>
-                          <td> <input type="button" (click) = "addToCart(results)" class="btn btn-primary btn-lg" value="Adicionar ao Carrinho"></td>
-                          <td style="width: 50px;"> <input type="button" (click) = "remove(results)" class="btn btn-primary btn-lg" value="Remover do Carrinho"></td> 
-                        </tr>
-                        
-                        
-                      </table>
-                </div>
-            </div>
+            <li class="list-group-item">
+                <table class="table table-dark center" style="width:100%">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Valor</th>
+                        <th>Saldo</th>
+                    </tr>
+                    <tr *ngFor="let results of itemArray">
+                        <td>{{results.name}}</td>
+                        <td>{{results.description}}</td>
+                        <td>{{results.category}}</td>
+                        <td>{{results.price | currency: "BRL" }}</td>
+                        <td>{{results.balance}}</td>
+                        <td> <input type="button" (click)="removing(results)" class="btn btn-primary btn-lg"
+                                value="Remover Produto"></td>
+                        <td> <input type="button" (click)="addToCart(results)" class="btn btn-primary btn-lg"
+                                value="Adicionar ao Carrinho"></td>
+                        <td style="width: 50px;"> <input type="button" (click)="remove(results)"
+                                class="btn btn-primary btn-lg" value="Remover do Carrinho"></td>
+                    </tr>
+
+
+                </table>
+        </div>
+    </div>
+</div> -->

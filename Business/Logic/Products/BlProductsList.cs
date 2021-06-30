@@ -48,8 +48,14 @@ namespace Business.Logic.Products
             return products;
         }
 
-        public IEnumerable<Product> GetProducts(FiltersProducts filters) => filters.Limit > 0 ?  Collection.Find(QueryFilters(filters)).SetLimit(filters.Limit) : Collection.Find(QueryFilters(filters));
+        public IEnumerable<Product> GetProducts(FiltersProducts filters)
+        {
+            if (filters.Page > 0 && filters.Limit == 0)
+                filters.Limit = 25;
 
-        
+            return filters.Limit > 0 ? Collection.Find(QueryFilters(filters)).SetSkip(filters.Limit * (filters.Page > 0 ? filters.Page - 1 : 0)).SetLimit(filters.Limit) : Collection.Find(QueryFilters(filters));
+        }
+
+
     }
 }

@@ -4,8 +4,8 @@
             <img src="../../../assets/images/logo-masterpiece-laranja.png" alt="Logo Topo Tag">
         </div>
         <div class="find-product">
-            <input type="text" placeholder="Buscar Produto" />
-            <button>
+            <input type="text" [(ngModel)]="productName" placeholder="Buscar Produto" (keyup.enter)="onClickFindProducts()" />
+            <button type="button" (click)="onClickFindProducts()">
                 <i class="fas fa-search"></i>
             </button>
         </div>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <a *ngIf="!(loggedModel && loggedModel.user)" [routerLink]="'/login'"><i class="far fa-user"></i></a>
-            <a>
+            <a [routerLink]="'/shopping-cart'">
                 <p class="amount">{{amount}}</p> <i class="fas fa-shopping-bag"></i>
             </a>
         </div>

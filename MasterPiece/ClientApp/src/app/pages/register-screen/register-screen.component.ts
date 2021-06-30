@@ -82,7 +82,6 @@ export class RegisterScreenComponent extends BaseEdit<User> implements OnInit {
   }
 
   onSubmit = async (user: User) => {
-    console.log(user)
     if (await this.inValidateForm()) {
       this.errors();
       return;

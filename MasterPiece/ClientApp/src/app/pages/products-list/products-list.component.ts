@@ -7,6 +7,7 @@ import { Utils } from "src/shared/utils";
 import { BaseEdit } from "../../pages/base/base-edit.component";
 import { CartComponent } from "src/app/cache/cart.component";
 import { UserService } from "src/shared/services/user.service";
+import { ProductCategoryOutput } from "src/models/category/product-category-output";
 
 
 @Component({
@@ -16,9 +17,9 @@ import { UserService } from "src/shared/services/user.service";
 })
 
 export class ProductListComponent extends BaseEdit<Product> implements OnInit {
-  itemArray: Array<Product>;
-  items = [];
-  @Output() productRemoved = new EventEmitter();
+  products: Array<Product>;
+  filters: FiltersProduct = new FiltersProduct();
+  categories = Array<ProductCategoryOutput>();
 
 
   constructor(
@@ -30,44 +31,44 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
     super(router, utils);
   }
   ngOnInit(): void {
-    this.getProduct(new FiltersProduct());
+    this.filters.productName = this.dataReceived ? this.dataReceived.productName : '';
+    this.filters.page = 1;
+    this.filters.limit = 25;
+    this.getProducts();
+    this.getCategories();
   }
 
-  removeProduct(product) {
-    debugger;
-    this.items.splice(product, 1)
-    return;
-  }
-
-  removing(product: Product) {
-    debugger;
-    this.removeProduct(product);
-    console.log("Produto Removido com sucesso")
+  async getCategories() {
+    this.categories = await this.apiService.listCategories();
   }
 
   addToCart(product: Product) {
     this.cartService.setShoppingCartNewItem(product);
     this.userService.changeShoppingCartAmount();
-    window.alert('Seu produto foi adicionado ao carrinho')
-    console.log(product);
   }
 
-
-
-  remove(product: Product) {
-    debugger;
-    this.cartService.removeProduct(product);
-    this.userService.changeShoppingCartAmount();
-    window.alert('seu produto foi removido com sucesso!')
-  }
-
-  getProduct = async (filters: FiltersProduct) => {
-    debugger;
+  getProducts = async () => {
     try {
-      this.itemArray = await this.apiService.listProduct(filters);
+      this.products = await this.apiService.listProduct(this.filters);
     }
     catch (e) {
       this.utils.errorMessage(e);
     }
+  }
+
+  decrementPage = () => {
+    this.filters.page--;
+    this.changePage();
+  }
+  incrementPage = () => {
+    this.filters.page++;
+    this.changePage();
+  }
+
+  changePage = () => {
+    if (!this.filters.page || typeof this.filters.page != 'number')
+      this.filters.page = 1.
+
+    this.getProducts();
   }
 }
