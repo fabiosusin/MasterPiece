@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Router } from "@angular/router";
 import { CartComponent } from "src/app/cache/cart.component";
+import { LoggedUserService } from "src/app/cache/loggedUser.component";
 import { FiltersProduct } from "src/models/product/filters-product";
 import { Product } from "src/models/product/product";
+import { SaleInput } from "src/models/sale/sale-input";
 import { ApiService } from "src/shared/services/api.service";
 import { UserService } from "src/shared/services/user.service";
 import { Utils } from "src/shared/utils";
@@ -18,6 +20,7 @@ export class ShoppingCartComponent implements OnInit {
   constructor(
     protected cartService: CartComponent,
     protected userService: UserService,
+    protected loggedUserService: LoggedUserService,
     protected apiService: ApiService,
     protected router: Router,
     protected utils: Utils) {
@@ -25,7 +28,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   products: Array<Product> = [];
-
+  isLoading: boolean;
 
   ngOnInit(): void {
     this.getProducts();
@@ -35,11 +38,39 @@ export class ShoppingCartComponent implements OnInit {
     this.products = this.cartService.getShoppingCartItems();
   }
 
-  getTotal = () => this.products.reduce((a, b) => a + (b.price || 0), 0);
+  getTotal = () => this.apiService.getSaleTotal(this.products.map(x => x.id));
 
   removeProduct = (product: Product) => {
     this.cartService.removeProduct(product);
     this.getProducts();
+  }
+
+  saveSale = async () => {
+    const loggedUser = this.loggedUserService.getLoggedUser();
+    const user = await this.apiService.getUser(loggedUser ? loggedUser.user.id : '');
+    try {
+      if (!user) {
+        this.utils.errorMessage('Necessário estar logado para finalizar a venda');
+        this.router.navigateByUrl('/login')
+      }
+      this.isLoading = true;
+
+      const input: SaleInput = {
+        productsId: this.products.map(x => x.id),
+        userId: user.id,
+        destination: user.address
+      };
+
+      await this.apiService.saveSale(input)
+    }
+    catch (e) {
+      this.utils.errorMessage(e);
+      if (e.includes('endereço'))
+        this.router.navigateByUrl('/register/' + user.id)
+    }
+    finally {
+      this.isLoading = false;
+    }
   }
 
 }

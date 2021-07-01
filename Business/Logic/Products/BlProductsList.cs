@@ -38,6 +38,12 @@ namespace Business.Logic.Products
             if(!(filters.Ids?.Any() ?? false))
                 query.Add(Query<Product>.In(x => x.Id, filters.Ids));
 
+            if (filters.Status != ProductStatus.Default)
+                query.Add(Query<Product>.EQ(x => x.Status, filters.Status));
+
+            if (filters.InvalidStatus?.Any() ?? false)
+                query.Add(Query<Product>.NotIn(x => x.Status, filters.InvalidStatus));
+
             if (!query.Any())
                 return Query.And(Query.Empty);
 
@@ -46,6 +52,7 @@ namespace Business.Logic.Products
 
         public List<Product> List(FiltersProducts filters)
         {
+            filters.Status = ProductStatus.Valid;
             var products = GetProducts(filters).ToList();
             if (!(products?.Any() ?? false))
                 return null;

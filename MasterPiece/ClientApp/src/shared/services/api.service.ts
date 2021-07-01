@@ -11,6 +11,7 @@ import { ProductCategoryOutput } from 'src/models/category/product-category-outp
 import { Category } from 'src/models/category/category';
 import { FiltersProduct } from 'src/models/product/filters-product';
 import { FiltersCategory } from 'src/models/category/filters-category';
+import { SaleInput } from 'src/models/sale/sale-input';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService extends BaseApiService {
@@ -84,6 +85,13 @@ export class ApiService extends BaseApiService {
     await this.post(`categories/migration`, input, await this.getRequestHeaders());
   //#endregion
 
+  //#region Sales
+  getSaleTotal = async (input: string[]): Promise<number> =>
+    await this.post(`sales/total`, input, await this.getRequestHeaders());
+
+  saveSale = async (input: SaleInput): Promise<void> =>
+    await this.post(`sales/create`, input, await this.getRequestHeaders());
+  //#endregion
 }
 
 

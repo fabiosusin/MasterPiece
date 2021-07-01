@@ -1,13 +1,8 @@
 ﻿using Business.Logic.Sales;
-using Business.Logic.Users;
-using Business.Services;
-using DAO.Databases;
 using DAO.Input;
-using DAO.Input.Filters;
-using DAO.Output;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Settings;
+using System.Collections.Generic;
 
 namespace MasterPiece.Controllers
 {
@@ -22,7 +17,14 @@ namespace MasterPiece.Controllers
             _blSales = new BlSales(settings);
         }
 
-        //[HttpPost, Route("create")]
-        //public IActionResult Create([FromBody] SaleInput input) => Ok(_blSales.Create(input));
+        [HttpPost, Route("Create")]
+        public IActionResult Create([FromBody] SaleInput input)
+        {
+            _blSales.Create(input);
+            return Ok();
+        }
+
+        [HttpPost, Route("Total")]
+        public IActionResult Total([FromBody] List<string> ids) => Ok(_blSales.GetSaleTotal(ids));
     }
 }
