@@ -34,18 +34,37 @@ export class HomeComponent extends BaseEdit<Product> implements OnInit {
   }
 
   async getProducts() {
-    this.products = await this.apiService.listProduct({
-      limit: 8
-    });
+    try {
+      this.isLoading = true;
+      this.products = await this.apiService.listProduct({
+        limit: 8
+      });
+    }
+    catch (e) {
+      this.utils.errorMessage(e);
+    }
+    finally {
+      this.isLoading = false;
+    }
   }
 
   async getCategories() {
-    this.categories = await this.apiService.listCategories()
+    try {
+      this.isLoading = true;
+      this.categories = await this.apiService.listCategories()
+    }
+    catch (e) {
+      this.utils.errorMessage(e);
+    }
+    finally {
+      this.isLoading = false;
+    }
   }
 
   addToCart(product: Product) {
     this.cartService.setShoppingCartNewItem(product);
     this.userService.changeShoppingCartAmount();
+    this.utils.successMessage('Produto adicionado ao carrinho')
   }
 
 }

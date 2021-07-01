@@ -20,9 +20,20 @@ namespace Business.Logic
 
         public virtual void EntityValidation(TEntity entity) { }
 
+        public virtual void EntityDeleteValidation(TEntity entity) { }
+
         public virtual void EntitySanitize(TEntity entity) { }
 
+        public virtual void EntityDeleteSanitize(TEntity entity) { }
+
         public virtual TEntity GetById(string id) => MongoDatabase.GetCollection<TEntity>().FindById(id);
+
+        public virtual void Delete(TEntity entity)
+        {
+            EntityDeleteValidation(entity);
+            EntityDeleteSanitize(entity);
+            MongoDatabase.GetCollection<TEntity>().RemoveById(entity.Id);
+        }
 
         public virtual TEntity Save(TEntity entity)
         {

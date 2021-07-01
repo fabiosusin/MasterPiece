@@ -16,7 +16,8 @@
                     *ngIf="openDropdown && !loggedModel.user.admin">
                     <a (click)="onClickGoToRegisterProduct(1)">Doar Produto</a>
                     <a (click)="onClickGoToRegisterProduct(2)">Vender Produto</a>
-                    <a>Meus Produtos</a>
+                    <a [routerLink]="'/user-products'">Meus Produtos</a>
+                    <a>Minhas Compras</a>
                     <a>Minhas Vendas</a>
                     <a (click)="onClickLogout()">Sair</a>
                 </div>

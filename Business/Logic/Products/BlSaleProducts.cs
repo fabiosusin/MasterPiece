@@ -26,8 +26,11 @@ namespace Business.Logic.Products
             if (!string.IsNullOrEmpty(filters.Name))
                 query.Add(Query<SaleProduct>.EQ(x => x.Name, filters.Name));
 
-            if(!string.IsNullOrEmpty(filters.SaleId))
+            if (!string.IsNullOrEmpty(filters.SaleId))
                 query.Add(Query<SaleProduct>.EQ(x => x.SaleId, filters.SaleId));
+
+            if (!string.IsNullOrEmpty(filters.Id))
+                query.Add(Query<SaleProduct>.EQ(x => x.ProductId, filters.Id));
 
             return Query.And(query);
         }

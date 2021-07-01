@@ -54,6 +54,9 @@ export class ApiService extends BaseApiService {
   saveProduct = async (product: Product): Promise<any> =>
     await this.post('productsregister/create', product, await this.getRequestHeaders());
 
+  deleteProduct = async (id: string): Promise<any> =>
+    await this.post(`productsregister/delete?${ApiService.getUrlQueryParameters({ id })}`, {}, await this.getRequestHeaders());
+
   listProduct = async (filters?: FiltersProduct): Promise<Product[]> => {
     filters = filters ? filters : new FiltersProduct();
     return await this.post('productsList/list', filters, await this.getRequestHeaders());

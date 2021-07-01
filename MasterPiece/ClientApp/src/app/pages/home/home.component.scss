@@ -1,6 +1,6 @@
 @import "../../../shared/scss/bg-products.scss";
 
-.layout {
+.page {
     position: relative;
     .header-info {
         height: 400px;
@@ -66,6 +66,69 @@
             height: 2px;
             opacity: 0.1;
             background-color: var(--theme-main-color);
+        }
+    }
+}
+@media only screen and (max-width: 1900px) {
+    .bg-products {
+        .card {
+            width: 19%;
+        }
+    }
+}
+
+@media only screen and (max-width: 1750px) {
+    .bg-products {
+        .card {
+            width: 18%;
+        }
+    }
+}
+
+@media only screen and (max-width: 1550px) {
+    .bg-products {
+        .card {
+            width: 26%;
+        }
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+    .bg-products {
+        .card {
+            width: 42%;
+        }
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .bg-products {
+        margin-left: 0;
+        width: 100%;
+        .card {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .page {
+        .content {
+            padding: 50px;
+            .bg-products {
+                padding: 0;
+                .card {
+                    margin: 10px 0;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .page {
+        .content {
+            padding: 50px 0;
         }
     }
 }

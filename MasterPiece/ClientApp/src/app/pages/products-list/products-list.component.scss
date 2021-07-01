@@ -130,3 +130,57 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+@media only screen and (max-width: 1500px) {
+    .page {
+        .right {
+            .bg-products {
+                .card {
+                    width: 47%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .page {
+        .right {
+            .bg-products {
+                margin-left: 0;
+                width: 100%;
+                .card {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .page {
+        .left {
+            display: none;
+        }
+        .right {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .page {
+        padding: 50px;
+        .bg-products {
+            padding: 0;
+            .card {
+                margin: 10px 0;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .page {
+        padding: 50px 0;
+    }
+}

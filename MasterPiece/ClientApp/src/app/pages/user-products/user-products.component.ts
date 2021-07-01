@@ -4,54 +4,67 @@ import { Router } from "@angular/router";
 import { Product } from "src/models/product/product";
 import { ApiService } from "src/shared/services/api.service";
 import { Utils } from "src/shared/utils";
-import { BaseEdit } from "../../pages/base/base-edit.component";
+import { BaseEdit } from "../base/base-edit.component";
 import { CartComponent } from "src/app/cache/cart.component";
 import { UserService } from "src/shared/services/user.service";
 import { ProductCategoryOutput } from "src/models/category/product-category-output";
+import { LoggedUserService } from "src/app/cache/loggedUser.component";
 
 
 @Component({
-  selector: 'app-products-list-component',
-  templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.scss']
+  selector: 'app-user-products-component',
+  templateUrl: './user-products.component.html',
+  styleUrls: ['./user-products.component.scss']
 })
 
-export class ProductListComponent extends BaseEdit<Product> implements OnInit {
+export class UserProductsComponent extends BaseEdit<Product> implements OnInit {
   products: Array<Product>;
   filters: FiltersProduct = new FiltersProduct();
-  categories = Array<ProductCategoryOutput>();
 
 
   constructor(
     protected apiService: ApiService,
     protected cartService: CartComponent,
-    protected userService: UserService,
+    protected loggedUserService: LoggedUserService,
     protected router: Router,
     protected utils: Utils) {
     super(router, utils);
   }
   ngOnInit(): void {
-    this.filters.productName = this.dataReceived ? this.dataReceived.productName : '';
     this.filters.page = 1;
     this.filters.limit = 25;
     this.getProducts();
-    this.getCategories();
-  }
-
-  async getCategories() {
-    this.categories = await this.apiService.listCategories();
-  }
-
-  addToCart(product: Product) {
-    this.cartService.setShoppingCartNewItem(product);
-    this.userService.changeShoppingCartAmount();
-    this.utils.successMessage('Produto adicionado ao carrinho')
   }
 
   getProducts = async () => {
     try {
-      this.isLoading = true
+      this.isLoading = true;
+      const loggedUser = this.loggedUserService.getLoggedUser();
+      if (!loggedUser)
+        return;
+
+      this.filters.userId = loggedUser.user ? loggedUser.user.id : '';
+      if (!this.filters.userId)
+        return;
+
       this.products = await this.apiService.listProduct(this.filters);
+    }
+    catch (e) {
+      this.utils.errorMessage(e);
+    }
+    finally {
+      this.isLoading = false;
+    }
+  }
+
+  deleteProduct = async (id: string) => {
+    if (!confirm('Tem certeza que deseja excluir o produto?'))
+      return;
+    try {
+      this.isLoading = true;
+      await this.apiService.deleteProduct(id);
+      this.utils.successMessage('Produto excluído com sucesso!')
+      this.getProducts();
     }
     catch (e) {
       this.utils.errorMessage(e);
