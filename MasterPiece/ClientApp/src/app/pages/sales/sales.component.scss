@@ -64,3 +64,20 @@
         }
     }
 }
+@media only screen and (max-width: 910px) {
+    .page {
+            padding: 50px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .page {
+            padding: 50px 10px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .page {
+            padding: 50px 0;
+    }
+}
