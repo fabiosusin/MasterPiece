@@ -32,13 +32,14 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   getProducts() {
-    const products = this.cartService.getShoppingCartItems();
-    this.products = products && products.itensProduct ? products.itensProduct : [];
-    console.log(this.products)
+    this.products = this.cartService.getShoppingCartItems();
   }
 
+  getTotal = () => this.products.reduce((a, b) => a + (b.price || 0), 0);
 
-
-
+  removeProduct = (product: Product) => {
+    this.cartService.removeProduct(product);
+    this.getProducts();
+  }
 
 }

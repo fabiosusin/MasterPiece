@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { CartModel } from "src/models/cart/cart";
 import { Product } from "src/models/product/product";
 
 @Injectable({ providedIn: 'root' })
@@ -7,18 +6,17 @@ export class CartComponent {
     setShoppingCartNewItem(product: Product) {
         let cartProduct = this.getShoppingCartItems();
         if (!cartProduct)
-            cartProduct = new CartModel();
+            cartProduct = new Array<Product>();
 
-        if (!cartProduct.itensProduct)
-            cartProduct.itensProduct = new Array<Product>();
+        if (cartProduct.map(x => x.id).includes(product.id))
+            return;
 
-        cartProduct.itensProduct.push(product);
+        cartProduct.push(product);
         localStorage.setItem('cartProduct', JSON.stringify(cartProduct));
     }
 
     setShoppingCartItems(products: Product[]) {
-        let cartProduct = new CartModel();
-        cartProduct.itensProduct = products;
+        let cartProduct = products;
         localStorage.setItem('cartProduct', JSON.stringify(cartProduct));
     }
 
@@ -26,15 +24,15 @@ export class CartComponent {
 
     removeProduct(product: Product) {
         let items = this.getShoppingCartItems();
-        if (!items || items.itensProduct.length == 0)
+        if (!items || items.length == 0)
             return;
 
-        items.itensProduct = items.itensProduct.filter(x => x.id != product.id);
-        this.setShoppingCartItems(items.itensProduct);
+        items = items.filter(x => x.id != product.id);
+        this.setShoppingCartItems(items);
     }
 
     getShoppingCartAmount = () => {
         const items = this.getShoppingCartItems();
-        return !items || !items.itensProduct ? '' : items.lenght;
+        return !items || !items.length ? '' : items.length;
     }
 }

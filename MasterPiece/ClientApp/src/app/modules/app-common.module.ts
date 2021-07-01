@@ -8,6 +8,7 @@ import { MoneyDirective } from 'src/shared/directives/money.directive';
 import { CpfCnpjDirective } from 'src/shared/directives/cpf-cnpj.directive';
 import { ZipCodeDirective } from 'src/shared/directives/zip-code.directive';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { MoneyPipe } from 'src/shared/pipe/money.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     MoneyDirective,
     CpfCnpjDirective,
     ZipCodeDirective,
-    QuantityPipe
+    QuantityPipe,
+    MoneyPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -40,8 +42,12 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     MatTableModule,
     LoaderComponent,
     TooltipModule,
-    QuantityPipe
+    QuantityPipe,
+    MoneyPipe
   ],
-  providers: [QuantityPipe]
+  providers: [
+    QuantityPipe,
+    MoneyPipe
+  ]
 })
 export class AppCommonModule { }

@@ -1,4 +1,6 @@
-﻿namespace DAO.Input
+﻿using System.Collections.Generic;
+
+namespace DAO.Input
 {
     public class FiltersProducts
     {
@@ -8,6 +10,7 @@
         public bool HasPicture { get; set; }
         public decimal Price { get; set; }
         public string CategoryId { get; set; }
+        public List<string> Ids{ get; set; }
 
         // Ajuste de pesquisa, como limite de resultado e ordenações
         public int Limit { get; set; }

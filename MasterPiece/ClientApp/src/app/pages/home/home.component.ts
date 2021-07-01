@@ -8,6 +8,7 @@ import { BaseEdit } from '../base/base-edit.component';
 import { ProductCategoryOutput } from 'src/models/category/product-category-output';
 import { CartComponent } from 'src/app/cache/cart.component';
 import { UserService } from 'src/shared/services/user.service';
+import { ProducstService } from 'src/shared/services/products.service';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent extends BaseEdit<Product> implements OnInit {
   constructor(
     protected cartService: CartComponent,
     protected userService: UserService,
+    protected producstService: ProducstService,
     protected apiService: ApiService,
     protected router: Router,
     protected utils: Utils) {
@@ -36,9 +38,10 @@ export class HomeComponent extends BaseEdit<Product> implements OnInit {
   async getProducts() {
     try {
       this.isLoading = true;
-      this.products = await this.apiService.listProduct({
+      this.products = await this.producstService.getProducts({
         limit: 8
       });
+
     }
     catch (e) {
       this.utils.errorMessage(e);
@@ -51,7 +54,7 @@ export class HomeComponent extends BaseEdit<Product> implements OnInit {
   async getCategories() {
     try {
       this.isLoading = true;
-      this.categories = await this.apiService.listCategories()
+      this.categories = await this.producstService.getCategories()
     }
     catch (e) {
       this.utils.errorMessage(e);
@@ -61,10 +64,6 @@ export class HomeComponent extends BaseEdit<Product> implements OnInit {
     }
   }
 
-  addToCart(product: Product) {
-    this.cartService.setShoppingCartNewItem(product);
-    this.userService.changeShoppingCartAmount();
-    this.utils.successMessage('Produto adicionado ao carrinho')
-  }
+  addToCart = (product: Product) => this.producstService.addToCart(product)
 
 }

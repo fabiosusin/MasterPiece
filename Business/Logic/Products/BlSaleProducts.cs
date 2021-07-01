@@ -21,7 +21,7 @@ namespace Business.Logic.Products
             var query = new List<IMongoQuery>();
 
             if (!string.IsNullOrEmpty(filters.Price.ToString()))
-                query.Add(Query<SaleProduct>.EQ(x => x.UnitPrice, filters.Price));
+                query.Add(Query<SaleProduct>.EQ(x => x.Price, filters.Price));
 
             if (!string.IsNullOrEmpty(filters.Name))
                 query.Add(Query<SaleProduct>.EQ(x => x.Name, filters.Name));

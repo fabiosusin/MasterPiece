@@ -14,6 +14,7 @@ namespace DAO.Databases
         public decimal Price { get; set; }
         public decimal Balance { get; set; }
         public ProductType Type { get; set; }
+        public ProductStatus Status { get; set; }
 
         [BsonIgnore]
         public AuxiliaryProperties AuxiliaryProperties { get; set; } = new AuxiliaryProperties();
@@ -36,6 +37,14 @@ namespace DAO.Databases
         Default,
         Donation,
         ForSale
+    }
+
+    public enum ProductStatus
+    {
+        Default,
+        Valid,
+        Sold,
+        Invalid
     }
 }
 

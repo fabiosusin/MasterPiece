@@ -21,7 +21,7 @@
             <div class="description">
                 <h5>{{ product.name }}</h5>
                 <div class="infos">
-                    <p><b>{{ product.balance | quantity }} unidades</b> por <b>R$ {{ product.price | currency:'R$'
+                    <p><b>{{ product.balance | quantity }} unidades</b> por <b>R$ {{ product.price | money:'R$'
                             }}</b></p>
                     <button class="info-btn bt-left" type="button" (click)="deleteProduct(product.id)">Deletar
                         Produto</button>

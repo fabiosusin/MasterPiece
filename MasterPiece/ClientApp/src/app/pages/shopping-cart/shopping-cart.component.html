@@ -1,12 +1,16 @@
 <section class="pt-5 pb-5">
     <div class="container">
-        <div class="row w-100">
+        <div class="empty-cart" *ngIf="!(products && products.length)">
+            <i class="fas fa-shopping-bag"></i>
+            <span>O seu carrinho de compras se encontra vazio!</span>
+        </div>
+        <div class="row w-100" *ngIf="products && products.length">
             <div class="col-lg-12 col-md-12 col-12">
                 <h3 class="display-5 mb-2 text-center">Carrinho de Compras</h3>
                 <p class="mb-5 text-center">
-                    <i class="font-weight-bold">3</i> Itens em seu Carrinho
+                    <i class="font-weight-bold">{{products.length}}</i> Itens em seu Carrinho
                 </p>
-                <table id="shoppingCart" class="table table-condensed table-responsive" *ngIf="products && products.length">
+                <table id="shoppingCart" class="table table-condensed table-responsive">
                     <thead>
                         <tr>
                             <th class="col-md-8">Produto</th>
@@ -34,13 +38,13 @@
                                 Adoção
                             </td>
                             <td data-th="Price" *ngIf="product.type == 2">
-                                {{ product.price | currency:'R$' }}
+                                {{ product.price | money:'R$' }}
                             </td>
                             <td data-th="Quantity">
                                 {{ product.balance | quantity }}
                             </td>
                             <td class="actions" data-th="">
-                                <button class="remove-item">
+                                <button class="remove-item" (click)="removeProduct(product)">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -50,7 +54,7 @@
                 <div class="float-right total">
                     <div class="info">
                         <span>Total:</span>
-                        <span>R$99.00</span>
+                        <span>{{ getTotal() | money:'R$' }}</span>
                     </div>
                     <button>Finalizar</button>
                 </div>
@@ -58,7 +62,7 @@
         </div>
         <div class="row mt-4 d-flex align-items-center">
             <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
-                <a href="catalog.html" class="back-to-store">
+                <a [routerLink]="'/home'" class="back-to-store">
                     <i class="fas fa-arrow-left mr-2"></i> Continuar Comprando</a>
             </div>
         </div>

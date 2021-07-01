@@ -35,6 +35,9 @@ namespace Business.Logic.Products
             if (!string.IsNullOrEmpty(filters.ProductName))
                 query.Add(Query<Product>.Matches(x => x.Name, $"(?i).*{string.Join(".*", Regex.Split(filters.ProductName, @"\s+").Select(x => Regex.Escape(x)))}.*"));
 
+            if(!(filters.Ids?.Any() ?? false))
+                query.Add(Query<Product>.In(x => x.Id, filters.Ids));
+
             if (!query.Any())
                 return Query.And(Query.Empty);
 

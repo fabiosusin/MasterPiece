@@ -9,6 +9,7 @@ import { CartComponent } from "src/app/cache/cart.component";
 import { UserService } from "src/shared/services/user.service";
 import { ProductCategoryOutput } from "src/models/category/product-category-output";
 import { LoggedUserService } from "src/app/cache/loggedUser.component";
+import { ProducstService } from "src/shared/services/products.service";
 
 
 @Component({
@@ -26,6 +27,7 @@ export class UserProductsComponent extends BaseEdit<Product> implements OnInit {
     protected apiService: ApiService,
     protected cartService: CartComponent,
     protected loggedUserService: LoggedUserService,
+    protected producstService: ProducstService,
     protected router: Router,
     protected utils: Utils) {
     super(router, utils);
@@ -47,7 +49,7 @@ export class UserProductsComponent extends BaseEdit<Product> implements OnInit {
       if (!this.filters.userId)
         return;
 
-      this.products = await this.apiService.listProduct(this.filters);
+      this.products = await this.producstService.getProducts(this.filters);
     }
     catch (e) {
       this.utils.errorMessage(e);

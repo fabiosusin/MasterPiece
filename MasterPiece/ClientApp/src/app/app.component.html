@@ -19,6 +19,7 @@
                     <a [routerLink]="'/user-products'">Meus Produtos</a>
                     <a>Minhas Compras</a>
                     <a>Minhas Vendas</a>
+                    <a  [routerLink]="'/register/' + loggedModel.user.id">Editar</a>
                     <a (click)="onClickLogout()">Sair</a>
                 </div>
                 <div class="dropdown-items" (clickOutside)="openDropdown ? onClickOutsideChangeDropdown(false) : null"
