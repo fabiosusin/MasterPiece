@@ -33,5 +33,8 @@ export class CartComponent {
         this.setShoppingCartItems(items.itensProduct);
     }
 
-    getShoppingCartAmount = () => this.getShoppingCartItems().itensProduct.length;
+    getShoppingCartAmount = () => {
+        const items = this.getShoppingCartItems();
+        return !items || !items.itensProduct ? '' : items.lenght;
+    }
 }

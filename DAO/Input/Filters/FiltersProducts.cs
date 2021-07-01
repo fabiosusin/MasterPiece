@@ -3,6 +3,7 @@
     public class FiltersProducts
     {
         public string ProductName { get; set; }
+        public string UserId { get; set; }
         public string ProductId { get; set; }
         public bool HasPicture { get; set; }
         public decimal Price { get; set; }

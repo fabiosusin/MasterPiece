@@ -23,6 +23,9 @@ namespace Business.Logic.Products
             if (!string.IsNullOrEmpty(filters.CategoryId))
                 query.Add(Query<Product>.EQ(x => x.CategoryId, filters.CategoryId));
 
+            if (!string.IsNullOrEmpty(filters.UserId))
+                query.Add(Query<Product>.EQ(x => x.UserId, filters.UserId));
+
             if (filters.HasPicture)
                 query.Add(Query<Product>.NE(x => x.Image, null));
 

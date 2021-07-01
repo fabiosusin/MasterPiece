@@ -17,6 +17,14 @@ namespace MasterPiece.Controllers
 
         [HttpPost, Route("Create")]
         public IActionResult Create([FromBody] Product product) => Ok(_blProducts.Save(product));
+
+
+        [HttpPost, Route("Delete")]
+        public IActionResult Delete(string id)
+        {
+            _blProducts.Delete(_blProducts.GetById(id));
+            return Ok();
+        }
     }
 }
 
