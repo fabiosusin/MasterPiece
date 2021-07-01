@@ -12,6 +12,8 @@ import { Category } from 'src/models/category/category';
 import { FiltersProduct } from 'src/models/product/filters-product';
 import { FiltersCategory } from 'src/models/category/filters-category';
 import { SaleInput } from 'src/models/sale/sale-input';
+import { FiltersSale } from 'src/models/sales/filters-sale';
+import { SaleOutput } from 'src/models/sales/sales-output';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService extends BaseApiService {
@@ -91,6 +93,9 @@ export class ApiService extends BaseApiService {
 
   saveSale = async (input: SaleInput): Promise<void> =>
     await this.post(`sales/create`, input, await this.getRequestHeaders());
+
+  getSales = async (input: FiltersSale): Promise<SaleOutput[]> =>
+    await this.post(`sales/get`, input, await this.getRequestHeaders());
   //#endregion
 }
 

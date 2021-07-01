@@ -22,6 +22,8 @@ export class CartComponent {
 
     getShoppingCartItems = () => JSON.parse(localStorage.getItem('cartProduct'));
 
+    clearCart = () => localStorage.removeItem('cartProduct');
+
     removeProduct(product: Product) {
         let items = this.getShoppingCartItems();
         if (!items || items.length == 0)

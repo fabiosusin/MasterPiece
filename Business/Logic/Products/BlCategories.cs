@@ -17,10 +17,12 @@ namespace Business.Logic.Products
 
         protected BlProductsList BlProductsList;
         protected BlSaleProducts BlSaleProducts;
+        protected BlProductsList BlProducts;
         public BlCategories(IMasterPieceDatabaseSettings settings) : base(settings)
         {
             BlProductsList = new BlProductsList(settings);
             BlSaleProducts = new BlSaleProducts(settings);
+            BlProducts = new BlProductsList(settings);
         }
 
         public override void EntityValidation(Category category)
@@ -31,7 +33,7 @@ namespace Business.Logic.Products
             if (string.IsNullOrEmpty(category.Name))
                 throw new ValidationResponseException("Informe o nome da Categoria!");
 
-            if(Collection.FindOne(Query.And(Query<Category>.EQ(x => x.Name, category.Name), Query<Category>.NE(x => x.Id, category.Id))) != null)
+            if (Collection.FindOne(Query.And(Query<Category>.EQ(x => x.Name, category.Name), Query<Category>.NE(x => x.Id, category.Id))) != null)
                 throw new ValidationResponseException("Ja existe uma categoria com este nome");
         }
 
@@ -52,7 +54,7 @@ namespace Business.Logic.Products
 
         public IEnumerable<ProductCategoryOutput> GetCategories(FiltersCategories filters)
         {
-            var result = List(filters)?.Select(x => new ProductCategoryOutput { Id = x.Id, Name = x.Name, ImageUrl = GetCategoryimage(x.Id), QuantityProductSold = GetQuantitySoldItem(x.Id), Products = BlProductsList.GetProducts(new FiltersProducts { CategoryId = x.Id }).Count() });
+            var result = List(filters)?.Select(x => new ProductCategoryOutput { Id = x.Id, Name = x.Name, ImageUrl = GetCategoryimage(x.Id), QuantityProductSold = GetQuantitySoldItem(x.Id), Products = BlProducts.GetProducts(new FiltersProducts { Status = ProductStatus.Valid })?.Count() ?? 0 });
 
             if (filters?.MinItems.HasValue ?? false && filters.MinItems.Value > 0)
                 result = result.Where(x => x.Products >= filters.MinItems.Value);
@@ -65,19 +67,22 @@ namespace Business.Logic.Products
 
         private string GetCategoryimage(string categoryId) => BlProductsList.GetProducts(new FiltersProducts { CategoryId = categoryId, HasPicture = true, Limit = 1 })?.FirstOrDefault()?.Image.GetImage(ListResolutionsSize.Url512, FileType.Jpeg);
 
-        private long GetQuantitySoldItem(string id) => BlSaleProducts.GetProducts(new FiltersSaleProducts { CategoryId = id })?.Count ?? 0;
+        private long GetQuantitySoldItem(string id) => BlSaleProducts.GetProducts(new FiltersSaleProducts { CategoryId = id, })?.Count ?? 0;
 
-        private static IMongoQuery QueryFilters(FiltersCategories filters)
+        private IMongoQuery QueryFilters(FiltersCategories filters)
         {
             if (filters == null)
                 return Query.And(Query.Empty);
 
             var list = new List<IMongoQuery>();
+            if (filters.HasValidProducts)
+                list.Add(Query<Category>.In(x => x.Id, BlProducts.GetProducts(new FiltersProducts { Status = ProductStatus.Valid }).Select(x => x.CategoryId).Distinct()));
+
             if (!string.IsNullOrEmpty(filters.Id))
-                return Query<Category>.EQ(x => x.Id, filters.Id);
+                list.Add(Query<Category>.EQ(x => x.Id, filters.Id));
 
             if (!string.IsNullOrEmpty(filters.Name))
-                return Query<Category>.Matches(x => x.Name, $"(?i).*{string.Join(".*", Regex.Split(filters.Name, @"\s+").Select(x => Regex.Escape(x)))}.*");
+                list.Add(Query<Category>.Matches(x => x.Name, $"(?i).*{string.Join(".*", Regex.Split(filters.Name, @"\s+").Select(x => Regex.Escape(x)))}.*"));
 
             if (!list.Any())
                 return Query.And(Query.Empty);

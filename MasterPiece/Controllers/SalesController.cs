@@ -1,5 +1,6 @@
 ﻿using Business.Logic.Sales;
 using DAO.Input;
+using DAO.Input.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Settings;
 using System.Collections.Generic;
@@ -26,5 +27,8 @@ namespace MasterPiece.Controllers
 
         [HttpPost, Route("Total")]
         public IActionResult Total([FromBody] List<string> ids) => Ok(_blSales.GetSaleTotal(ids));
+
+        [HttpPost, Route("Get")]
+        public IActionResult Get([FromBody] FiltersSales filters) => Ok(_blSales.List(filters));
     }
 }

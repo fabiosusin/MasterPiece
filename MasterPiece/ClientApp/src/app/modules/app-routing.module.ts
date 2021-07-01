@@ -23,6 +23,7 @@ const routes: Routes = [
   //Listagens
   { path: 'products-list', loadChildren: () => import('./products-list/products-list.module').then(m => m.ProductsListModule) },
   { path: 'user-products', loadChildren: () => import('./user-products/products-list.module').then(m => m.UserProductsModule) },
+  { path: 'sales', loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule) },
 
 
   //{ path: '**', component: PageNotFoundComponent }

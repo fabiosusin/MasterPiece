@@ -17,7 +17,7 @@
                     <a (click)="onClickGoToRegisterProduct(1)">Doar Produto</a>
                     <a (click)="onClickGoToRegisterProduct(2)">Vender Produto</a>
                     <a [routerLink]="'/user-products'">Meus Produtos</a>
-                    <a>Minhas Compras</a>
+                    <a [routerLink]="'/sales'">Minhas Compras</a>
                     <a>Minhas Vendas</a>
                     <a  [routerLink]="'/register/' + loggedModel.user.id">Editar</a>
                     <a (click)="onClickLogout()">Sair</a>

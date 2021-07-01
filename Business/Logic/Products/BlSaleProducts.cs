@@ -15,19 +15,18 @@ namespace Business.Logic.Products
 {
     public class BlSaleProducts : BlAbstract<SaleProduct>
     {
-        protected BlSales BlSales;
-        protected BlProductsList BlProductsList;
-        public BlSaleProducts(IMasterPieceDatabaseSettings settings) : base(settings)
-        {
-            BlProductsList = new BlProductsList(settings);
-            BlSales = new BlSales(settings);
-        }
+        private readonly IMasterPieceDatabaseSettings Settings;
+        private BlSales blSales;
+        private BlProductsList blProductsList;
+        protected BlSales BlSales { get => blSales ??= new BlSales(Settings); }
+        protected BlProductsList BlProductsList { get => blProductsList ??= new BlProductsList(Settings); }
+        public BlSaleProducts(IMasterPieceDatabaseSettings settings) : base(settings) => Settings = settings;
 
         private IMongoQuery QueryFilters(FiltersSaleProducts filters)
         {
             var query = new List<IMongoQuery>();
 
-            if (!string.IsNullOrEmpty(filters.Price.ToString()))
+            if (filters.Price > 0)
                 query.Add(Query<SaleProduct>.EQ(x => x.Price, filters.Price));
 
             if (!string.IsNullOrEmpty(filters.Name))
@@ -39,7 +38,7 @@ namespace Business.Logic.Products
             if (!string.IsNullOrEmpty(filters.Id))
                 query.Add(Query<SaleProduct>.EQ(x => x.ProductId, filters.Id));
 
-            return Query.And(query);
+            return query?.Any() ?? false ? Query.And(query): Query.And(Query.Empty);
         }
 
         public List<SaleProduct> GetProducts(FiltersSaleProducts filters) => Collection.Find(QueryFilters(filters)).ToList();
@@ -50,13 +49,13 @@ namespace Business.Logic.Products
                 return;
 
             var products = BlProductsList.GetProducts(new FiltersProducts { Ids = input.ProductsId });
-            if(!(products?.Any()??false))
+            if (!(products?.Any() ?? false))
             {
                 BlSales.Delete(BlSales.GetById(input.SaleId));
                 return;
             }
 
-            foreach(var product in products)
+            foreach (var product in products)
             {
                 product.Status = ProductStatus.Sold;
                 BlProductsList.Save(product);

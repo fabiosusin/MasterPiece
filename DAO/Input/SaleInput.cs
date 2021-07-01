@@ -5,7 +5,7 @@ namespace DAO.Input
 {
     public class SaleInput
     {
-        public string UserId{ get; set; }
+        public string UserId { get; set; }
         public List<string> ProductsId { get; set; }
         public Address Destination { get; set; }
 

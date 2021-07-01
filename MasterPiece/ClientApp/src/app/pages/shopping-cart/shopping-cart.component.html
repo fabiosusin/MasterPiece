@@ -54,9 +54,9 @@
                 <div class="float-right total">
                     <div class="info">
                         <span>Total:</span>
-                        <span>{{ getTotal() | money:'R$' }}</span>
+                        <span>{{ total | money:'R$' }}</span>
                     </div>
-                    <button>Finalizar</button>
+                    <button (click)="saveSale()">Finalizar</button>
                 </div>
             </div>
         </div>

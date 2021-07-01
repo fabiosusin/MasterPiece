@@ -8,6 +8,7 @@ import { Category } from 'src/models/category/category';
 import { User } from 'src/models/register-login/user';
 import { ApiService } from 'src/shared/services/api.service';
 import { Utils } from 'src/shared/utils';
+import { ProducstService } from 'src/shared/services/products.service';
 
 @Component({
   selector: 'app-categories',
@@ -19,6 +20,7 @@ export class CategoriesComponent extends BaseEdit<Category> implements OnInit {
     protected apiService: ApiService,
     protected router: Router,
     protected utils: Utils,
+    protected productsService: ProducstService,
     protected formBuilder: FormBuilder) {
     super(router, utils);
   }
@@ -42,7 +44,8 @@ export class CategoriesComponent extends BaseEdit<Category> implements OnInit {
   };
 
   getCategories = async (filter: FiltersCategory) => {
-    this.dataSource = await this.apiService.listCategories(filter);
+    filter.hasValidProducts = false;
+    this.dataSource = await this.productsService.getCategories(filter);
   }
 
   formatLabelSlider = (value: number) => value >= 1000 ? Math.round(value / 1000) : value;

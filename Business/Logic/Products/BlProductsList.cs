@@ -11,11 +11,7 @@ namespace Business.Logic.Products
 {
     public class BlProductsList : BlAbstract<Product>
     {
-        protected BlSaleProducts BlSaleProducts;
-        public BlProductsList(IMasterPieceDatabaseSettings settings) : base(settings)
-        {
-            BlSaleProducts = new BlSaleProducts(settings);
-        }
+        public BlProductsList(IMasterPieceDatabaseSettings settings) : base(settings) { }
 
         private IMongoQuery QueryFilters(FiltersProducts filters)
         {
@@ -35,14 +31,14 @@ namespace Business.Logic.Products
             if (!string.IsNullOrEmpty(filters.ProductName))
                 query.Add(Query<Product>.Matches(x => x.Name, $"(?i).*{string.Join(".*", Regex.Split(filters.ProductName, @"\s+").Select(x => Regex.Escape(x)))}.*"));
 
-            if(!(filters.Ids?.Any() ?? false))
+            if (filters.Ids?.Any() ?? false)
                 query.Add(Query<Product>.In(x => x.Id, filters.Ids));
 
             if (filters.Status != ProductStatus.Default)
                 query.Add(Query<Product>.EQ(x => x.Status, filters.Status));
 
             if (filters.InvalidStatus?.Any() ?? false)
-                query.Add(Query<Product>.NotIn(x => x.Status, filters.InvalidStatus));
+                query.Add(Query<Product>.In(x => x.Status, filters.InvalidStatus));
 
             if (!query.Any())
                 return Query.And(Query.Empty);
@@ -52,7 +48,8 @@ namespace Business.Logic.Products
 
         public List<Product> List(FiltersProducts filters)
         {
-            filters.Status = ProductStatus.Valid;
+            if (filters.Status == ProductStatus.Default)
+                filters.Status = ProductStatus.Valid;
             var products = GetProducts(filters).ToList();
             if (!(products?.Any() ?? false))
                 return null;

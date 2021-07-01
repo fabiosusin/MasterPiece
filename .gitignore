@@ -4,6 +4,9 @@
 # User-specific files
 *.suo
 .vs
+*.vs
+/.vs
+slnx.sqlite
 *.user
 *.sln.docstates
 
@@ -163,6 +166,7 @@ packages/
 /BorlanV2/TempBoleto
 /BorlanV2/Modelos
 /.vs/config
+/.vs/*
 /PDVwin/downloads.sigecloud.com.br/file/pdv
 /API_V2/Tools/pdf/pdf
 /API_V2/Modelos

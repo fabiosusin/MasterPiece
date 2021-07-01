@@ -2,7 +2,7 @@
 export class FiltersProduct {
     productName?: string;
     price?: number;
-    category?: string;
+    categoryId?: string;
     userId?: string;
     limit?: number;
     page?: number;

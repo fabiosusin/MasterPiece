@@ -29,9 +29,11 @@ export class ShoppingCartComponent implements OnInit {
 
   products: Array<Product> = [];
   isLoading: boolean;
+  total: number;
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.getProducts();
+    this.total = await this.getTotal();
   }
 
   getProducts() {
@@ -42,7 +44,7 @@ export class ShoppingCartComponent implements OnInit {
 
   removeProduct = (product: Product) => {
     this.cartService.removeProduct(product);
-    this.getProducts();
+    window.location.reload();
   }
 
   saveSale = async () => {
@@ -62,6 +64,9 @@ export class ShoppingCartComponent implements OnInit {
       };
 
       await this.apiService.saveSale(input)
+      this.cartService.clearCart();
+      this.utils.successMessage('Venda realizada com sucesso');
+      this.router.navigateByUrl('/home')
     }
     catch (e) {
       this.utils.errorMessage(e);

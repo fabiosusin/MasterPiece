@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CartComponent } from "src/app/cache/cart.component";
+import { FiltersCategory } from "src/models/category/filters-category";
 import { FiltersProduct } from "src/models/product/filters-product";
 import { Product } from "src/models/product/product";
 import { Utils } from "../utils";
@@ -18,7 +19,7 @@ export class ProducstService {
 
   getProducts = async (filters?: FiltersProduct) => await this.apiService.listProduct(filters);
 
-  getCategories = async () => await this.apiService.listCategories()
+  getCategories = async (filters?: FiltersCategory) => await this.apiService.listCategories(filters)
 
   addToCart(product: Product) {
     this.cartService.setShoppingCartNewItem(product);
