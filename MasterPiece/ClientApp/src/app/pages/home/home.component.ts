@@ -66,8 +66,8 @@ export class HomeComponent extends BaseEdit<Product> implements OnInit {
 
   addToCart = (product: Product) => this.producstService.addToCart(product)
 
-  onClickFilterProductsByCategory(categoryId: string) {
-    this.router.navigateByUrl('/products-list', { state: { categoryId: categoryId } });
-  }
+  buyProduct = (product: Product) => this.producstService.buyProduct(product);
+
+  onClickFilterProductsByCategory = (categoryId: string) => this.router.navigateByUrl('/products-list', { state: { categoryId: categoryId } });
 
 }

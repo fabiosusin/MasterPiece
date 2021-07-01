@@ -76,7 +76,7 @@ export class AppComponent extends BasePage implements OnInit {
     this.router.navigateByUrl('/products', { state: { type: type } });
   }
 
-  onClickFindProducts() {
-    this.router.navigateByUrl('/products-list', { state: { productName: this.productName } });
-  }
+  onClickFindProducts = () => this.router.navigateByUrl('/products-list', { state: { productName: this.productName } });
+
+  onClickFilterProductsByCategory = (categoryId: string) => this.router.navigateByUrl('/products-list', { state: { categoryId: categoryId } });
 }

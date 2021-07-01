@@ -86,4 +86,6 @@ export class ProductListComponent extends BaseEdit<Product> implements OnInit {
 
     this.getProducts();
   }
+
+  onClickFilterProductsByCategory = (categoryId: string) => this.router.navigateByUrl('/products-list', { state: { categoryId: categoryId } });
 }

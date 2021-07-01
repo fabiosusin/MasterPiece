@@ -31,13 +31,13 @@
                     <div class="infos">
                         <p *ngIf="product.type == 1"><b>{{ product.balance | quantity }} unidades</b> para <b>Adoção</b></p>
                         <p *ngIf="product.type == 2"><b>{{ product.balance | quantity }} unidades</b> por <b>R$ {{ product.price | money:'R$' }}</b></p>
-                        <button class="info-btn bt-left" type="button">{{ product.type == 1 ? 'Adquirir' : 'Comprar' }}</button>
+                        <button class="info-btn bt-left" type="button" (click)="buyProduct(product)">{{ product.type == 1 ? 'Adquirir' : 'Comprar' }}</button>
                         <button class="info-btn bt-right" type="button" (click)="addToCart(product)"><i class="fas fa-shopping-bag"></i></button>
                     </div>
                 </div>
             </div>
         </div>
-        <h2 class="title"><b></b><span>Produtos Mais Vendidos</span><b></b></h2>
+        <h2 class="title"><b></b><span>Novos Produtos</span><b></b></h2>
         <div class="bg-products">
             <div class="card" *ngFor="let product of products">
                 <div class="image"><img *ngIf="product.auxiliaryProperties && product.auxiliaryProperties.imageUrl" [src]="product.auxiliaryProperties.imageUrl" /></div>
@@ -46,7 +46,7 @@
                     <div class="infos">
                         <p *ngIf="product.type == 1"><b>{{ product.balance | quantity }} unidades</b> para <b>Adoção</b></p>
                         <p *ngIf="product.type == 2"><b>{{ product.balance | quantity }} unidades</b> por <b>R$ {{ product.price | money:'R$' }}</b></p>
-                        <button class="info-btn bt-left" type="button">Comprar</button>
+                        <button class="info-btn bt-left" type="button" (click)="buyProduct(product)">Comprar</button>
                         <button class="info-btn bt-right" type="button" (click)="addToCart(product)"><i class="fas fa-shopping-bag"></i></button>
                     </div>
                 </div>

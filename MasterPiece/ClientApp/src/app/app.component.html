@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="bg-top-lower">
-        <div class="sub-category" *ngFor="let category of categories">{{category.name}}</div>
+        <div class="sub-category" *ngFor="let category of categories" (click)="onClickFilterProductsByCategory(category.id)">{{category.name}}</div>
     </div>
 </div>
 <div>
